@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:id="@+id/layoutRootSearchResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/imgArrowRight"
+                android:ellipsize="end"
+                android:lines="1"
+                android:textColor="@color/colorOrange"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/imgArrowRight"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                android:tint="@color/colorOrange" />
+        </RelativeLayout>
+
+        <View style="@style/ViewLineOrange" />
+
+    </LinearLayout>
+</layout>
