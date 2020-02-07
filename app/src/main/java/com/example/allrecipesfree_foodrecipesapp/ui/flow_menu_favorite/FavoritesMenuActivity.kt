@@ -87,7 +87,7 @@ class FavoritesMenuActivity : BaseActivity<ActivityFavoritesMenuBinding>(){
             }
 
             override fun onClickFavoriteMenu(postsMenu: ServiceResponse, position: Int) {
-                Log.d("chok", "click favorite.")
+
             }
 
         })

@@ -24,7 +24,6 @@ class MainActivityViewModel(private val iServiceRepository: IServiceRepository) 
                     allCountryCategories.postValue(result.data)
                 }
                 is UseCaseResult.Error -> {
-                    Log.d("chok exception", "${result.exception.message}")
                 }
             }
         }
@@ -38,7 +37,6 @@ class MainActivityViewModel(private val iServiceRepository: IServiceRepository) 
                     allPostsMenuBySearch.postValue(result.data)
                 }
                 is UseCaseResult.Error -> {
-                    Log.d("chok exception", "${result.exception.message}")
                 }
             }
         }

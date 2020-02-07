@@ -22,7 +22,7 @@ class PostsMenuDetailViewModel (private val iServiceRepository: IServiceReposito
                     postsMenuDetail.postValue(result.data)
                 }
                 is UseCaseResult.Error -> {
-                    Log.d("chok exception", "${result.exception.message}")
+
                 }
             }
         }

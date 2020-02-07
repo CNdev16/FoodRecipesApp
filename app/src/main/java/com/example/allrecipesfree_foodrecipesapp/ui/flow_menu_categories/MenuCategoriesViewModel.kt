@@ -25,7 +25,7 @@ class MenuCategoriesViewModel(private val iServiceRepository: IServiceRepository
                     allMenuCategories.postValue(result.data)
                 }
                 is UseCaseResult.Error -> {
-                    Log.d("chok exception", "${result.exception.message}")
+
                 }
             }
         }
@@ -39,7 +39,7 @@ class MenuCategoriesViewModel(private val iServiceRepository: IServiceRepository
                     allPostsMenu.postValue(result.data)
                 }
                 is UseCaseResult.Error -> {
-                    Log.d("chok exception", "${result.exception.message}")
+
                 }
             }
         }
