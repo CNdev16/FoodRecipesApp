@@ -1,19 +1,23 @@
 package com.example.allrecipesfree_foodrecipesapp.ui.flow_posts_menu_detail
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.os.Bundle
 import android.webkit.WebChromeClient
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.base.BaseActivity
+import com.example.allrecipesfree_foodrecipesapp.data.Favorite
+import com.example.allrecipesfree_foodrecipesapp.data.ServiceResponse
 import com.example.allrecipesfree_foodrecipesapp.databinding.ActivityPostsMenuDetailBinding
+import com.example.allrecipesfree_foodrecipesapp.local.AppDataBase
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PostsMenuDetailActivity : BaseActivity<ActivityPostsMenuDetailBinding>(){
 
     private val viewModel: PostsMenuDetailViewModel by viewModel()
-
     override var layoutResource: Int = R.layout.activity_posts_menu_detail
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +47,6 @@ class PostsMenuDetailActivity : BaseActivity<ActivityPostsMenuDetailBinding>(){
         viewModel.getPostsMenuDetail(postsId)
 
         viewModel.postsMenuDetail.observe(this, Observer {
-
             binding.tvTitlePost.text = it.title!!.rendered
 
             binding.webViewDetail.apply {
@@ -56,22 +59,6 @@ class PostsMenuDetailActivity : BaseActivity<ActivityPostsMenuDetailBinding>(){
 
                 loadData("<html><head><style type='text/css'>body{margin-top:auto; margin-bottom:auto;} img{width:100%25;} </style></head><body>${it.content?.rendered}</body></html>", "text/html", "utf-8")
             }
-
-            setupButtonMenu()
         })
     }
-
-    private fun setupButtonMenu() {
-        var click = 0
-        binding.imgFav.setOnClickListener {
-            if (click == 0) {
-                binding.imgFav.setColorFilter(ContextCompat.getColor(this, R.color.colorRed))
-                click = 1
-            }else{
-                binding.imgFav.setColorFilter(ContextCompat.getColor(this, R.color.colorOrange))
-                click = 0
-            }
-        }
-    }
-
 }

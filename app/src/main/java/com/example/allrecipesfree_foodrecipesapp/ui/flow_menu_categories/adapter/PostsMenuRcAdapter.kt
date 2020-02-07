@@ -11,7 +11,7 @@ import com.example.allrecipesfree_foodrecipesapp.data.ServiceResponse
 import com.example.allrecipesfree_foodrecipesapp.databinding.ItemtPostsMenuBinding
 
 class PostsMenuRcAdapter(
-    private val postsList: List<ServiceResponse>,
+    private var postsList: List<ServiceResponse>,
     private val context: Context
 ) : RecyclerView.Adapter<PostsMenuRcViewHolder>() {
 
@@ -38,10 +38,9 @@ class PostsMenuRcAdapter(
         holder.binding.tvDate.text = postMenu.date
 
         holder.binding.imgFav.apply {
-            if (postMenu.id == 22) {
-                setColorFilter(ContextCompat.getColor(context, R.color.colorRed))
-            }else{
-                setColorFilter(ContextCompat.getColor(context, R.color.colorWhite))
+            when (postMenu.favoriteStatus) {
+                true -> {setColorFilter(ContextCompat.getColor(context, R.color.colorRed))}
+                false -> {setColorFilter(ContextCompat.getColor(context, R.color.colorWhite))}
             }
 
             setOnClickListener {
@@ -68,6 +67,11 @@ class PostsMenuRcAdapter(
 
     fun setOnClickPostsMenu(onClickPostsMenu: OnClickPostsMenu) {
         this.listener = onClickPostsMenu
+    }
+
+    fun updateData(lisData: List<ServiceResponse>){
+        this.postsList = lisData
+        notifyDataSetChanged()
     }
 
 }

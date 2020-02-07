@@ -1,7 +1,10 @@
 package com.example.allrecipesfree_foodrecipesapp.di
 
+import androidx.room.Room
 import com.example.allrecipesfree_foodrecipesapp.BASE_URL
 import com.example.allrecipesfree_foodrecipesapp.CONNECTION_TIME
+import com.example.allrecipesfree_foodrecipesapp.local.AppDataBase
+import com.example.allrecipesfree_foodrecipesapp.local.AppDataBaseDao
 import com.example.allrecipesfree_foodrecipesapp.network.IServiceRepository
 import com.example.allrecipesfree_foodrecipesapp.network.PostsService
 import com.example.allrecipesfree_foodrecipesapp.network.ServiceRepositoryImpl
@@ -13,6 +16,7 @@ import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.CallAdapter
@@ -32,7 +36,10 @@ val appModule = module {
         )
     }
 
-    factory <IServiceRepository> { ServiceRepositoryImpl(get()) }
+    single { Room.databaseBuilder(androidApplication(), AppDataBase::class.java, "app-db").allowMainThreadQueries().build() }
+    single { get<AppDataBase>().appDataBaseDao() }
+
+    factory<IServiceRepository> { ServiceRepositoryImpl(get()) }
 
     viewModel { MainActivityViewModel(get()) }
     viewModel { MenuCategoriesViewModel(get()) }

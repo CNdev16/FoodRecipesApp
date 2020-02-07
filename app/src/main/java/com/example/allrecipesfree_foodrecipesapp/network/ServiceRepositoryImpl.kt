@@ -18,7 +18,7 @@ class ServiceRepositoryImpl(private val postsService: PostsService) : IServiceRe
         return try {
             val result = postsService.getMenuCategoriesAsync(parentNo).await()
             UseCaseResult.Success(result)
-        } catch (e: Exception){
+        } catch (e: Exception) {
             UseCaseResult.Error(e)
         }
     }
@@ -36,7 +36,7 @@ class ServiceRepositoryImpl(private val postsService: PostsService) : IServiceRe
         return try {
             val result = postsService.getPostsMenuDetailAsync(postsNo).await()
             UseCaseResult.Success(result)
-        }catch (e: Exception){
+        } catch (e: Exception) {
             UseCaseResult.Error(e)
         }
     }
@@ -45,7 +45,7 @@ class ServiceRepositoryImpl(private val postsService: PostsService) : IServiceRe
         return try {
             val result = postsService.getSearchPostsMenuAsync(s).await()
             UseCaseResult.Success(result)
-        }catch (e: Exception){
+        } catch (e: Exception) {
             UseCaseResult.Error(e)
         }
     }
@@ -54,8 +54,9 @@ class ServiceRepositoryImpl(private val postsService: PostsService) : IServiceRe
         return try {
             val result = postsService.getAllPostsMenuAsync().await()
             UseCaseResult.Success(result)
-        }catch (e: Exception){
+        } catch (e: Exception) {
             UseCaseResult.Error(e)
-        }    }
+        }
+    }
 
 }

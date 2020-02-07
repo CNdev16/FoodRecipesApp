@@ -1,5 +1,6 @@
 package com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_categories
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,18 +10,24 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.base.BaseActivity
+import com.example.allrecipesfree_foodrecipesapp.data.Favorite
 import com.example.allrecipesfree_foodrecipesapp.data.ServiceResponse
 import com.example.allrecipesfree_foodrecipesapp.databinding.ActivityMenuCategoriesBinding
+import com.example.allrecipesfree_foodrecipesapp.local.AppDataBase
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_categories.adapter.PostsMenuRcAdapter
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_posts_menu_detail.PostsMenuDetailActivity
 import com.example.allrecipesfree_foodrecipesapp.utility.DialogUtils
 import com.google.android.material.tabs.TabLayout
+import com.google.gson.Gson
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MenuCategoriesActivity : BaseActivity<ActivityMenuCategoriesBinding>() {
 
     private val viewModel: MenuCategoriesViewModel by viewModel()
     private lateinit var postsMenuRcAdapter: PostsMenuRcAdapter
+    private val appData: AppDataBase by inject()
+    private lateinit var listServiceResponse: List<ServiceResponse>
 
     override var layoutResource: Int = R.layout.activity_menu_categories
 
@@ -52,6 +59,7 @@ class MenuCategoriesActivity : BaseActivity<ActivityMenuCategoriesBinding>() {
         viewModel.allMenuCategories.observe(this, Observer {
             DialogUtils.disMissDialog()
             if (it.isNotEmpty()) {
+                listServiceResponse = it
                 setupListMenu(it)
             } else {
                 binding.tab.visibility = View.GONE
@@ -94,7 +102,10 @@ class MenuCategoriesActivity : BaseActivity<ActivityMenuCategoriesBinding>() {
             }
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                DialogUtils.showProgressDialog(this@MenuCategoriesActivity, "Fetching data, please with...")
+                DialogUtils.showProgressDialog(
+                    this@MenuCategoriesActivity,
+                    "Fetching data, please with..."
+                )
                 viewModel.fetchPostsMenu(it[binding.tab.selectedTabPosition].id!!)
             }
         })
@@ -106,7 +117,10 @@ class MenuCategoriesActivity : BaseActivity<ActivityMenuCategoriesBinding>() {
 
         postsMenuRcAdapter =
             PostsMenuRcAdapter(
-                it!!, this
+                updateModel(
+                    it!!,
+                    appData.appDataBaseDao().getFavoriteMenu()
+                ), this
             )
         binding.rcView.apply {
             setHasFixedSize(true)
@@ -130,9 +144,50 @@ class MenuCategoriesActivity : BaseActivity<ActivityMenuCategoriesBinding>() {
             }
 
             override fun onClickFavoriteMenu(postsMenu: ServiceResponse, position: Int) {
+                val t = appData.appDataBaseDao().getFavoriteMenu()
+                    .filter { p -> (p.id == postsMenu.id) && (postsMenu.favoriteStatus == true) }
+                if (t.isEmpty()) {
+                    appData.appDataBaseDao().addFavoriteMenu(
+                        Favorite(
+                            postsMenu.id!!,
+                            postsMenu.title!!.rendered!!,
+                            true
+                        )
+                    )
+                    postsMenuRcAdapter.updateData(
+                        updateModel(
+                            it,
+                            appData.appDataBaseDao().getFavoriteMenu()
+                        )
+                    )
+                } else {
+                    appData.appDataBaseDao().addFavoriteMenu(
+                        Favorite(
+                            postsMenu.id!!,
+                            postsMenu.title!!.rendered!!,
+                            false
+                        )
+                    )
+                    postsMenuRcAdapter.updateData(
+                        updateModel(
+                            it,
+                            appData.appDataBaseDao().getFavoriteMenu()
+                        )
+                    )
+                }
             }
 
         })
+    }
+
+    private fun updateModel(
+        serviceResponse: List<ServiceResponse>,
+        favoriteMenu: List<Favorite>
+    ): List<ServiceResponse> {
+        favoriteMenu.forEach { f ->
+            serviceResponse.find { it.id == f.id }?.favoriteStatus = f.status
+        }
+        return serviceResponse
     }
 
 }

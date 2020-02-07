@@ -1,6 +1,5 @@
 package com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.allrecipesfree_foodrecipesapp.base.BaseViewModel
