@@ -43,7 +43,7 @@
                 android:gravity="center"
                 android:padding="8dp"
                 android:textColor="@color/colorWhite"
-                android:textSize="20sp" />
+                android:textSize="@dimen/text_size_20sp" />
 
             <WebView
                 android:id="@+id/webViewDetail"

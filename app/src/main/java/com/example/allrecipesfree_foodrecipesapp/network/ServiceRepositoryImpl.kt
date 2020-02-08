@@ -41,9 +41,9 @@ class ServiceRepositoryImpl(private val postsService: PostsService) : IServiceRe
         }
     }
 
-    override suspend fun getSearchPostsMenu(s: String): UseCaseResult<List<ServiceResponse>> {
+    override suspend fun getSearchPostsMenu(): UseCaseResult<List<ServiceResponse>> {
         return try {
-            val result = postsService.getSearchPostsMenuAsync(s).await()
+            val result = postsService.getSearchPostsMenuAsync().await()
             UseCaseResult.Success(result)
         } catch (e: Exception) {
             UseCaseResult.Error(e)

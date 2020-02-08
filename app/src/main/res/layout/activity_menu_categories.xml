@@ -31,15 +31,15 @@
             android:background="@color/colorOrange"
             android:gravity="center"
             android:padding="8dp"
-            android:text="Select Menu Category"
+            android:text="@string/select_menu_category"
             android:textColor="@color/colorWhite"
-            android:textSize="20sp" />
+            android:textSize="@dimen/text_size_20sp" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabBackground="@color/colorOrange"
+            android:background="@color/colorOrange"
             app:tabGravity="fill"
             app:tabMode="scrollable"
             app:tabSelectedTextColor="@color/colorWhite"
@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:textSize="24sp"
+            android:textSize="@dimen/text_size_24sp"
             android:visibility="gone" />
     </LinearLayout>
 </layout>

@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">All Recipes Free - Food Recipes App</string>
+    <string name="favorite">Favorite</string>
+    <string name="country_category">Country Category</string>
+    <string name="about">About</string>
+    <string name="search">Search</string>
+    <string name="application_name">Application Name :</string>
+    <string name="application_version">Application version :</string>
+    <string name="contact">Contact :</string>
+    <string name="select_menu_category">Select Menu Category</string>
+    <string name="progress_msg">Fetching data, please with…</string>
+    <string name="result_not_found">Result not found.</string>
+    <string name="menu_is_empty">Menu is empty.</string>
+    <string name="favorite_menu_is_empty">Favorite Menu is empty.</string>
+    <string name="version">Version</string>
+    <string name="dialog_title">Warning!!</string>
+    <string name="dialog_msg">Connection is not available.</string>
+    <string name="dialog_btn">Close.</string>
 </resources>

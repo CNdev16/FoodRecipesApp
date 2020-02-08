@@ -44,7 +44,7 @@ class MenuCategoriesActivity : BaseActivity<ActivityMenuCategoriesBinding>() {
     private fun setupToolbar() {
         setSupportActionBar(binding.toolbar)
         val actionBar = supportActionBar
-        actionBar!!.title = "All Recipes Free - Food Recipes App"
+        actionBar!!.title = getString(R.string.app_name)
         actionBar.elevation = 4.0F
         actionBar.setDisplayShowHomeEnabled(true)
         actionBar.setLogo(R.mipmap.ic_launcher)
@@ -55,7 +55,7 @@ class MenuCategoriesActivity : BaseActivity<ActivityMenuCategoriesBinding>() {
         binding.viewModel = viewModel
 
         viewModel.fetchMenuCategories(id)
-        DialogUtils.showProgressDialog(this, "Fetching data, please with...")
+        DialogUtils.showProgressDialog(this, getString(R.string.progress_msg))
         viewModel.allMenuCategories.observe(this, Observer {
             DialogUtils.disMissDialog()
             if (it.isNotEmpty()) {
@@ -79,7 +79,7 @@ class MenuCategoriesActivity : BaseActivity<ActivityMenuCategoriesBinding>() {
             binding.tab.addTab(binding.tab.newTab().setText(s.name))
         }
 
-        DialogUtils.showProgressDialog(this, "Fetching data, please with...")
+        DialogUtils.showProgressDialog(this, getString(R.string.progress_msg))
         viewModel.fetchPostsMenu(it[binding.tab.selectedTabPosition].id!!)
 
         viewModel.allPostsMenu.observe(this@MenuCategoriesActivity, Observer {
@@ -90,7 +90,7 @@ class MenuCategoriesActivity : BaseActivity<ActivityMenuCategoriesBinding>() {
             } else {
                 binding.rcView.visibility = View.GONE
                 binding.tvEmpty.visibility = View.VISIBLE
-                binding.tvEmpty.text = "Menu is empty."
+                binding.tvEmpty.text = getString(R.string.menu_is_empty)
             }
         })
 
@@ -104,7 +104,7 @@ class MenuCategoriesActivity : BaseActivity<ActivityMenuCategoriesBinding>() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 DialogUtils.showProgressDialog(
                     this@MenuCategoriesActivity,
-                    "Fetching data, please with..."
+                    getString(R.string.progress_msg)
                 )
                 viewModel.fetchPostsMenu(it[binding.tab.selectedTabPosition].id!!)
             }

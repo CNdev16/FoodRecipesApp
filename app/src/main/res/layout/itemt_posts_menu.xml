@@ -37,12 +37,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="4dp"
+                        android:layout_margin="4dp"
                         android:background="@drawable/bg_text_view_corners_redius"
                         android:gravity="center"
                         android:padding="4dp"
+                        android:maxLines="2"
+                        android:ellipsize="end"
                         android:text="tttt"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/text_size_18sp" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -81,8 +83,10 @@
                             android:layout_toLeftOf="@id/imgFav"
                             android:layout_toRightOf="@id/imgDate"
                             android:text="date"
+                            android:lines="1"
+                            android:ellipsize="end"
                             android:textColor="@color/colorWhite"
-                            android:textSize="18sp" />
+                            android:textSize="@dimen/text_size_18sp" />
 
                     </RelativeLayout>
                 </RelativeLayout>

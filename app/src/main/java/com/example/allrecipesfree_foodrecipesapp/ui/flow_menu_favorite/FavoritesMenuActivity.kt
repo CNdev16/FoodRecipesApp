@@ -41,7 +41,7 @@ class FavoritesMenuActivity : BaseActivity<ActivityFavoritesMenuBinding>() {
     private fun setupToolbar() {
         setSupportActionBar(binding.toolbar)
         val actionBar = supportActionBar
-        actionBar!!.title = "All Recipes Free - Food Recipes App"
+        actionBar!!.title = getString(R.string.app_name)
         actionBar.elevation = 4.0F
         actionBar.setDisplayShowHomeEnabled(true)
         actionBar.setLogo(R.mipmap.ic_launcher)
@@ -53,7 +53,7 @@ class FavoritesMenuActivity : BaseActivity<ActivityFavoritesMenuBinding>() {
 
         DialogUtils.showProgressDialog(
             this,
-            "Fetching data, please with..."
+            getString(R.string.progress_msg)
         )
         viewModel.fetchAllPostsMenu()
 
@@ -61,11 +61,25 @@ class FavoritesMenuActivity : BaseActivity<ActivityFavoritesMenuBinding>() {
             DialogUtils.disMissDialog()
 
             if (it.isNotEmpty()) {
-                setupRecyclerView(it)
+                if (updateModel(
+                        it!!,
+                        appData.appDataBaseDao().getFavoriteMenu()
+                    ).isNotEmpty()
+                ) {
+                    setupRecyclerView(updateModel(
+                        it,
+                        appData.appDataBaseDao().getFavoriteMenu()
+                    ))
+                }else{
+                    binding.rcView.visibility = View.GONE
+                    binding.tvEmpty.visibility = View.VISIBLE
+                    binding.tvEmpty.text = getString(R.string.favorite_menu_is_empty)
+                }
+
             } else {
                 binding.rcView.visibility = View.GONE
                 binding.tvEmpty.visibility = View.VISIBLE
-                binding.tvEmpty.text = "Menu is empty."
+                binding.tvEmpty.text = getString(R.string.favorite_menu_is_empty)
             }
         })
 

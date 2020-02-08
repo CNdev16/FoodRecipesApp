@@ -31,9 +31,9 @@ class MainActivityViewModel(private val iServiceRepository: IServiceRepository) 
     fun searchPostsMenu(s: String) {
         viewModelScope.launch {
             when (val result =
-                withContext(Dispatchers.IO) { iServiceRepository.getSearchPostsMenu(s) }) {
+                withContext(Dispatchers.IO) { iServiceRepository.getSearchPostsMenu() }) {
                 is UseCaseResult.Success -> {
-                    allPostsMenuBySearch.postValue(result.data)
+                    allPostsMenuBySearch.postValue(result.data.filter { response -> response.title!!.rendered!!.contains(s) })
                 }
                 is UseCaseResult.Error -> {
                 }

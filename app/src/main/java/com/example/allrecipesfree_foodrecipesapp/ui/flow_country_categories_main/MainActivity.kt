@@ -21,6 +21,8 @@ import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_categories.MenuCat
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_favorite.FavoritesMenuActivity
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_posts_menu_detail.PostsMenuDetailActivity
 import com.example.allrecipesfree_foodrecipesapp.utility.DialogUtils
+import com.example.allrecipesfree_foodrecipesapp.utility.Utils
+import com.example.allrecipesfree_foodrecipesapp.utility.hideKeyboard
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -44,7 +46,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private fun setupToolbar() {
         setSupportActionBar(binding.toolbar)
         val actionBar = supportActionBar
-        actionBar!!.title = "All Recipes Free - Food Recipes App"
+        actionBar!!.title = getString(R.string.app_name)
         actionBar.elevation = 4.0F
         actionBar.setDisplayShowHomeEnabled(true)
         actionBar.setLogo(R.mipmap.ic_launcher)
@@ -53,7 +55,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private fun subscribeLiveData() {
         binding.viewModel = viewModel
-        DialogUtils.showProgressDialog(this, "Fetching data, please with...")
+        DialogUtils.showProgressDialog(this, getString(R.string.progress_msg))
         viewModel.fetchCountryCategories(0)
 
         viewModel.allCountryCategories.observe(this, Observer {
@@ -93,12 +95,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 when (newState) {
                     BottomSheetBehavior.STATE_HIDDEN -> {
-                        binding.search.edtSearch.setText("")
-                        binding.search.edtSearch.clearFocus()
                     }
                     BottomSheetBehavior.STATE_EXPANDED -> {
                     }
                     BottomSheetBehavior.STATE_COLLAPSED -> {
+                        binding.search.layoutResult.hideKeyboard()
                     }
                     BottomSheetBehavior.STATE_DRAGGING -> {
                     }
@@ -168,35 +169,46 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private fun searchResult() {
 
-        DialogUtils.showProgressDialog(this, "Fetching data, please with...")
+        binding.search.progress.visibility = View.VISIBLE
         viewModel.searchPostsMenu(binding.search.edtSearch.text.toString())
 
         viewModel.allPostsMenuBySearch.observe(this, Observer {
-            DialogUtils.disMissDialog()
-            searchRcAdapter = SearchRcAdapter(it, this)
+            binding.search.progress.visibility = View.GONE
 
-            binding.search.rcViewSearchResult.apply {
-                setHasFixedSize(true)
-                layoutManager =
-                    LinearLayoutManager(
-                        this@MainActivity,
-                        LinearLayoutManager.VERTICAL,
-                        false
-                    )
-                adapter = searchRcAdapter
-            }
-            searchRcAdapter.setOnClickResult(object : SearchRcAdapter.OnClickResult {
-                override fun onClickResult(result: ServiceResponse, position: Int) {
-                    startActivity(
-                        Intent(
+            binding.search.layoutResult.hideKeyboard()
+
+            if (it.isNotEmpty()){
+                binding.search.rcViewSearchResult.visibility = View.VISIBLE
+                binding.search.tvEmpty.visibility = View.GONE
+                searchRcAdapter = SearchRcAdapter(it, this)
+
+                binding.search.rcViewSearchResult.apply {
+                    setHasFixedSize(true)
+                    layoutManager =
+                        LinearLayoutManager(
                             this@MainActivity,
-                            PostsMenuDetailActivity::class.java
-                        ).putExtra("id", result.id)
-                    )
-                    pageTransition()
+                            LinearLayoutManager.VERTICAL,
+                            false
+                        )
+                    adapter = searchRcAdapter
                 }
+                searchRcAdapter.setOnClickResult(object : SearchRcAdapter.OnClickResult {
+                    override fun onClickResult(result: ServiceResponse, position: Int) {
+                        startActivity(
+                            Intent(
+                                this@MainActivity,
+                                PostsMenuDetailActivity::class.java
+                            ).putExtra("id", result.id)
+                        )
+                        pageTransition()
+                    }
 
-            })
+                })
+            }else{
+                binding.search.rcViewSearchResult.visibility = View.GONE
+                binding.search.tvEmpty.visibility = View.VISIBLE
+                binding.search.tvEmpty.text = getString(R.string.result_not_found)
+            }
         })
     }
 

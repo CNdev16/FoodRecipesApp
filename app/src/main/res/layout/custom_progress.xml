@@ -32,7 +32,7 @@
                 android:gravity="center"
                 android:text="Msg"
                 android:textColor="@color/colorOrange"
-                android:textSize="22sp" />
+                android:textSize="@dimen/text_size_22sp" />
 
         </LinearLayout>
 

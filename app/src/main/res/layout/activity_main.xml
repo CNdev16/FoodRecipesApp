@@ -37,9 +37,9 @@
             android:background="#F5B041"
             android:gravity="center"
             android:padding="8dp"
-            android:text="Country Category"
+            android:text="@string/country_category"
             android:textColor="@color/colorWhite"
-            android:textSize="20sp" />
+            android:textSize="@dimen/text_size_20sp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcView"
@@ -91,9 +91,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/imgFav"
                     android:layout_centerHorizontal="true"
-                    android:text="Favorite"
+                    android:text="@string/favorite"
                     android:textColor="@color/colorWhite"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/text_size_18sp" />
             </RelativeLayout>
 
             <View
@@ -123,9 +123,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/imgAbout"
                     android:layout_centerHorizontal="true"
-                    android:text="About"
+                    android:text="@string/about"
                     android:textColor="@color/colorWhite"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/text_size_18sp" />
             </RelativeLayout>
 
 

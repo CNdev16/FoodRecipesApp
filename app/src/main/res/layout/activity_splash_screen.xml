@@ -24,7 +24,7 @@
             android:layout_height="130dp"/>
 
         <TextView
-            android:textSize="18sp"
+            android:textSize="@dimen/text_size_18sp"
             android:layout_margin="16dp"
             android:textColor="@color/colorWhite"
             android:layout_alignParentBottom="true"

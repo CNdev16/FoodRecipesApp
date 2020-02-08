@@ -22,7 +22,7 @@
                 android:ellipsize="end"
                 android:lines="1"
                 android:textColor="@color/colorOrange"
-                android:textSize="18sp" />
+                android:textSize="@dimen/text_size_18sp" />
 
             <ImageView
                 android:id="@+id/imgArrowRight"

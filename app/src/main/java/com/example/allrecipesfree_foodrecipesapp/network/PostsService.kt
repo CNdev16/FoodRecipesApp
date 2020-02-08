@@ -21,7 +21,7 @@ interface PostsService{
     fun getPostsMenuDetailAsync(@Path("id") postsId: Int): Deferred<ServiceResponse>
 
     @GET("wp-json/wp/v2/posts")
-    fun getSearchPostsMenuAsync(@Query("search") s:String) : Deferred<List<ServiceResponse>>
+    fun getSearchPostsMenuAsync() : Deferred<List<ServiceResponse>>
 
     @GET("wp-json/wp/v2/posts")
     fun getAllPostsMenuAsync() : Deferred<List<ServiceResponse>>

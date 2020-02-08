@@ -12,7 +12,7 @@ interface IServiceRepository {
 
     suspend fun getPostsMenuDetail(postsNo: Int): UseCaseResult<ServiceResponse>
 
-    suspend fun getSearchPostsMenu(s: String): UseCaseResult<List<ServiceResponse>>
+    suspend fun getSearchPostsMenu(): UseCaseResult<List<ServiceResponse>>
 
     suspend fun getAllPostsMenu(): UseCaseResult<List<ServiceResponse>>
 }

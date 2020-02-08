@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.data.ServiceResponse
 import com.example.allrecipesfree_foodrecipesapp.databinding.ItemtPostsMenuBinding
+import com.example.allrecipesfree_foodrecipesapp.utility.formatDateTime
 
 class PostsMenuRcAdapter(
     private var postsList: List<ServiceResponse>,
@@ -35,7 +36,7 @@ class PostsMenuRcAdapter(
         holder.binding.tvPostsName.apply {
             text = postMenu.title?.rendered
         }
-        holder.binding.tvDate.text = postMenu.date
+        holder.binding.tvDate.text = postMenu.date!!.formatDateTime()
 
         holder.binding.imgFav.apply {
             when (postMenu.favoriteStatus) {

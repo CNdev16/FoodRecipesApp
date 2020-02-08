@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import com.example.allrecipesfree_foodrecipesapp.BuildConfig
 import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.base.BaseActivity
@@ -19,20 +20,22 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding.tvVersion.text = "Version ${BuildConfig.VERSION_NAME}"
+        binding.tvVersion.text = "${getString(R.string.version)} ${BuildConfig.VERSION_NAME}"
 
         if (isInternetConnected()) {
 
-            startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
-            pageTransition()
-            finishAffinity()
+            Handler().postDelayed({
+                startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
+                pageTransition()
+                finishAffinity()
+            }, 3000L)
 
         } else {
             DialogUtils.showDialogOneButton(
                 this,
-                "Test title",
-                "Test msg",
-                "Ok",
+                getString(R.string.dialog_title),
+                getString(R.string.dialog_msg),
+                getString(R.string.dialog_btn),
                 object : DialogUtils.OnClickButtonDialog {
                     override fun onClickButtonDialog() {
                         DialogUtils.disMissDialog()

@@ -11,8 +11,8 @@
             android:textColor="@color/colorOrange"
             android:lines="1"
             android:ellipsize="end"
-            android:textSize="28sp"
-            android:text="Application Name : "
+            android:textSize="@dimen/text_size_28sp"
+            android:text="@string/application_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -21,8 +21,8 @@
             android:textColor="@color/colorOrange"
             android:lines="1"
             android:ellipsize="end"
-            android:textSize="28sp"
-            android:text="Application version : "
+            android:textSize="@dimen/text_size_28sp"
+            android:text="@string/application_version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -34,8 +34,8 @@
             android:textColor="@color/colorOrange"
             android:lines="1"
             android:ellipsize="end"
-            android:textSize="28sp"
-            android:text="Contact : "
+            android:textSize="@dimen/text_size_28sp"
+            android:text="@string/contact"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
