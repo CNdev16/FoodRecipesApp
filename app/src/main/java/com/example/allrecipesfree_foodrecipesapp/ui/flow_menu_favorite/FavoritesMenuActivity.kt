@@ -34,7 +34,6 @@ class FavoritesMenuActivity : BaseActivity<ActivityFavoritesMenuBinding>() {
         super.onCreate(savedInstanceState)
 
         setupToolbar()
-
         setupSubscribeLiveData()
     }
 
@@ -85,6 +84,7 @@ class FavoritesMenuActivity : BaseActivity<ActivityFavoritesMenuBinding>() {
 
     }
 
+    //setup favorite menu.
     private fun setupRecyclerView(it: List<ServiceResponse>?) {
         binding.rcView.visibility = View.VISIBLE
         binding.tvEmpty.visibility = View.GONE
@@ -154,6 +154,7 @@ class FavoritesMenuActivity : BaseActivity<ActivityFavoritesMenuBinding>() {
         })
     }
 
+    //update model for favorite.
     private fun updateModel(
         serviceResponse: List<ServiceResponse>,
         favoriteMenu: List<Favorite>

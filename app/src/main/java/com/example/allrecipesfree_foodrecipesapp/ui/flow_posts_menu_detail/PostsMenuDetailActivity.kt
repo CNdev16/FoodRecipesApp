@@ -25,10 +25,10 @@ class PostsMenuDetailActivity : BaseActivity<ActivityPostsMenuDetailBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //รับค่า postsId จาก posts ที่กดดู detail
         val postsId = intent.getIntExtra("id", -1)
 
         setupToolbar()
-
         subscribeLiveData(postsId)
     }
 
@@ -42,6 +42,7 @@ class PostsMenuDetailActivity : BaseActivity<ActivityPostsMenuDetailBinding>() {
         actionBar.setDisplayUseLogoEnabled(true)
     }
 
+    //setup webview.
     @SuppressLint("SetJavaScriptEnabled")
     private fun subscribeLiveData(postsId: Int) {
         binding.viewModel = viewModel

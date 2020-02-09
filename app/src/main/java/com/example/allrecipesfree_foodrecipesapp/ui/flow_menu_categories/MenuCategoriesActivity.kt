@@ -70,6 +70,7 @@ class MenuCategoriesActivity : BaseActivity<ActivityMenuCategoriesBinding>() {
         })
     }
 
+    //setup category menu.
     private fun setupListMenu(it: List<ServiceResponse>?) {
         binding.tab.visibility = View.VISIBLE
         binding.rcView.visibility = View.VISIBLE
@@ -111,6 +112,7 @@ class MenuCategoriesActivity : BaseActivity<ActivityMenuCategoriesBinding>() {
         })
     }
 
+    //setup posts menu.
     private fun setupRecyclerView(it: List<ServiceResponse>?) {
         binding.rcView.visibility = View.VISIBLE
         binding.tvEmpty.visibility = View.GONE
@@ -180,6 +182,7 @@ class MenuCategoriesActivity : BaseActivity<ActivityMenuCategoriesBinding>() {
         })
     }
 
+    //update model for favorite.
     private fun updateModel(
         serviceResponse: List<ServiceResponse>,
         favoriteMenu: List<Favorite>

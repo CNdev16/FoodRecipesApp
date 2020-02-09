@@ -10,7 +10,9 @@ import kotlinx.android.synthetic.main.custom_dialog.view.*
 import kotlinx.android.synthetic.main.custom_dialog.view.tvMsg
 import kotlinx.android.synthetic.main.custom_progress.view.*
 
+//dialog utils.
 object DialogUtils {
+
     private var alertDialog: AlertDialog.Builder? = null
     private var dialog: AlertDialog? = null
     private var dialogProgress: Dialog? = null

@@ -12,9 +12,11 @@ import kotlinx.coroutines.withContext
 
 class MainActivityViewModel(private val iServiceRepository: IServiceRepository) : BaseViewModel() {
 
+    //ประกาศตัวแปร รอรับค่า result.
     val allCountryCategories = MutableLiveData<List<ServiceResponse>>()
     val allPostsMenuBySearch = MutableLiveData<List<ServiceResponse>>()
 
+    //ฟังก์ชันค้นหา "หมวดหมู่ประเทศ" ส่ง param [parentNo] = 0
     fun fetchCountryCategories(parentNo: Int) {
         viewModelScope.launch {
             when (val result =
@@ -28,6 +30,7 @@ class MainActivityViewModel(private val iServiceRepository: IServiceRepository) 
         }
     }
 
+    //ฟังก์ชันค้นหา "posts" ใช้ param [s] มาใช้ในการ filter ข้อมูล
     fun searchPostsMenu(s: String) {
         viewModelScope.launch {
             when (val result =

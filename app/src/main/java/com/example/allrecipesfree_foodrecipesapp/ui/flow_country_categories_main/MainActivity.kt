@@ -28,21 +28,25 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
+    //inject view model.
     private val viewModel: MainActivityViewModel by viewModel()
+
+    //ประกาศตัวแปร
     private lateinit var countryRcAdapter: CountryRcAdapter
     private lateinit var searchRcAdapter: SearchRcAdapter
     private lateinit var sheetBehavior: BottomSheetBehavior<RelativeLayout>
 
+    //add layout res.
     override var layoutResource: Int = R.layout.activity_main
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setupToolbar()
-
         subscribeLiveData()
     }
 
+    //setup toolbar.
     private fun setupToolbar() {
         setSupportActionBar(binding.toolbar)
         val actionBar = supportActionBar
@@ -53,15 +57,26 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         actionBar.setDisplayUseLogoEnabled(true)
     }
 
+    //after activity created.
     private fun subscribeLiveData() {
+
+        //init view model
         binding.viewModel = viewModel
+
+        //show dialog
         DialogUtils.showProgressDialog(this, getString(R.string.progress_msg))
+
+        //call service.
         viewModel.fetchCountryCategories(0)
 
+        //observe data.
         viewModel.allCountryCategories.observe(this, Observer {
             DialogUtils.disMissDialog()
+
+            //init adapter.
             countryRcAdapter = CountryRcAdapter(it, this)
 
+            //setup recyclerview.
             binding.rcView.apply {
                 setHasFixedSize(true)
                 layoutManager = GridLayoutManager(this@MainActivity, 2)
@@ -70,6 +85,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             countryRcAdapter.setOnClickCountry(object : CountryRcAdapter.OnClickCountry {
                 override fun onClickCountry(country: ServiceResponse, position: Int) {
 
+                    //intent ไปคลาสที่ระบุ และ put extra คือการ ส่ง data ไปด้วย
                     startActivity(
                         Intent(
                             this@MainActivity,
@@ -84,7 +100,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         })
     }
 
+    //setup search menu.
     private fun setupSearch() {
+
+        //setup bottomSheetBehavior.
         sheetBehavior = BottomSheetBehavior.from(binding.search.bottomSheet)
         sheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
@@ -140,6 +159,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
     }
 
+    //set action menu.
     private fun setupButtonMenu() {
         binding.layoutFav.setOnClickListener {
             startActivity(
@@ -167,6 +187,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     }
 
+    //fun search menu.
     private fun searchResult() {
 
         binding.search.progress.visibility = View.VISIBLE
@@ -177,6 +198,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
             binding.search.layoutResult.hideKeyboard()
 
+            //check response [it] empty.
             if (it.isNotEmpty()){
                 binding.search.rcViewSearchResult.visibility = View.VISIBLE
                 binding.search.tvEmpty.visibility = View.GONE

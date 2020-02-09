@@ -41,6 +41,8 @@ val appModule = module {
 
     factory<IServiceRepository> { ServiceRepositoryImpl(get()) }
 
+    //provide view model.
+    //add every time when creating new view model class.
     viewModel { MainActivityViewModel(get()) }
     viewModel { MenuCategoriesViewModel(get()) }
     viewModel { PostsMenuDetailViewModel(get()) }
