@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.example.allrecipesfree_foodrecipesapp.R
+import io.github.inflationx.viewpump.ViewPumpContextWrapper
 
 abstract class BaseActivity <VB: ViewDataBinding>: AppCompatActivity(){
 
@@ -26,6 +27,10 @@ abstract class BaseActivity <VB: ViewDataBinding>: AppCompatActivity(){
     }
 
     fun pageTransition() = overridePendingTransition(R.anim.activity_open_enter, R.anim.activity_open_exit)
+
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase!!))
+    }
 
     override fun onBackPressed() {
         super.onBackPressed()
