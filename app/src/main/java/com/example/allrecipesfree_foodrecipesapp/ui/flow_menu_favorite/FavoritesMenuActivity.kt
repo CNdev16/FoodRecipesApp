@@ -1,24 +1,19 @@
 package com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_favorite
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.base.BaseActivity
-import com.example.allrecipesfree_foodrecipesapp.data.Favorite
-import com.example.allrecipesfree_foodrecipesapp.data.ServiceResponse
+import com.example.core.data.Favorite
+import com.example.core.data.ServiceResponse
 import com.example.allrecipesfree_foodrecipesapp.databinding.ActivityFavoritesMenuBinding
 import com.example.allrecipesfree_foodrecipesapp.local.AppDataBase
-import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_categories.adapter.PostsMenuRcAdapter
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_favorite.adapter.FavoriteMenuRcAdapter
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_posts_menu_detail.PostsMenuDetailActivity
 import com.example.allrecipesfree_foodrecipesapp.utility.DialogUtils
-import com.google.gson.Gson
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

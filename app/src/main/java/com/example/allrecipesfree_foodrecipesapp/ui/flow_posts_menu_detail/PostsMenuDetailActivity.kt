@@ -1,20 +1,13 @@
 package com.example.allrecipesfree_foodrecipesapp.ui.flow_posts_menu_detail
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.os.Bundle
 import android.webkit.WebChromeClient
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.base.BaseActivity
-import com.example.allrecipesfree_foodrecipesapp.data.Favorite
-import com.example.allrecipesfree_foodrecipesapp.data.ServiceResponse
 import com.example.allrecipesfree_foodrecipesapp.databinding.ActivityPostsMenuDetailBinding
-import com.example.allrecipesfree_foodrecipesapp.local.AppDataBase
 import com.example.allrecipesfree_foodrecipesapp.utility.DialogUtils
-import com.example.allrecipesfree_foodrecipesapp.utility.Utils
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PostsMenuDetailActivity : BaseActivity<ActivityPostsMenuDetailBinding>() {
@@ -25,7 +18,6 @@ class PostsMenuDetailActivity : BaseActivity<ActivityPostsMenuDetailBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //รับค่า postsId จาก posts ที่กดดู detail
         val postsId = intent.getIntExtra("id", -1)
 
         setupToolbar()
@@ -42,7 +34,6 @@ class PostsMenuDetailActivity : BaseActivity<ActivityPostsMenuDetailBinding>() {
         actionBar.setDisplayUseLogoEnabled(true)
     }
 
-    //setup webview.
     @SuppressLint("SetJavaScriptEnabled")
     private fun subscribeLiveData(postsId: Int) {
         binding.viewModel = viewModel

@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.allrecipesfree_foodrecipesapp.data.ServiceResponse
+import com.example.core.data.ServiceResponse
 import com.example.allrecipesfree_foodrecipesapp.databinding.ItemSearchResultBinding
 
 class SearchRcAdapter(private val listResult: List<ServiceResponse>, private val context: Context) :

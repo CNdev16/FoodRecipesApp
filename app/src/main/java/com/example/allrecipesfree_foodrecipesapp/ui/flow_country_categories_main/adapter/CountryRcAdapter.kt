@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.allrecipesfree_foodrecipesapp.data.ServiceResponse
+import com.example.core.data.ServiceResponse
 import com.example.allrecipesfree_foodrecipesapp.databinding.ItemCountryBinding
 
 class CountryRcAdapter(private val countryList: List<ServiceResponse>, private val context: Context) :

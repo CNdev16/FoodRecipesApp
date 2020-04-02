@@ -3,16 +3,14 @@ package com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_mai
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.RelativeLayout
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.base.BaseActivity
-import com.example.allrecipesfree_foodrecipesapp.data.ServiceResponse
+import com.example.core.data.ServiceResponse
 import com.example.allrecipesfree_foodrecipesapp.databinding.ActivityMainBinding
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_about.AboutActivity
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.adapter.CountryRcAdapter
@@ -21,22 +19,18 @@ import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_categories.MenuCat
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_favorite.FavoritesMenuActivity
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_posts_menu_detail.PostsMenuDetailActivity
 import com.example.allrecipesfree_foodrecipesapp.utility.DialogUtils
-import com.example.allrecipesfree_foodrecipesapp.utility.Utils
 import com.example.allrecipesfree_foodrecipesapp.utility.hideKeyboard
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
-    //inject view model.
     private val viewModel: MainActivityViewModel by viewModel()
 
-    //ประกาศตัวแปร
     private lateinit var countryRcAdapter: CountryRcAdapter
     private lateinit var searchRcAdapter: SearchRcAdapter
     private lateinit var sheetBehavior: BottomSheetBehavior<RelativeLayout>
 
-    //add layout res.
     override var layoutResource: Int = R.layout.activity_main
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +40,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         subscribeLiveData()
     }
 
-    //setup toolbar.
     private fun setupToolbar() {
         setSupportActionBar(binding.toolbar)
         val actionBar = supportActionBar
@@ -57,26 +50,19 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         actionBar.setDisplayUseLogoEnabled(true)
     }
 
-    //after activity created.
     private fun subscribeLiveData() {
 
-        //init view model
         binding.viewModel = viewModel
 
-        //show dialog
         DialogUtils.showProgressDialog(this, getString(R.string.progress_msg))
 
-        //call service.
         viewModel.fetchCountryCategories(0)
 
-        //observe data.
         viewModel.allCountryCategories.observe(this, Observer {
             DialogUtils.disMissDialog()
 
-            //init adapter.
             countryRcAdapter = CountryRcAdapter(it, this)
 
-            //setup recyclerview.
             binding.rcView.apply {
                 setHasFixedSize(true)
                 layoutManager = GridLayoutManager(this@MainActivity, 2)
@@ -85,7 +71,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             countryRcAdapter.setOnClickCountry(object : CountryRcAdapter.OnClickCountry {
                 override fun onClickCountry(country: ServiceResponse, position: Int) {
 
-                    //intent ไปคลาสที่ระบุ และ put extra คือการ ส่ง data ไปด้วย
                     startActivity(
                         Intent(
                             this@MainActivity,
@@ -100,10 +85,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         })
     }
 
-    //setup search menu.
     private fun setupSearch() {
 
-        //setup bottomSheetBehavior.
         sheetBehavior = BottomSheetBehavior.from(binding.search.bottomSheet)
         sheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
@@ -159,7 +142,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
     }
 
-    //set action menu.
     private fun setupButtonMenu() {
         binding.layoutFav.setOnClickListener {
             startActivity(
@@ -187,7 +169,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     }
 
-    //fun search menu.
     private fun searchResult() {
 
         binding.search.progress.visibility = View.VISIBLE
@@ -198,7 +179,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
             binding.search.layoutResult.hideKeyboard()
 
-            //check response [it] empty.
             if (it.isNotEmpty()){
                 binding.search.rcViewSearchResult.visibility = View.VISIBLE
                 binding.search.tvEmpty.visibility = View.GONE

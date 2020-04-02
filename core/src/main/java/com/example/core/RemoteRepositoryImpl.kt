@@ -1,62 +1,59 @@
-package com.example.allrecipesfree_foodrecipesapp.network
+package com.example.core
 
-import com.example.allrecipesfree_foodrecipesapp.data.ServiceResponse
-import java.lang.Exception
+import com.example.core.data.ServiceResponse
 
-
-class ServiceRepositoryImpl(private val postsService: PostsService) : IServiceRepository {
+class RemoteRepositoryImpl (private val mService: ServiceEndPointInterface): RemoteRepository {
     override suspend fun getCountryCategories(parentNo: Int): UseCaseResult<List<ServiceResponse>> {
         return try {
-            val result = postsService.getCountryCategoriesAsync(parentNo).await()
+            val result = mService.getCountryCategoriesAsync(parentNo).await()
             UseCaseResult.Success(result)
-        } catch (e: Exception) {
+        }catch (e: Exception){
             UseCaseResult.Error(e)
         }
     }
 
     override suspend fun getMenuCategories(parentNo: Int): UseCaseResult<List<ServiceResponse>> {
         return try {
-            val result = postsService.getMenuCategoriesAsync(parentNo).await()
+            val result = mService.getMenuCategoriesAsync(parentNo).await()
             UseCaseResult.Success(result)
-        } catch (e: Exception) {
+        }catch (e: Exception){
             UseCaseResult.Error(e)
         }
     }
 
     override suspend fun getPostsMenu(categoriesNo: Int): UseCaseResult<List<ServiceResponse>> {
         return try {
-            val result = postsService.getPostsMenuAsync(categoriesNo).await()
+            val result = mService.getPostsMenuAsync(categoriesNo).await()
             UseCaseResult.Success(result)
-        } catch (e: Exception) {
+        }catch (e: Exception){
             UseCaseResult.Error(e)
         }
     }
 
     override suspend fun getPostsMenuDetail(postsNo: Int): UseCaseResult<ServiceResponse> {
         return try {
-            val result = postsService.getPostsMenuDetailAsync(postsNo).await()
+            val result = mService.getPostsMenuDetailAsync(postsNo).await()
             UseCaseResult.Success(result)
-        } catch (e: Exception) {
+        }catch (e: Exception){
             UseCaseResult.Error(e)
         }
     }
 
     override suspend fun getSearchPostsMenu(): UseCaseResult<List<ServiceResponse>> {
         return try {
-            val result = postsService.getSearchPostsMenuAsync().await()
+            val result = mService.getSearchPostsMenuAsync().await()
             UseCaseResult.Success(result)
-        } catch (e: Exception) {
+        }catch (e: Exception){
             UseCaseResult.Error(e)
         }
     }
 
     override suspend fun getAllPostsMenu(): UseCaseResult<List<ServiceResponse>> {
         return try {
-            val result = postsService.getAllPostsMenuAsync().await()
+            val result = mService.getAllPostsMenuAsync().await()
             UseCaseResult.Success(result)
-        } catch (e: Exception) {
+        }catch (e: Exception){
             UseCaseResult.Error(e)
         }
     }
-
 }

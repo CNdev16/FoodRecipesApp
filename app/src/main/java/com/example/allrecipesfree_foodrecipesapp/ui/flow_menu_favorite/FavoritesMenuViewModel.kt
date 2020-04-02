@@ -1,17 +1,17 @@
 package com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_favorite
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.allrecipesfree_foodrecipesapp.base.BaseViewModel
-import com.example.allrecipesfree_foodrecipesapp.data.ServiceResponse
-import com.example.allrecipesfree_foodrecipesapp.network.IServiceRepository
-import com.example.allrecipesfree_foodrecipesapp.network.UseCaseResult
+import com.example.core.data.ServiceResponse
+import com.example.core.RemoteRepository
+import com.example.core.RemoteRepositoryImpl
+import com.example.core.UseCaseResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class FavoritesMenuViewModel(private val iServiceRepository: IServiceRepository) : BaseViewModel(){
+class FavoritesMenuViewModel(private val iServiceRepository: RemoteRepositoryImpl) : BaseViewModel(){
 
     val allPostsMenu = MutableLiveData<List<ServiceResponse>>()
 

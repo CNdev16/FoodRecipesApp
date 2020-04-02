@@ -1,4 +1,4 @@
-package com.example.allrecipesfree_foodrecipesapp.data
+package com.example.core.data
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
