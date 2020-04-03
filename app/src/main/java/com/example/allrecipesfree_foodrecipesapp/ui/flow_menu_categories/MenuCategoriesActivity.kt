@@ -14,6 +14,8 @@ import com.example.allrecipesfree_foodrecipesapp.local.AppDataBase
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_categories.adapter.PostsMenuRcAdapter
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_posts_menu_detail.PostsMenuDetailActivity
 import com.example.allrecipesfree_foodrecipesapp.utility.DialogUtils
+import com.example.allrecipesfree_foodrecipesapp.utility.Utils
+import com.example.allrecipesfree_foodrecipesapp.utility.setFont
 import com.google.android.material.tabs.TabLayout
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -74,6 +76,7 @@ class MenuCategoriesActivity : BaseActivity<ActivityMenuCategoriesBinding>() {
 
         it!!.forEach { s ->
             binding.tab.addTab(binding.tab.newTab().setText(s.name))
+            binding.tab.setFont()
         }
 
         DialogUtils.showProgressDialog(this, getString(R.string.progress_msg))

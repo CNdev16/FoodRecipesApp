@@ -20,7 +20,7 @@ class MyApplication : Application() {
                 .addInterceptor(
                     CalligraphyInterceptor(
                         CalligraphyConfig.Builder()
-                            .setDefaultFontPath("fonts/THSarabunNew001.ttf")
+                            .setDefaultFontPath("fonts/Sarabun-Regular.ttf")
                             .setFontAttrId(R.attr.fontPath)
                             .build()
                     )
