@@ -7,8 +7,10 @@ import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_categories.MenuCategoriesViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_favorite.FavoritesMenuViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_posts_menu_detail.PostsMenuDetailViewModel
+import com.example.core.DataRepository
+import com.example.core.DataSource
 import com.example.core.remote.ApiService
-import com.example.core.remote.RemoteRepositoryImpl
+import com.example.core.remote.RemoteDataSource
 import com.example.core.remote.ServiceEndPointInterface
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -16,15 +18,20 @@ import org.koin.dsl.module
 
 val appModule = module {
     single { ApiService(BASE_URL) }
-    single {
+    single<DataSource> {
         val apiService: ApiService = get()
-        RemoteRepositoryImpl(
+        RemoteDataSource(
             apiService.getEndpointInterface(
                 ServiceEndPointInterface::class.java
             )
         )
     }
-    single { Room.databaseBuilder(androidApplication(), AppDataBase::class.java, "app-db").allowMainThreadQueries().build() }
+
+    single { DataRepository(get()) }
+    single {
+        Room.databaseBuilder(androidApplication(), AppDataBase::class.java, "app-db")
+            .allowMainThreadQueries().build()
+    }
     single { get<AppDataBase>().appDataBaseDao() }
 
     viewModel { MainActivityViewModel(get()) }

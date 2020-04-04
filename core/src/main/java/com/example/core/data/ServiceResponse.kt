@@ -37,4 +37,4 @@ data class ServiceResponse(
 
     @SerializedName("favorite_status")
     var favoriteStatus: Boolean = false
-) : Parcelable
+) : Parcelable{}

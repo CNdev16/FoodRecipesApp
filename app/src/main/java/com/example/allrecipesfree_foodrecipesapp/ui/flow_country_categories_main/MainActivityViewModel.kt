@@ -3,14 +3,14 @@ package com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_mai
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.allrecipesfree_foodrecipesapp.base.BaseViewModel
+import com.example.core.DataRepository
 import com.example.core.data.ServiceResponse
-import com.example.core.remote.RemoteRepositoryImpl
 import com.example.core.UseCaseResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MainActivityViewModel(private val iServiceRepository: RemoteRepositoryImpl) : BaseViewModel() {
+class MainActivityViewModel(private val dataRepository: DataRepository) : BaseViewModel() {
 
     val allCountryCategories = MutableLiveData<List<ServiceResponse>>()
     val allPostsMenuBySearch = MutableLiveData<List<ServiceResponse>>()
@@ -18,7 +18,7 @@ class MainActivityViewModel(private val iServiceRepository: RemoteRepositoryImpl
     fun fetchCountryCategories(parentNo: Int) {
         viewModelScope.launch {
             when (val result =
-                withContext(Dispatchers.IO) { iServiceRepository.getCountryCategories(parentNo) }) {
+                withContext(Dispatchers.IO) { dataRepository.getCountryCategories(parentNo) }) {
                 is UseCaseResult.Success -> {
                     allCountryCategories.postValue(result.data)
                 }
@@ -31,7 +31,7 @@ class MainActivityViewModel(private val iServiceRepository: RemoteRepositoryImpl
     fun searchPostsMenu(s: String) {
         viewModelScope.launch {
             when (val result =
-                withContext(Dispatchers.IO) { iServiceRepository.getSearchPostsMenu() }) {
+                withContext(Dispatchers.IO) { dataRepository.getSearchPostsMenu() }) {
                 is UseCaseResult.Success -> {
                     allPostsMenuBySearch.postValue(result.data.filter { response -> response.title!!.rendered!!.contains(s) })
                 }
