@@ -1,5 +1,6 @@
-package com.example.core
+package com.example.core.remote
 
+import com.example.core.UseCaseResult
 import com.example.core.data.ServiceResponse
 
 interface RemoteRepository {

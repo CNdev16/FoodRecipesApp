@@ -1,4 +1,4 @@
-package com.example.core
+package com.example.core.remote
 
 import com.example.core.data.ServiceResponse
 import kotlinx.coroutines.Deferred

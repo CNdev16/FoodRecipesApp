@@ -4,8 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.allrecipesfree_foodrecipesapp.base.BaseViewModel
 import com.example.core.data.ServiceResponse
-import com.example.core.RemoteRepository
-import com.example.core.RemoteRepositoryImpl
+import com.example.core.remote.RemoteRepositoryImpl
 import com.example.core.UseCaseResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

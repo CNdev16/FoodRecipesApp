@@ -1,8 +1,10 @@
-package com.example.core
+package com.example.core.remote
 
+import com.example.core.UseCaseResult
 import com.example.core.data.ServiceResponse
 
-class RemoteRepositoryImpl (private val mService: ServiceEndPointInterface): RemoteRepository {
+class RemoteRepositoryImpl (private val mService: ServiceEndPointInterface):
+    RemoteRepository {
     override suspend fun getCountryCategories(parentNo: Int): UseCaseResult<List<ServiceResponse>> {
         return try {
             val result = mService.getCountryCategoriesAsync(parentNo).await()

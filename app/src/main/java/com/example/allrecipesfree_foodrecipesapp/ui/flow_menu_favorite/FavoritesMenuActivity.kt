@@ -10,7 +10,7 @@ import com.example.allrecipesfree_foodrecipesapp.base.BaseActivity
 import com.example.core.data.Favorite
 import com.example.core.data.ServiceResponse
 import com.example.allrecipesfree_foodrecipesapp.databinding.ActivityFavoritesMenuBinding
-import com.example.allrecipesfree_foodrecipesapp.local.AppDataBase
+import com.example.core.local.AppDataBase
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_favorite.adapter.FavoriteMenuRcAdapter
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_posts_menu_detail.PostsMenuDetailActivity
 import com.example.allrecipesfree_foodrecipesapp.utility.DialogUtils

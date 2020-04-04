@@ -10,11 +10,10 @@ import com.example.allrecipesfree_foodrecipesapp.base.BaseActivity
 import com.example.core.data.Favorite
 import com.example.core.data.ServiceResponse
 import com.example.allrecipesfree_foodrecipesapp.databinding.ActivityMenuCategoriesBinding
-import com.example.allrecipesfree_foodrecipesapp.local.AppDataBase
+import com.example.core.local.AppDataBase
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_categories.adapter.PostsMenuRcAdapter
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_posts_menu_detail.PostsMenuDetailActivity
 import com.example.allrecipesfree_foodrecipesapp.utility.DialogUtils
-import com.example.allrecipesfree_foodrecipesapp.utility.Utils
 import com.example.allrecipesfree_foodrecipesapp.utility.setFont
 import com.google.android.material.tabs.TabLayout
 import org.koin.android.ext.android.inject
@@ -68,7 +67,6 @@ class MenuCategoriesActivity : BaseActivity<ActivityMenuCategoriesBinding>() {
         })
     }
 
-    //setup category menu.
     private fun setupListMenu(it: List<ServiceResponse>?) {
         binding.tab.visibility = View.VISIBLE
         binding.rcView.visibility = View.VISIBLE
@@ -111,7 +109,6 @@ class MenuCategoriesActivity : BaseActivity<ActivityMenuCategoriesBinding>() {
         })
     }
 
-    //setup posts menu.
     private fun setupRecyclerView(it: List<ServiceResponse>?) {
         binding.rcView.visibility = View.VISIBLE
         binding.tvEmpty.visibility = View.GONE
@@ -181,7 +178,6 @@ class MenuCategoriesActivity : BaseActivity<ActivityMenuCategoriesBinding>() {
         })
     }
 
-    //update model for favorite.
     private fun updateModel(
         serviceResponse: List<ServiceResponse>,
         favoriteMenu: List<Favorite>

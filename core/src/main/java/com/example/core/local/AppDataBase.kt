@@ -1,4 +1,4 @@
-package com.example.allrecipesfree_foodrecipesapp.local
+package com.example.core.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
