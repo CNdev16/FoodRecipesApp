@@ -21,21 +21,68 @@
             app:titleTextColor="@color/colorWhite"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorOrange" />
+            android:background="@drawable/bg_toolbar" />
 
         <View style="@style/ViewLine" />
 
         <TextView
+            android:id="@+id/tvCategoryName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorOrange"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="@string/select_menu_category"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/text_size_20sp" />
+            android:layout_below="@+id/view"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/colorWhite"
+            android:gravity="left"
+            android:paddingLeft="16dp"
+            android:text="Select you category"
+            android:textColor="#000"
+            android:textSize="@dimen/text_size_24sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/vpView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_above="@id/btnSelect"
+                android:layout_below="@id/tvCategoryName"
+                android:layout_weight="0.85"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:background="@drawable/bg_footer_corners_redius"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:textSize="@dimen/text_size_22sp"
+                    android:gravity="center_horizontal"
+                    android:text="List category"
+                    android:padding="4dp"
+                    android:textColor="@color/colorWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:visibility="visible"
+                    android:id="@+id/rcView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:listitem="@layout/itemt_posts_menu"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <com.google.android.material.tabs.TabLayout
+            android:visibility="gone"
             android:id="@+id/tab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -45,11 +92,6 @@
             app:tabSelectedTextColor="@color/colorWhite"
             app:tabIndicatorColor="@color/colorWhite"
             app:tabTextColor="@color/colorWhite" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
 
         <TextView
             android:id="@+id/tvEmpty"

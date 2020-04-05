@@ -107,6 +107,9 @@ dependencies {
     //gson
     implementation "com.google.code.gson:gson:$gson_version"
 
+    //viewpager2
+    implementation "androidx.viewpager2:viewpager2:$viewpager2_version"
+
     implementation project(":core")
 
     testImplementation 'junit:junit:4.12'

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -17,12 +17,12 @@
         tools:context=".ui.flow_country_categories_main.MainActivity">
 
         <androidx.appcompat.widget.Toolbar
-            android:padding="1dp"
             android:id="@+id/toolbar"
-            app:titleTextColor="@color/colorWhite"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorOrange" />
+            android:background="@drawable/bg_toolbar"
+            android:padding="1dp"
+            app:titleTextColor="@color/colorWhite" />
 
         <View
             android:id="@+id/view"
@@ -34,12 +34,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/view"
-            android:background="#F5B041"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="@string/country_category"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/text_size_20sp" />
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/colorWhite"
+            android:gravity="left"
+            android:paddingLeft="16dp"
+            android:text="Select you country"
+            android:textColor="#000"
+            android:textSize="@dimen/text_size_24sp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcView"
@@ -47,13 +49,42 @@
             android:layout_height="match_parent"
             android:layout_above="@id/layoutFooter"
             android:layout_below="@id/tvCountryName"
+            android:visibility="gone"
             tools:listitem="@layout/item_country" />
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:layout_marginTop="4dp"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vpView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/toolbar">
+            android:layout_above="@id/btnSelect"
+            android:layout_below="@id/tvCountryName"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal" />
+
+        <Button
+            android:id="@+id/btnSelect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginBottom="60dp"
+            android:background="@drawable/bg_button_selector"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="Select country"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_size_24sp" />
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:layout_marginTop="4dp"
+            android:visibility="gone">
 
             <include
                 android:id="@+id/search"
@@ -68,7 +99,8 @@
             android:layout_alignParentBottom="true"
             android:background="@drawable/bg_footer_corners_redius"
             android:orientation="horizontal"
-            android:padding="4dp">
+            android:padding="4dp"
+            android:visibility="gone">
 
             <RelativeLayout
                 android:id="@+id/layoutFav"

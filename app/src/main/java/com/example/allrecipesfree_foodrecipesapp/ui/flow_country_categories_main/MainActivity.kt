@@ -6,15 +6,18 @@ import android.os.Bundle
 import android.view.View
 import android.widget.RelativeLayout
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.base.BaseActivity
 import com.example.core.data.ServiceResponse
 import com.example.allrecipesfree_foodrecipesapp.databinding.ActivityMainBinding
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_about.AboutActivity
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.adapter.CountryRcAdapter
+import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.adapter.CountryVpAdapter
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.adapter.SearchRcAdapter
+import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.adapter.transformer.CountryTransformer
+import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.adapter.transformer.HorizontalMarginItemDecoration
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_categories.MenuCategoriesActivity
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_favorite.FavoritesMenuActivity
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_posts_menu_detail.PostsMenuDetailActivity
@@ -28,8 +31,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private val viewModel: MainActivityViewModel by viewModel()
 
     private lateinit var countryRcAdapter: CountryRcAdapter
+    private lateinit var countryVpAdapter: CountryVpAdapter
     private lateinit var searchRcAdapter: SearchRcAdapter
     private lateinit var sheetBehavior: BottomSheetBehavior<RelativeLayout>
+    private lateinit var list :List<ServiceResponse>
 
     override var layoutResource: Int = R.layout.activity_main
 
@@ -55,20 +60,49 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         binding.viewModel = viewModel
 
         DialogUtils.showProgressDialog(this, getString(R.string.progress_msg))
-
         viewModel.fetchCountryCategories(0)
+        binding.btnSelect.isEnabled = false
 
         viewModel.allCountryCategories.observe(this, Observer {
             DialogUtils.disMissDialog()
+            binding.btnSelect.isEnabled = true
+            list = it
 
-            countryRcAdapter = CountryRcAdapter(it, this)
 
-            binding.rcView.apply {
-                setHasFixedSize(true)
-                layoutManager = GridLayoutManager(this@MainActivity, 2)
-                adapter = countryRcAdapter
+//            countryRcAdapter = CountryRcAdapter(it, this)
+//
+//            binding.rcView.apply {
+//                setHasFixedSize(true)
+//                layoutManager = GridLayoutManager(this@MainActivity, 2)
+//                adapter = countryRcAdapter
+//            }
+//            countryRcAdapter.setOnClickCountry(object : CountryRcAdapter.OnClickCountry {
+//                override fun onClickCountry(country: ServiceResponse, position: Int) {
+//
+//                    startActivity(
+//                        Intent(
+//                            this@MainActivity,
+//                            MenuCategoriesActivity::class.java
+//                        ).putExtra("id", country.id)
+//                    )
+//                    pageTransition()
+//                }
+//            })
+
+            countryVpAdapter = CountryVpAdapter(it, this)
+
+            binding.vpView.apply {
+                adapter = countryVpAdapter
+                offscreenPageLimit = 1
+                setPageTransformer(
+                    CountryTransformer(
+                        this.resources.getDimension(R.dimen.viewpager_next_item),
+                        this.resources.getDimension(R.dimen.viewpager_current_item_margin)
+                    )
+                )
+                addItemDecoration(HorizontalMarginItemDecoration(this@MainActivity, R.dimen.viewpager_current_item_margin))
             }
-            countryRcAdapter.setOnClickCountry(object : CountryRcAdapter.OnClickCountry {
+            countryVpAdapter.setOnClickCountry(object : CountryVpAdapter.OnClickCountry {
                 override fun onClickCountry(country: ServiceResponse, position: Int) {
 
                     startActivity(
@@ -80,6 +114,34 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                     pageTransition()
                 }
             })
+
+            binding.vpView.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    binding.btnSelect.setOnClickListener {
+                        startActivity(
+                            Intent(
+                                this@MainActivity,
+                                MenuCategoriesActivity::class.java
+                            ).putExtra("id", list[position].id)
+                        )
+                        pageTransition()
+                    }
+                }
+
+                override fun onPageScrolled(
+                    position: Int,
+                    positionOffset: Float,
+                    positionOffsetPixels: Int
+                ) {
+                    super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+                }
+
+                override fun onPageScrollStateChanged(state: Int) {
+                    super.onPageScrollStateChanged(state)
+                }
+            })
+
             setupSearch()
             setupButtonMenu()
         })
@@ -179,7 +241,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
             binding.search.layoutResult.hideKeyboard()
 
-            if (it.isNotEmpty()){
+            if (it.isNotEmpty()) {
                 binding.search.rcViewSearchResult.visibility = View.VISIBLE
                 binding.search.tvEmpty.visibility = View.GONE
                 searchRcAdapter = SearchRcAdapter(it, this)
@@ -206,7 +268,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                     }
 
                 })
-            }else{
+            } else {
                 binding.search.rcViewSearchResult.visibility = View.GONE
                 binding.search.tvEmpty.visibility = View.VISIBLE
                 binding.search.tvEmpty.text = getString(R.string.result_not_found)

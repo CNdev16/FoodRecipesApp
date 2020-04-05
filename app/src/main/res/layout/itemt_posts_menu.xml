@@ -13,7 +13,10 @@
             android:id="@+id/cItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
 
@@ -21,16 +24,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <ImageView
+                    android:id="@+id/imgMenu"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/img_404" />
+
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignBottom="@id/imgMenu"
+                    android:layout_toRightOf="@id/imgMenu"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/imgMenu"
+                    <TextView
+                        android:id="@+id/tvPostDetail"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:adjustViewBounds="true" />
+                        android:layout_height="match_parent"
+                        android:layout_above="@id/rlDate"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:padding="8dp"
+                        android:text="xxx"
+                        android:textSize="@dimen/text_size_16sp" />
 
                     <TextView
                         android:id="@+id/tvPostsName"
@@ -39,24 +56,26 @@
                         android:layout_centerHorizontal="true"
                         android:layout_margin="4dp"
                         android:background="@drawable/bg_text_view_corners_redius"
-                        android:gravity="center"
-                        android:padding="4dp"
-                        android:maxLines="2"
                         android:ellipsize="end"
+                        android:gravity="center"
+                        android:maxLines="2"
+                        android:padding="4dp"
                         android:text="tttt"
-                        android:textSize="@dimen/text_size_18sp" />
+                        android:textSize="@dimen/text_size_18sp"
+                        android:visibility="gone" />
 
                     <RelativeLayout
+                        android:id="@+id/rlDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/imgMenu"
-                        android:background="@color/colorOrange"
+                        android:layout_alignParentBottom="true"
+                        android:background="#494848"
                         android:padding="4dp">
 
                         <ImageView
                             android:id="@+id/imgFav"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
                             android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true"
                             android:adjustViewBounds="true"
@@ -65,8 +84,8 @@
 
                         <ImageView
                             android:id="@+id/imgDate"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
                             android:layout_alignParentStart="true"
                             android:layout_alignParentLeft="true"
                             android:layout_centerVertical="true"
@@ -82,11 +101,11 @@
                             android:layout_marginRight="8dp"
                             android:layout_toLeftOf="@id/imgFav"
                             android:layout_toRightOf="@id/imgDate"
-                            android:text="date"
-                            android:lines="1"
                             android:ellipsize="end"
-                            android:textColor="@color/colorWhite"
-                            android:textSize="@dimen/text_size_18sp" />
+                            android:gravity="center_vertical"
+                            android:lines="1"
+                            android:text="date"
+                            android:textColor="@color/colorWhite" />
 
                     </RelativeLayout>
                 </RelativeLayout>

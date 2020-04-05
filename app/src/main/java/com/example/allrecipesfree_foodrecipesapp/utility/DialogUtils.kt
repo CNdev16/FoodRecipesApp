@@ -43,6 +43,7 @@ object DialogUtils {
         progressLayout.tvMsg.text = msg
         dialogProgress = Dialog(context)
         dialogProgress?.setContentView(progressLayout)
+        dialogProgress?.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dialogProgress?.setCancelable(false)
         dialogProgress?.show()
     }

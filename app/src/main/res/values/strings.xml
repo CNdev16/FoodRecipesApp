@@ -8,7 +8,8 @@
     <string name="application_version">Application version :</string>
     <string name="contact">Contact :</string>
     <string name="select_menu_category">Select Menu Category</string>
-    <string name="progress_msg">Fetching data, please with…</string>
+<!--    <string name="progress_msg">Fetching data, please with…</string>-->
+    <string name="progress_msg">Loading…</string>
     <string name="result_not_found">Result not found.</string>
     <string name="menu_is_empty">Menu is empty.</string>
     <string name="favorite_menu_is_empty">Favorite Menu is empty.</string>
