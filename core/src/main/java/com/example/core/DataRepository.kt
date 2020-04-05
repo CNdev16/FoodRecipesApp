@@ -2,7 +2,7 @@ package com.example.core
 
 import com.example.core.data.ServiceResponse
 
-class DataRepository (var remoteDataSource: DataSource) {
+class DataRepository (private var remoteDataSource: DataSource) {
 
     suspend fun getCountryCategories(parentNo: Int): UseCaseResult<List<ServiceResponse>> {
         return try {
