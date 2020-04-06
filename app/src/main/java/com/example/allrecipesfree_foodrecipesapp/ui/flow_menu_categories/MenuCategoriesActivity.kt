@@ -12,14 +12,14 @@ import com.example.core.data.Favorite
 import com.example.core.data.ServiceResponse
 import com.example.allrecipesfree_foodrecipesapp.databinding.ActivityMenuCategoriesBinding
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.adapter.CountryVpAdapter
-import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.adapter.transformer.CountryTransformer
-import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.adapter.transformer.HorizontalMarginItemDecoration
+import com.example.allrecipesfree_foodrecipesapp.ui.extensions.PagerTransformer
+import com.example.allrecipesfree_foodrecipesapp.ui.extensions.HorizontalMarginItemDecoration
+import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_categories.adapter.MenuCategoryVpAdapter
 import com.example.core.local.AppDataBase
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_categories.adapter.PostsMenuRcAdapter
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_posts_menu_detail.PostsMenuDetailActivity
 import com.example.allrecipesfree_foodrecipesapp.utility.DialogUtils
-import com.example.allrecipesfree_foodrecipesapp.utility.setFont
-import com.google.android.material.tabs.TabLayout
+import com.example.allrecipesfree_foodrecipesapp.utility.logD
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -29,7 +29,7 @@ class MenuCategoriesActivity : BaseActivity<ActivityMenuCategoriesBinding>() {
     private lateinit var postsMenuRcAdapter: PostsMenuRcAdapter
     private val appData: AppDataBase by inject()
     private lateinit var listServiceResponse: List<ServiceResponse>
-    private lateinit var countryVpAdapter: CountryVpAdapter
+    private lateinit var menuCategoryVpAdapter: MenuCategoryVpAdapter
 
     override var layoutResource: Int = R.layout.activity_menu_categories
 
@@ -66,67 +66,39 @@ class MenuCategoriesActivity : BaseActivity<ActivityMenuCategoriesBinding>() {
                 listServiceResponse = it
                 setupListMenu(it)
             } else {
-                binding.tab.visibility = View.GONE
+                binding.vpView.visibility = View.GONE
                 binding.rcView.visibility = View.GONE
-                binding.tvEmpty.visibility = View.VISIBLE
-                binding.tvEmpty.text = "Category is empty."
+                binding.tvMenuCateEmpty.visibility = View.VISIBLE
+                binding.tvMenuCateEmpty.text = "Category is empty."
+                binding.tvMenuEmpty.visibility = View.VISIBLE
+                binding.tvMenuEmpty.text = getString(R.string.menu_is_empty)
             }
         })
     }
 
     private fun setupListMenu(it: List<ServiceResponse>?) {
-        //binding.tab.visibility = View.VISIBLE
-        //binding.rcView.visibility = View.VISIBLE
-        binding.tvEmpty.visibility = View.GONE
+        binding.vpView.visibility = View.VISIBLE
+        binding.tvMenuCateEmpty.visibility = View.GONE
 
-        countryVpAdapter = CountryVpAdapter(it!!, this)
+        menuCategoryVpAdapter = MenuCategoryVpAdapter(it!!, this)
 
         binding.vpView.apply {
-            adapter = countryVpAdapter
+            adapter = menuCategoryVpAdapter
             offscreenPageLimit = 1
             setPageTransformer(
-                CountryTransformer(
+                PagerTransformer(
                     this.resources.getDimension(R.dimen.viewpager_next_item),
                     this.resources.getDimension(R.dimen.viewpager_current_item_margin)
                 )
             )
-            addItemDecoration(HorizontalMarginItemDecoration(this@MenuCategoriesActivity, R.dimen.viewpager_current_item_margin))
+            addItemDecoration(
+                HorizontalMarginItemDecoration(
+                    this@MenuCategoriesActivity,
+                    R.dimen.viewpager_current_item_margin
+                )
+            )
         }
-//        it!!.forEach { s ->
-//            binding.tab.addTab(binding.tab.newTab().setText(s.name))
-//            binding.tab.setFont()
-//        }
-//
-//        DialogUtils.showProgressDialog(this, getString(R.string.progress_msg))
-//        viewModel.fetchPostsMenu(it[binding.vpView.currentItem].id!!)
 
-        viewModel.allPostsMenu.observe(this@MenuCategoriesActivity, Observer {
-            DialogUtils.disMissDialog()
-
-            if (it.isNotEmpty()) {
-                setupRecyclerView(it)
-            } else {
-                binding.rcView.visibility = View.GONE
-                binding.tvEmpty.visibility = View.VISIBLE
-                binding.tvEmpty.text = getString(R.string.menu_is_empty)
-            }
-        })
-//
-//        binding.tab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-//            override fun onTabReselected(tab: TabLayout.Tab?) {
-//            }
-//
-//            override fun onTabUnselected(tab: TabLayout.Tab?) {
-//            }
-//
-//            override fun onTabSelected(tab: TabLayout.Tab?) {
-//                DialogUtils.showProgressDialog(
-//                    this@MenuCategoriesActivity,
-//                    getString(R.string.progress_msg)
-//                )
-//                viewModel.fetchPostsMenu(it[binding.tab.selectedTabPosition].id!!)
-//            }
-//        })
         binding.vpView.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
@@ -146,11 +118,24 @@ class MenuCategoriesActivity : BaseActivity<ActivityMenuCategoriesBinding>() {
                 super.onPageScrollStateChanged(state)
             }
         })
+
+        viewModel.allPostsMenu.observe(this@MenuCategoriesActivity, Observer {
+            DialogUtils.disMissDialog()
+
+            if (it.isNotEmpty()) {
+                setupRecyclerView(it)
+            } else {
+                binding.rcView.visibility = View.GONE
+                binding.tvMenuEmpty.visibility = View.VISIBLE
+                binding.tvMenuEmpty.text = getString(R.string.menu_is_empty)
+            }
+        })
+
     }
 
     private fun setupRecyclerView(it: List<ServiceResponse>?) {
         binding.rcView.visibility = View.VISIBLE
-        binding.tvEmpty.visibility = View.GONE
+        binding.tvMenuEmpty.visibility = View.GONE
 
         postsMenuRcAdapter =
             PostsMenuRcAdapter(

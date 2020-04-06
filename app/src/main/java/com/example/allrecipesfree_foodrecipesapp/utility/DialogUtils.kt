@@ -10,7 +10,6 @@ import kotlinx.android.synthetic.main.custom_dialog.view.*
 import kotlinx.android.synthetic.main.custom_dialog.view.tvMsg
 import kotlinx.android.synthetic.main.custom_progress.view.*
 
-//dialog utils.
 object DialogUtils {
 
     private var alertDialog: AlertDialog.Builder? = null
@@ -49,8 +48,13 @@ object DialogUtils {
     }
 
     fun disMissDialog() {
-        dialog?.dismiss()
-        dialogProgress?.hide()
+        if (dialog != null && dialog!!.isShowing) {
+            dialog?.dismiss()
+        }
+
+        if (dialogProgress != null && dialogProgress!!.isShowing) {
+            dialogProgress?.dismiss()
+        }
     }
 
     interface OnClickButtonDialog {

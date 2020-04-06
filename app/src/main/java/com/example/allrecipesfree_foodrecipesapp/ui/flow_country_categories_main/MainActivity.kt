@@ -16,8 +16,8 @@ import com.example.allrecipesfree_foodrecipesapp.ui.flow_about.AboutActivity
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.adapter.CountryRcAdapter
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.adapter.CountryVpAdapter
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.adapter.SearchRcAdapter
-import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.adapter.transformer.CountryTransformer
-import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.adapter.transformer.HorizontalMarginItemDecoration
+import com.example.allrecipesfree_foodrecipesapp.ui.extensions.PagerTransformer
+import com.example.allrecipesfree_foodrecipesapp.ui.extensions.HorizontalMarginItemDecoration
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_categories.MenuCategoriesActivity
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_favorite.FavoritesMenuActivity
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_posts_menu_detail.PostsMenuDetailActivity
@@ -95,12 +95,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 adapter = countryVpAdapter
                 offscreenPageLimit = 1
                 setPageTransformer(
-                    CountryTransformer(
+                    PagerTransformer(
                         this.resources.getDimension(R.dimen.viewpager_next_item),
                         this.resources.getDimension(R.dimen.viewpager_current_item_margin)
                     )
                 )
-                addItemDecoration(HorizontalMarginItemDecoration(this@MainActivity, R.dimen.viewpager_current_item_margin))
+                addItemDecoration(
+                    HorizontalMarginItemDecoration(
+                        this@MainActivity,
+                        R.dimen.viewpager_current_item_margin
+                    )
+                )
             }
             countryVpAdapter.setOnClickCountry(object : CountryVpAdapter.OnClickCountry {
                 override fun onClickCountry(country: ServiceResponse, position: Int) {

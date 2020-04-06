@@ -1,4 +1,4 @@
-package com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.adapter.transformer
+package com.example.allrecipesfree_foodrecipesapp.ui.extensions
 
 import android.content.Context
 import android.graphics.Rect

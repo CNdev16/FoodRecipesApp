@@ -3,10 +3,12 @@ package com.example.allrecipesfree_foodrecipesapp.utility
 import android.content.Context
 import android.content.res.AssetManager
 import android.graphics.Typeface
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
+import android.widget.Toast
 import com.google.android.material.tabs.TabLayout
 
 fun String.formatDateTime(): String {
@@ -38,3 +40,7 @@ fun TabLayout.setFont() {
         }
     }
 }
+
+fun Context.toast(text: String) = Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+
+fun logD(logMsg: String) = Log.d("Print logD ",logMsg)

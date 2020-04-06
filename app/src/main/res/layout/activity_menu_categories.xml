@@ -16,12 +16,12 @@
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
-            android:padding="1dp"
             android:id="@+id/toolbar"
-            app:titleTextColor="@color/colorWhite"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@drawable/bg_toolbar" />
+            android:background="@drawable/bg_toolbar"
+            android:padding="1dp"
+            app:titleTextColor="@color/colorWhite" />
 
         <View style="@style/ViewLine" />
 
@@ -30,8 +30,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/view"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
             android:background="@color/colorWhite"
             android:gravity="left"
             android:paddingLeft="16dp"
@@ -44,61 +42,68 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/vpView"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_above="@id/btnSelect"
-                android:layout_below="@id/tvCategoryName"
-                android:layout_weight="0.85"
-                android:layout_marginBottom="16dp"
-                android:orientation="horizontal" />
+                android:layout_weight="1">
 
-            <LinearLayout
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/vpView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="horizontal" />
+
+                <TextView
+                    android:id="@+id/tvMenuCateEmpty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="xxx"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_24sp"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_footer_corners_redius"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:textSize="@dimen/text_size_22sp"
-                    android:gravity="center_horizontal"
-                    android:text="List category"
-                    android:padding="4dp"
-                    android:textColor="@color/colorWhite"
+                    android:id="@+id/tvTextListMenu"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:padding="4dp"
+                    android:text="List category"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_22sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:visibility="visible"
                     android:id="@+id/rcView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    tools:listitem="@layout/itemt_posts_menu"/>
+                    android:layout_below="@id/tvTextListMenu"
+                    android:visibility="visible"
+                    tools:listitem="@layout/itemt_posts_menu" />
 
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/tvMenuEmpty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="xxxxx"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_24sp"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
 
+            </RelativeLayout>
         </LinearLayout>
-
-        <com.google.android.material.tabs.TabLayout
-            android:visibility="gone"
-            android:id="@+id/tab"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorOrange"
-            app:tabGravity="fill"
-            app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/colorWhite"
-            app:tabIndicatorColor="@color/colorWhite"
-            app:tabTextColor="@color/colorWhite" />
-
-        <TextView
-            android:id="@+id/tvEmpty"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:textSize="@dimen/text_size_24sp"
-            android:visibility="gone" />
     </LinearLayout>
 </layout>

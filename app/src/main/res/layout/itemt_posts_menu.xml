@@ -73,6 +73,7 @@
                         android:padding="4dp">
 
                         <ImageView
+                            android:layout_centerVertical="true"
                             android:id="@+id/imgFav"
                             android:layout_width="18dp"
                             android:layout_height="18dp"
