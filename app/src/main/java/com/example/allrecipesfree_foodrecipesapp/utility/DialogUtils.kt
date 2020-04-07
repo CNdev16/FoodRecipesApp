@@ -29,15 +29,15 @@ object DialogUtils {
         dialogLayout.tvTitle.text = titleMsg
         dialogLayout.tvMsg.text = detailMsg
         dialogLayout.btn.text = labelBtn
-
         dialog = alertDialog!!.show()
+        dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
         dialogLayout.btn.setOnClickListener {
             onClickButtonDialog.onClickButtonDialog()
         }
     }
 
-    fun showProgressDialog(context: Context, msg: String){
+    fun showProgressDialog(context: Context, msg: String) {
         val progressLayout = LayoutInflater.from(context).inflate(R.layout.custom_progress, null)
         progressLayout.tvMsg.text = msg
         dialogProgress = Dialog(context)
