@@ -2,26 +2,31 @@ package com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_categories
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.base.BaseActivity
-import com.example.core.data.Favorite
-import com.example.core.data.ServiceResponse
 import com.example.allrecipesfree_foodrecipesapp.databinding.ActivityMenuCategoriesBinding
-import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.adapter.CountryVpAdapter
-import com.example.allrecipesfree_foodrecipesapp.ui.extensions.PagerTransformer
+import com.example.allrecipesfree_foodrecipesapp.databinding.LayoutToolbarBinding
 import com.example.allrecipesfree_foodrecipesapp.ui.extensions.HorizontalMarginItemDecoration
+import com.example.allrecipesfree_foodrecipesapp.ui.extensions.PagerTransformer
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_categories.adapter.MenuCategoryVpAdapter
-import com.example.core.local.AppDataBase
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_categories.adapter.PostsMenuRcAdapter
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_posts_menu_detail.PostsMenuDetailActivity
 import com.example.allrecipesfree_foodrecipesapp.utility.DialogUtils
-import com.example.allrecipesfree_foodrecipesapp.utility.logD
+import com.example.core.data.Favorite
+import com.example.core.data.ServiceResponse
+import com.example.core.local.AppDataBase
+import com.google.android.material.appbar.AppBarLayout
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class MenuCategoriesActivity : BaseActivity<ActivityMenuCategoriesBinding>() {
 
@@ -45,12 +50,23 @@ class MenuCategoriesActivity : BaseActivity<ActivityMenuCategoriesBinding>() {
 
     private fun setupToolbar() {
         setSupportActionBar(binding.toolbar)
-        val actionBar = supportActionBar
-        actionBar!!.title = getString(R.string.app_name)
+        val actionBar = supportActionBar!!
         actionBar.elevation = 4.0F
-        actionBar.setDisplayShowHomeEnabled(true)
-        actionBar.setLogo(R.mipmap.ic_launcher)
-        actionBar.setDisplayUseLogoEnabled(true)
+        actionBar.setDisplayShowHomeEnabled(false)
+        actionBar.setDisplayShowTitleEnabled(false)
+
+        val cusView = LayoutInflater.from(this).inflate(R.layout.layout_toolbar, null)
+        val ivBack = cusView.findViewById<ImageView>(R.id.ivBack)
+        val tvTitle = cusView.findViewById<TextView>(R
+            .id.tvTitleToolbar)
+        tvTitle.apply {
+            text = "Menu category"
+        }
+        ivBack.apply {
+            setOnClickListener { onBackPressed() }
+        }
+        actionBar.customView = cusView
+        actionBar.setDisplayShowCustomEnabled(true)
     }
 
     private fun subscribeLiveData(id: Int) {
@@ -66,6 +82,7 @@ class MenuCategoriesActivity : BaseActivity<ActivityMenuCategoriesBinding>() {
                 listServiceResponse = it
                 setupListMenu(it)
             } else {
+                stopScroll()
                 binding.vpView.visibility = View.GONE
                 binding.rcView.visibility = View.GONE
                 binding.tvMenuCateEmpty.visibility = View.VISIBLE
@@ -99,10 +116,13 @@ class MenuCategoriesActivity : BaseActivity<ActivityMenuCategoriesBinding>() {
             )
         }
 
-        binding.vpView.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+        binding.vpView.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                DialogUtils.showProgressDialog(this@MenuCategoriesActivity, getString(R.string.progress_msg))
+                DialogUtils.showProgressDialog(
+                    this@MenuCategoriesActivity,
+                    getString(R.string.progress_msg)
+                )
                 viewModel.fetchPostsMenu(it[position].id!!)
             }
 
@@ -124,7 +144,9 @@ class MenuCategoriesActivity : BaseActivity<ActivityMenuCategoriesBinding>() {
 
             if (it.isNotEmpty()) {
                 setupRecyclerView(it)
+                startScroll()
             } else {
+                stopScroll()
                 binding.rcView.visibility = View.GONE
                 binding.tvMenuEmpty.visibility = View.VISIBLE
                 binding.tvMenuEmpty.text = getString(R.string.menu_is_empty)
@@ -210,6 +232,29 @@ class MenuCategoriesActivity : BaseActivity<ActivityMenuCategoriesBinding>() {
             serviceResponse.find { it.id == f.id }?.favoriteStatus = f.status
         }
         return serviceResponse
+    }
+
+    fun stopScroll() {
+        val toolbarLayoutParams =
+            binding.collap.layoutParams as AppBarLayout.LayoutParams
+        toolbarLayoutParams.scrollFlags = 0
+        binding.collap.layoutParams = toolbarLayoutParams
+        val appBarLayoutParams =
+            binding.appBar.layoutParams as CoordinatorLayout.LayoutParams
+        appBarLayoutParams.behavior = null
+        binding.appBar.setLayoutParams(appBarLayoutParams)
+    }
+
+    fun startScroll() {
+        val toolbarLayoutParams =
+            binding.collap.layoutParams as AppBarLayout.LayoutParams
+        toolbarLayoutParams.scrollFlags =
+            AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
+        binding.collap.layoutParams = toolbarLayoutParams
+        val appBarLayoutParams =
+            binding.appBar.layoutParams as CoordinatorLayout.LayoutParams
+        appBarLayoutParams.behavior = AppBarLayout.Behavior()
+        binding.appBar.layoutParams = appBarLayoutParams
     }
 
 }

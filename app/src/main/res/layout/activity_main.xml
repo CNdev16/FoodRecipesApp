@@ -58,7 +58,6 @@
             android:layout_height="match_parent"
             android:layout_above="@id/btnSelect"
             android:layout_below="@id/tvCountryName"
-            android:layout_marginTop="16dp"
             android:orientation="horizontal" />
 
         <TextView
@@ -67,10 +66,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginRight="80dp"
-            android:layout_marginBottom="60dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginBottom="30dp"
             android:background="@drawable/bg_button_selector"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"

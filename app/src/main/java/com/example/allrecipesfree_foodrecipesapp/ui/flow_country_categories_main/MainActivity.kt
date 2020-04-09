@@ -3,8 +3,11 @@ package com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_mai
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
 import android.widget.RelativeLayout
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
@@ -47,12 +50,23 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private fun setupToolbar() {
         setSupportActionBar(binding.toolbar)
-        val actionBar = supportActionBar
-        actionBar!!.title = getString(R.string.app_name)
+        val actionBar = supportActionBar!!
         actionBar.elevation = 4.0F
-        actionBar.setDisplayShowHomeEnabled(true)
-        actionBar.setLogo(R.mipmap.ic_launcher)
-        actionBar.setDisplayUseLogoEnabled(true)
+        actionBar.setDisplayShowHomeEnabled(false)
+        actionBar.setDisplayShowTitleEnabled(false)
+
+        val cusView = LayoutInflater.from(this).inflate(R.layout.layout_toolbar, null)
+        val ivBack = cusView.findViewById<ImageView>(R.id.ivBack)
+        val tvTitle = cusView.findViewById<TextView>(R
+            .id.tvTitleToolbar)
+        tvTitle.apply {
+            text = getString(R.string.app_name)
+        }
+        ivBack.apply {
+            visibility = View.GONE
+        }
+        actionBar.customView = cusView
+        actionBar.setDisplayShowCustomEnabled(true)
     }
 
     private fun subscribeLiveData() {
