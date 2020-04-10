@@ -10,6 +10,8 @@ import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.core.data.ServiceResponse
 import com.example.allrecipesfree_foodrecipesapp.databinding.ItemtPostsMenuBinding
 import com.example.allrecipesfree_foodrecipesapp.utility.formatDateTime
+import com.example.allrecipesfree_foodrecipesapp.utility.logD
+import com.google.gson.Gson
 
 class PostsMenuRcAdapter(
     private var postsList: List<ServiceResponse>,
@@ -33,9 +35,7 @@ class PostsMenuRcAdapter(
     override fun onBindViewHolder(holder: PostsMenuRcViewHolder, position: Int) {
         val postMenu: ServiceResponse = postsList[holder.adapterPosition]
 
-        holder.binding.tvPostsName.apply {
-            text = postMenu.title?.rendered
-        }
+        holder.binding.tvPostDetail.text = postMenu.title?.rendered
         holder.binding.tvDate.text = postMenu.date!!.formatDateTime()
 
         holder.binding.imgFav.apply {
@@ -51,7 +51,6 @@ class PostsMenuRcAdapter(
 
         Glide.with(context)
             .load(postMenu.betterFeaturedImage?.sourceUrl)
-            .placeholder(ContextCompat.getDrawable(context, R.drawable.img_404))
             .into(holder.binding.imgMenu)
 
         holder.binding.cItem.apply {

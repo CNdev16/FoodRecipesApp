@@ -33,9 +33,9 @@ class FavoriteMenuRcAdapter(
     override fun onBindViewHolder(holder: FavoriteMenuRcViewHolder, position: Int) {
         val postMenu: ServiceResponse = favList[holder.adapterPosition]
 
-        holder.binding.tvPostsName.apply {
-            text = postMenu.title?.rendered
-        }
+//        holder.binding.tvPostsName.apply {
+//            text = postMenu.title?.rendered
+//        }
         holder.binding.tvDate.text = postMenu.date!!.formatDateTime()
 
         holder.binding.imgFav.apply {

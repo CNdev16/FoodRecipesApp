@@ -60,7 +60,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         val tvTitle = cusView.findViewById<TextView>(R
             .id.tvTitleToolbar)
         tvTitle.apply {
-            text = getString(R.string.app_name)
+            text = "Country category"
         }
         ivBack.apply {
             visibility = View.GONE

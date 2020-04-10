@@ -31,6 +31,10 @@ class CountryVpAdapter(private val countryList: List<ServiceResponse>, private v
             text = country.name
         }
 
+        holder.binding.imgCate.apply {
+            clipToOutline = true
+        }
+
         holder.binding.cItem.apply {
             setOnClickListener {
                 listener?.onClickCountry(country, position)

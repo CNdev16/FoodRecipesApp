@@ -14,6 +14,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:gravity="center"
+            android:padding="4dp"
             android:orientation="vertical">
 
             <ImageView
@@ -21,7 +22,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:src="@drawable/img_404" />
+                android:src="@drawable/img_404"
+                android:background="@drawable/bg_corners_radius"/>
 
             <TextView
                 android:id="@+id/tvCountryName"
@@ -29,11 +31,10 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="8dp"
                 android:gravity="center"
-                android:padding="4dp"
                 android:lines="1"
                 android:ellipsize="end"
                 android:text="tttt"
-                android:textSize="@dimen/text_size_18sp" />
+                android:textSize="@dimen/text_size_22sp" />
         </LinearLayout>
 
 

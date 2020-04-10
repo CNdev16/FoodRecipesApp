@@ -13,7 +13,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.base.BaseActivity
 import com.example.allrecipesfree_foodrecipesapp.databinding.ActivityMenuCategoriesBinding
-import com.example.allrecipesfree_foodrecipesapp.databinding.LayoutToolbarBinding
 import com.example.allrecipesfree_foodrecipesapp.ui.extensions.HorizontalMarginItemDecoration
 import com.example.allrecipesfree_foodrecipesapp.ui.extensions.PagerTransformer
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_categories.adapter.MenuCategoryVpAdapter

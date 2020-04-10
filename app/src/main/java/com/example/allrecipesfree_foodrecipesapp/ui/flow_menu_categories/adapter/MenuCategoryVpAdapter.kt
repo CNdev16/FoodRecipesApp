@@ -27,6 +27,10 @@ class MenuCategoryVpAdapter(private val countryList: List<ServiceResponse>, priv
 
         Glide.with(context).load(country.imageCategory?.guid).into(holder.binding.imgCate)
 
+        holder.binding.imgCate.apply {
+            clipToOutline = true
+        }
+
         holder.binding.tvCountryName.apply {
             text = country.name
         }

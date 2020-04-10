@@ -28,22 +28,13 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="@color/colorOrange"
+                    android:background="@drawable/bg_toolbar"
+                    android:padding="1dp"
                     app:titleTextColor="@color/colorWhite" />
 
             </RelativeLayout>
 
             <View style="@style/ViewLine" />
-
-            <TextView
-                android:id="@+id/tvTitlePost"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorOrange"
-                android:gravity="center"
-                android:padding="8dp"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/text_size_20sp" />
 
             <WebView
                 android:id="@+id/webViewDetail"
