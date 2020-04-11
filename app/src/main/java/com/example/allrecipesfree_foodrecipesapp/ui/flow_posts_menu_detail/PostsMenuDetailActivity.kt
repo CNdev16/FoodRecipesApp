@@ -8,7 +8,9 @@ import android.webkit.WebChromeClient
 import android.webkit.WebSettings
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
 import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.base.BaseActivity
 import com.example.allrecipesfree_foodrecipesapp.databinding.ActivityPostsMenuDetailBinding
@@ -69,6 +71,11 @@ class PostsMenuDetailActivity : BaseActivity<ActivityPostsMenuDetailBinding>() {
                 text = "${it.title!!.rendered}"
             }
 
+            Glide.with(this)
+                .load(it.betterFeaturedImage?.sourceUrl)
+                .placeholder(ContextCompat.getDrawable(this, R.drawable.img_404))
+                .into(binding.ivMenu)
+
             binding.webViewDetail.apply {
                 webChromeClient = WebChromeClient()
                 settings.javaScriptEnabled = true
@@ -95,9 +102,9 @@ class PostsMenuDetailActivity : BaseActivity<ActivityPostsMenuDetailBinding>() {
     private fun getStyledFont(html: String): String? {
         val addBodyStart = !html.toLowerCase().contains("<body>")
         val addBodyEnd = !html.toLowerCase().contains("</body")
-        return "<style type=\"text/css\">@font-face {font-family: CustomFont;" +
-                "src: url(\"file:///android_assets/fonts/Sarabun-Regular.ttf\")}" +
-                "body {font-family: CustomFont;font-size: large;text-align: justify;}</style>" +
+        return "<head><style type=\"text/css\">@font-face {font-family: CustomFont;" +
+                "src: url(\'file:///android_assets/fonts/Sarabun-Regular.ttf\')}" +
+                "body {font-family: CustomFont;font-size: large;text-align: justify;}</style></head>" +
                 (if (addBodyStart) "<body>" else "") + html + if (addBodyEnd) "</body>" else ""
     }
 }
