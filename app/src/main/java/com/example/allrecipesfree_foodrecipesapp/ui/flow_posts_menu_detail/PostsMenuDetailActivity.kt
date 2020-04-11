@@ -3,6 +3,7 @@ package com.example.allrecipesfree_foodrecipesapp.ui.flow_posts_menu_detail
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.webkit.WebChromeClient
 import android.webkit.WebSettings
 import android.widget.ImageView
@@ -12,6 +13,7 @@ import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.base.BaseActivity
 import com.example.allrecipesfree_foodrecipesapp.databinding.ActivityPostsMenuDetailBinding
 import com.example.allrecipesfree_foodrecipesapp.utility.DialogUtils
+import kotlinx.android.synthetic.main.layout_toolbar.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -33,18 +35,21 @@ class PostsMenuDetailActivity : BaseActivity<ActivityPostsMenuDetailBinding>() {
     private fun setupToolbar() {
         setSupportActionBar(binding.toolbar)
         val actionBar = supportActionBar!!
-        actionBar.elevation = 4.0F
+        actionBar.elevation = 0F
         actionBar.setDisplayShowHomeEnabled(false)
         actionBar.setDisplayShowTitleEnabled(false)
 
         val cusView = LayoutInflater.from(this).inflate(R.layout.layout_toolbar, null)
         val ivBack = cusView.findViewById<ImageView>(R.id.ivBack)
+        ivBack.visibility  = View.GONE
+        val ivClose = cusView.findViewById<ImageView>(R.id.ivClose)
+        ivClose.visibility  = View.VISIBLE
         tvTitle = cusView.findViewById<TextView>(
             R
                 .id.tvTitleToolbar
         )
-        ivBack.apply {
-            setOnClickListener { onBackPressed() }
+        ivClose.apply {
+            setOnClickListener { finish() }
         }
         actionBar.customView = cusView
         actionBar.setDisplayShowCustomEnabled(true)

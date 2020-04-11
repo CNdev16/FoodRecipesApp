@@ -5,13 +5,16 @@
         android:id="@+id/layoutRootSearchResult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorWhite"
-        android:orientation="vertical">
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/bg_item_selector"
+        android:orientation="vertical"
+        android:padding="4dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp">
+            android:background="@drawable/bg_corners_radius">
 
             <TextView
                 android:id="@+id/tvTitle"
@@ -19,6 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@id/imgArrowRight"
+                android:padding="4dp"
                 android:ellipsize="end"
                 android:lines="1"
                 android:textColor="@color/colorOrange"
@@ -32,11 +36,9 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:adjustViewBounds="true"
-                android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                android:rotation="180"
+                android:src="@drawable/ic_back"
                 android:tint="@color/colorOrange" />
         </RelativeLayout>
-
-        <View style="@style/ViewLineOrange" />
-
     </LinearLayout>
 </layout>

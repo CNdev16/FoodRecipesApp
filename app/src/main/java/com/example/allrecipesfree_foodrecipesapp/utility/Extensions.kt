@@ -10,6 +10,9 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.tabs.TabLayout
+import kotlin.math.log
+
+private var t: Toast? = null
 
 fun String.formatDateTime(): String {
     return try {
@@ -41,6 +44,12 @@ fun TabLayout.setFont() {
     }
 }
 
-fun Context.toast(text: String) = Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+fun Context.toast(text: String) {
+    t = Toast.makeText(this, text, Toast.LENGTH_SHORT)
+    return t!!.show()
+}
 
-fun logD(logMsg: String) = Log.d("Print logD ",logMsg)
+fun cancelToast() = t?.cancel() ?: logD("Toast exit fail!!")
+
+
+fun logD(logMsg: String) = Log.d("Print logD ", logMsg)

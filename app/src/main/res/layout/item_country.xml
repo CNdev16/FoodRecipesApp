@@ -10,30 +10,30 @@
         app:cardElevation="6dp">
 
         <LinearLayout
-            android:background="@drawable/bg_item_selector"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:padding="4dp"
+            android:background="@drawable/bg_item_selector"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="4dp">
 
             <ImageView
                 android:id="@+id/imgCate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:src="@drawable/img_404"
-                android:background="@drawable/bg_corners_radius"/>
+                android:background="@drawable/bg_corners_radius"
+                android:src="@drawable/img_404" />
 
             <TextView
                 android:id="@+id/tvCountryName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="8dp"
+                android:ellipsize="end"
                 android:gravity="center"
                 android:lines="1"
-                android:ellipsize="end"
                 android:text="tttt"
                 android:textSize="@dimen/text_size_22sp" />
         </LinearLayout>

@@ -50,7 +50,7 @@ class MenuCategoriesActivity : BaseActivity<ActivityMenuCategoriesBinding>() {
     private fun setupToolbar() {
         setSupportActionBar(binding.toolbar)
         val actionBar = supportActionBar!!
-        actionBar.elevation = 4.0F
+        actionBar.elevation = 0F
         actionBar.setDisplayShowHomeEnabled(false)
         actionBar.setDisplayShowTitleEnabled(false)
 

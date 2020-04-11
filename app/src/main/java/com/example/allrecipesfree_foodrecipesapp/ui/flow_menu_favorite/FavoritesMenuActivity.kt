@@ -2,7 +2,10 @@ package com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_favorite
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.allrecipesfree_foodrecipesapp.R
@@ -34,12 +37,26 @@ class FavoritesMenuActivity : BaseActivity<ActivityFavoritesMenuBinding>() {
 
     private fun setupToolbar() {
         setSupportActionBar(binding.toolbar)
-        val actionBar = supportActionBar
-        actionBar!!.title = getString(R.string.app_name)
-        actionBar.elevation = 4.0F
-        actionBar.setDisplayShowHomeEnabled(true)
-        actionBar.setLogo(R.mipmap.ic_launcher)
-        actionBar.setDisplayUseLogoEnabled(true)
+        val actionBar = supportActionBar!!
+        actionBar.elevation = 0F
+        actionBar.setDisplayShowHomeEnabled(false)
+        actionBar.setDisplayShowTitleEnabled(false)
+
+        val cusView = LayoutInflater.from(this).inflate(R.layout.layout_toolbar, null)
+        val ivBack = cusView.findViewById<ImageView>(R.id.ivBack)
+        ivBack.visibility  = View.GONE
+        val ivClose = cusView.findViewById<ImageView>(R.id.ivClose)
+        ivClose.visibility  = View.VISIBLE
+        val tvTitle = cusView.findViewById<TextView>(
+            R
+                .id.tvTitleToolbar
+        )
+        tvTitle.text = "Menu favorites"
+        ivClose.apply {
+            setOnClickListener { finish() }
+        }
+        actionBar.customView = cusView
+        actionBar.setDisplayShowCustomEnabled(true)
     }
 
     private fun setupSubscribeLiveData() {
@@ -79,7 +96,6 @@ class FavoritesMenuActivity : BaseActivity<ActivityFavoritesMenuBinding>() {
 
     }
 
-    //setup favorite menu.
     private fun setupRecyclerView(it: List<ServiceResponse>?) {
         binding.rcView.visibility = View.VISIBLE
         binding.tvEmpty.visibility = View.GONE
@@ -149,7 +165,6 @@ class FavoritesMenuActivity : BaseActivity<ActivityFavoritesMenuBinding>() {
         })
     }
 
-    //update model for favorite.
     private fun updateModel(
         serviceResponse: List<ServiceResponse>,
         favoriteMenu: List<Favorite>

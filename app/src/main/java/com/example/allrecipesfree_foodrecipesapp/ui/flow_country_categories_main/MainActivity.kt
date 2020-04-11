@@ -3,6 +3,7 @@ package com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_mai
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -25,7 +26,9 @@ import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_categories.MenuCat
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_favorite.FavoritesMenuActivity
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_posts_menu_detail.PostsMenuDetailActivity
 import com.example.allrecipesfree_foodrecipesapp.utility.DialogUtils
+import com.example.allrecipesfree_foodrecipesapp.utility.cancelToast
 import com.example.allrecipesfree_foodrecipesapp.utility.hideKeyboard
+import com.example.allrecipesfree_foodrecipesapp.utility.toast
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -37,7 +40,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private lateinit var countryVpAdapter: CountryVpAdapter
     private lateinit var searchRcAdapter: SearchRcAdapter
     private lateinit var sheetBehavior: BottomSheetBehavior<RelativeLayout>
-    private lateinit var list :List<ServiceResponse>
+    private lateinit var list: List<ServiceResponse>
+    private var confirmExit: Boolean = false
 
     override var layoutResource: Int = R.layout.activity_main
 
@@ -51,14 +55,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private fun setupToolbar() {
         setSupportActionBar(binding.toolbar)
         val actionBar = supportActionBar!!
-        actionBar.elevation = 4.0F
+        actionBar.elevation = 0F
         actionBar.setDisplayShowHomeEnabled(false)
         actionBar.setDisplayShowTitleEnabled(false)
 
         val cusView = LayoutInflater.from(this).inflate(R.layout.layout_toolbar, null)
         val ivBack = cusView.findViewById<ImageView>(R.id.ivBack)
-        val tvTitle = cusView.findViewById<TextView>(R
-            .id.tvTitleToolbar)
+        val tvTitle = cusView.findViewById<TextView>(
+            R
+                .id.tvTitleToolbar
+        )
         tvTitle.apply {
             text = "Country category"
         }
@@ -75,33 +81,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
         DialogUtils.showProgressDialog(this, getString(R.string.progress_msg))
         viewModel.fetchCountryCategories(0)
-        binding.btnSelect.isEnabled = false
+        binding.fab.isEnabled = false
 
         viewModel.allCountryCategories.observe(this, Observer {
             DialogUtils.disMissDialog()
-            binding.btnSelect.isEnabled = true
+            binding.fab.isEnabled = true
             list = it
-
-
-//            countryRcAdapter = CountryRcAdapter(it, this)
-//
-//            binding.rcView.apply {
-//                setHasFixedSize(true)
-//                layoutManager = GridLayoutManager(this@MainActivity, 2)
-//                adapter = countryRcAdapter
-//            }
-//            countryRcAdapter.setOnClickCountry(object : CountryRcAdapter.OnClickCountry {
-//                override fun onClickCountry(country: ServiceResponse, position: Int) {
-//
-//                    startActivity(
-//                        Intent(
-//                            this@MainActivity,
-//                            MenuCategoriesActivity::class.java
-//                        ).putExtra("id", country.id)
-//                    )
-//                    pageTransition()
-//                }
-//            })
 
             countryVpAdapter = CountryVpAdapter(it, this)
 
@@ -121,23 +106,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                     )
                 )
             }
-            countryVpAdapter.setOnClickCountry(object : CountryVpAdapter.OnClickCountry {
-                override fun onClickCountry(country: ServiceResponse, position: Int) {
 
-                    startActivity(
-                        Intent(
-                            this@MainActivity,
-                            MenuCategoriesActivity::class.java
-                        ).putExtra("id", country.id)
-                    )
-                    pageTransition()
-                }
-            })
-
-            binding.vpView.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+            binding.vpView.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
-                    binding.btnSelect.setOnClickListener {
+                    binding.fab.setOnClickListener {
                         startActivity(
                             Intent(
                                 this@MainActivity,
@@ -218,13 +191,21 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 sheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             }
             else -> {
-                finishAffinity()
+                if (confirmExit) {
+                    finishAffinity()
+                    return
+                }
+                toast("Press back again to exit.")
+                confirmExit = true
+                Handler().postDelayed({
+                    confirmExit = false
+                }, 2000)
             }
         }
     }
 
     private fun setupButtonMenu() {
-        binding.layoutFav.setOnClickListener {
+        binding.btnFav.setOnClickListener {
             startActivity(
                 Intent(
                     this,
@@ -234,18 +215,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             toggleBottomSheetSwipe()
             pageTransition()
         }
-        binding.search.layoutTextSearch.setOnClickListener { toggleBottomSheet() }
-        binding.layoutAbout.setOnClickListener {
-            startActivity(
-                Intent(
-                    this,
-                    AboutActivity::class.java
-                )
-            )
-            toggleBottomSheetSwipe()
-            pageTransition()
-        }
-
+        binding.btnSearch.setOnClickListener { toggleBottomSheet() }
+        binding.search.ivClose.setOnClickListener { toggleBottomSheet() }
         binding.search.imgBtnSearch.setOnClickListener { if (binding.search.edtSearch.text.isNotEmpty()) searchResult() }
 
     }
@@ -293,6 +264,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 binding.search.tvEmpty.text = getString(R.string.result_not_found)
             }
         })
+    }
+
+    override fun onStop() {
+        super.onStop()
+        cancelToast()
     }
 
     override fun onBackPressed() {
