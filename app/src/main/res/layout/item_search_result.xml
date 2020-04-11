@@ -1,44 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:id="@+id/layoutRootSearchResult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@drawable/bg_item_selector"
         android:orientation="vertical"
-        android:padding="4dp">
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp">
 
-        <RelativeLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_corners_radius">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            app:cardUseCompatPadding="true">
 
-            <TextView
-                android:id="@+id/tvTitle"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@id/imgArrowRight"
-                android:padding="4dp"
-                android:ellipsize="end"
-                android:lines="1"
-                android:textColor="@color/colorOrange"
-                android:textSize="@dimen/text_size_18sp" />
+                android:background="@drawable/bg_item_selector"
+                android:padding="4dp">
 
-            <ImageView
-                android:id="@+id/imgArrowRight"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:adjustViewBounds="true"
-                android:rotation="180"
-                android:src="@drawable/ic_back"
-                android:tint="@color/colorOrange" />
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/imgArrowRight"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:background="@drawable/bg_corners_radius"
+                    android:textColor="@color/colorOrange"
+                    android:textSize="@dimen/text_size_18sp" />
+
+                <ImageView
+                    android:id="@+id/imgArrowRight"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:adjustViewBounds="true"
+                    android:rotation="180"
+                    android:src="@drawable/ic_back"
+                    android:tint="@color/colorOrange" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
     </LinearLayout>
 </layout>

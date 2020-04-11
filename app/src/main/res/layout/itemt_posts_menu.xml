@@ -61,13 +61,13 @@
                             android:layout_height="wrap_content"
                             android:layout_alignBottom="@id/imgMenu"
                             android:layout_toRightOf="@id/imgMenu"
-                            android:background="#494848"
+                            android:background="#656464"
                             android:padding="4dp">
 
                             <ImageView
                                 android:id="@+id/imgFav"
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
                                 android:layout_alignParentEnd="true"
                                 android:layout_alignParentRight="true"
                                 android:layout_centerVertical="true"
@@ -77,8 +77,8 @@
 
                             <ImageView
                                 android:id="@+id/imgDate"
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
                                 android:layout_alignParentStart="true"
                                 android:layout_alignParentLeft="true"
                                 android:layout_centerVertical="true"
