@@ -4,6 +4,8 @@ import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
 import com.example.allrecipesfree_foodrecipesapp.di.appModule
+import com.example.allrecipesfree_foodrecipesapp.di.useCaseModule
+import com.example.allrecipesfree_foodrecipesapp.di.viewModelModule
 import io.github.inflationx.calligraphy3.CalligraphyConfig
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor
 import io.github.inflationx.viewpump.ViewPump
@@ -31,7 +33,7 @@ class MyApplication : Application() {
         startKoin {
             androidContext(this@MyApplication)
             androidLogger(Level.DEBUG)
-            modules(listOf(appModule))
+            modules(listOf(appModule, viewModelModule, useCaseModule))
         }
     }
 
