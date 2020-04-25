@@ -15,29 +15,29 @@ class MainActivityViewModel(private val dataRepository: DataRepository) : BaseVi
     val allCountryCategories = MutableLiveData<List<ServiceResponse>>()
     val allPostsMenuBySearch = MutableLiveData<List<ServiceResponse>>()
 
-    fun fetchCountryCategories(parentNo: Int) {
-        viewModelScope.launch {
-            when (val result =
-                withContext(Dispatchers.IO) { dataRepository.getCountryCategories(parentNo) }) {
-                is UseCaseResult.Success -> {
-                    allCountryCategories.postValue(result.data)
-                }
-                is UseCaseResult.Error -> {
-                }
-            }
-        }
-    }
-
-    fun searchPostsMenu(s: String) {
-        viewModelScope.launch {
-            when (val result =
-                withContext(Dispatchers.IO) { dataRepository.getSearchPostsMenu() }) {
-                is UseCaseResult.Success -> {
-                    allPostsMenuBySearch.postValue(result.data.filter { response -> response.title!!.rendered!!.contains(s) })
-                }
-                is UseCaseResult.Error -> {
-                }
-            }
-        }
-    }
+//    fun fetchCountryCategories(parentNo: Int) {
+//        viewModelScope.launch {
+//            when (val result =
+//                withContext(Dispatchers.IO) { dataRepository.getCountryCategories(parentNo) }) {
+//                is UseCaseResult.Success -> {
+//                    allCountryCategories.postValue(result.data)
+//                }
+//                is UseCaseResult.Error -> {
+//                }
+//            }
+//        }
+//    }
+//
+//    fun searchPostsMenu(s: String) {
+//        viewModelScope.launch {
+//            when (val result =
+//                withContext(Dispatchers.IO) { dataRepository.getSearchPostsMenu() }) {
+//                is UseCaseResult.Success -> {
+//                    allPostsMenuBySearch.postValue(result.data.filter { response -> response.title!!.rendered!!.contains(s) })
+//                }
+//                is UseCaseResult.Error -> {
+//                }
+//            }
+//        }
+//    }
 }

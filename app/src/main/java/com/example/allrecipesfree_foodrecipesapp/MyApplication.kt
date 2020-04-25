@@ -22,7 +22,7 @@ class MyApplication : Application() {
                 .addInterceptor(
                     CalligraphyInterceptor(
                         CalligraphyConfig.Builder()
-                            .setDefaultFontPath("fonts/Sarabun-Regular.ttf")
+                            .setDefaultFontPath("fonts/Mitr-Regular.ttf")
                             .setFontAttrId(R.attr.fontPath)
                             .build()
                     )

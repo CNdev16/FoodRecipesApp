@@ -21,7 +21,7 @@ class PostsMenuDetailActivity : BaseActivity<ActivityPostsMenuDetailBinding>() {
         val postsId = intent.getIntExtra("id", -1)
 
         setupToolbar()
-        subscribeLiveData(postsId)
+        //subscribeLiveData(postsId)
     }
 
     private fun setupToolbar() {
@@ -34,32 +34,32 @@ class PostsMenuDetailActivity : BaseActivity<ActivityPostsMenuDetailBinding>() {
         actionBar.setDisplayUseLogoEnabled(true)
     }
 
-    @SuppressLint("SetJavaScriptEnabled")
-    private fun subscribeLiveData(postsId: Int) {
-        binding.viewModel = viewModel
-
-        DialogUtils.showProgressDialog(this, getString(R.string.progress_msg))
-        viewModel.getPostsMenuDetail(postsId)
-
-        viewModel.postsMenuDetail.observe(this, Observer {
-            DialogUtils.disMissDialog()
-
-            binding.tvTitlePost.text = it.title!!.rendered
-
-            binding.webViewDetail.apply {
-                webChromeClient = WebChromeClient()
-                settings.javaScriptEnabled = true
-                settings.loadWithOverviewMode = true
-                settings.useWideViewPort = true
-                settings.domStorageEnabled = true
-                setBackgroundColor(0x00000000)
-
-                loadData(
-                    "<html><head><style type='text/css'>body{margin-top:auto; margin-bottom:auto;} img{width:100%25;} </style></head><body>${it.content?.rendered}</body></html>",
-                    "text/html",
-                    "utf-8"
-                )
-            }
-        })
-    }
+//    @SuppressLint("SetJavaScriptEnabled")
+//    private fun subscribeLiveData(postsId: Int) {
+//        binding.viewModel = viewModel
+//
+//        DialogUtils.showProgressDialog(this, getString(R.string.progress_msg))
+//        viewModel.getPostsMenuDetail(postsId)
+//
+//        viewModel.postsMenuDetail.observe(this, Observer {
+//            DialogUtils.disMissDialog()
+//
+//            binding.tvTitlePost.text = it.title!!.rendered
+//
+//            binding.webViewDetail.apply {
+//                webChromeClient = WebChromeClient()
+//                settings.javaScriptEnabled = true
+//                settings.loadWithOverviewMode = true
+//                settings.useWideViewPort = true
+//                settings.domStorageEnabled = true
+//                setBackgroundColor(0x00000000)
+//
+//                loadData(
+//                    "<html><head><style type='text/css'>body{margin-top:auto; margin-bottom:auto;} img{width:100%25;} </style></head><body>${it.content?.rendered}</body></html>",
+//                    "text/html",
+//                    "utf-8"
+//                )
+//            }
+//        })
+//    }
 }

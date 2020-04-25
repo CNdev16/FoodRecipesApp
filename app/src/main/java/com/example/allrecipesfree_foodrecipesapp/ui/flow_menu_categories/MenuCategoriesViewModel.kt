@@ -16,32 +16,32 @@ class MenuCategoriesViewModel(private val dataRepository: DataRepository) :
     val allMenuCategories = MutableLiveData<List<ServiceResponse>>()
     val allPostsMenu = MutableLiveData<List<ServiceResponse>>()
 
-    fun fetchMenuCategories(parentNo: Int) {
-        viewModelScope.launch {
-            when (val result =
-                withContext(Dispatchers.IO) { dataRepository.getMenuCategories(parentNo) }) {
-                is UseCaseResult.Success -> {
-                    allMenuCategories.postValue(result.data)
-                }
-                is UseCaseResult.Error -> {
-
-                }
-            }
-        }
-    }
-
-    fun fetchPostsMenu(categoriesNo: Int) {
-        viewModelScope.launch {
-            when (val result =
-                withContext(Dispatchers.IO) { dataRepository.getPostsMenu(categoriesNo) }) {
-                is UseCaseResult.Success -> {
-                    allPostsMenu.postValue(result.data)
-                }
-                is UseCaseResult.Error -> {
-
-                }
-            }
-        }
-    }
+//    fun fetchMenuCategories(parentNo: Int) {
+//        viewModelScope.launch {
+//            when (val result =
+//                withContext(Dispatchers.IO) { dataRepository.getMenuCategories(parentNo) }) {
+//                is UseCaseResult.Success -> {
+//                    allMenuCategories.postValue(result.data)
+//                }
+//                is UseCaseResult.Error -> {
+//
+//                }
+//            }
+//        }
+//    }
+//
+//    fun fetchPostsMenu(categoriesNo: Int) {
+//        viewModelScope.launch {
+//            when (val result =
+//                withContext(Dispatchers.IO) { dataRepository.getPostsMenu(categoriesNo) }) {
+//                is UseCaseResult.Success -> {
+//                    allPostsMenu.postValue(result.data)
+//                }
+//                is UseCaseResult.Error -> {
+//
+//                }
+//            }
+//        }
+//    }
 
 }

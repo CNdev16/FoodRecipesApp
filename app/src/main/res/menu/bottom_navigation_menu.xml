@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menuMyFood"
+        android:icon="@drawable/ic_restaurant_black_24dp"
+        android:title="My Food"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/menuAllRecipes"
+        android:icon="@drawable/ic_room_service_black_24dp"
+        android:title="All Recipes"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/menuCategories"
+        android:icon="@drawable/ic_import_contacts_black_24dp"
+        android:title="Categories"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/menuFavorite"
+        android:icon="@drawable/ic_favorite_black_24dp"
+        android:title="Favorite"
+        app:showAsAction="ifRoom" />
+</menu>

@@ -28,7 +28,7 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="@color/colorOrange"
+                    android:background="@color/colorDarkGreen"
                     app:titleTextColor="@color/colorWhite" />
 
             </RelativeLayout>
@@ -39,7 +39,7 @@
                 android:id="@+id/tvTitlePost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorOrange"
+                android:background="@color/colorDarkGreen"
                 android:gravity="center"
                 android:padding="8dp"
                 android:textColor="@color/colorWhite"

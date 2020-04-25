@@ -14,16 +14,16 @@ class PostsMenuDetailViewModel (private val dataRepository: DataRepository) : Ba
 
     val postsMenuDetail = MutableLiveData<ServiceResponse>()
 
-    fun getPostsMenuDetail(postsId: Int){
-        viewModelScope.launch {
-            when(val result = withContext(Dispatchers.IO){dataRepository.getPostsMenuDetail(postsId)}){
-                is UseCaseResult.Success -> {
-                    postsMenuDetail.postValue(result.data)
-                }
-                is UseCaseResult.Error -> {
-
-                }
-            }
-        }
-    }
+//    fun getPostsMenuDetail(postsId: Int){
+//        viewModelScope.launch {
+//            when(val result = withContext(Dispatchers.IO){dataRepository.getPostsMenuDetail(postsId)}){
+//                is UseCaseResult.Success -> {
+//                    postsMenuDetail.postValue(result.data)
+//                }
+//                is UseCaseResult.Error -> {
+//
+//                }
+//            }
+//        }
+//    }
 }

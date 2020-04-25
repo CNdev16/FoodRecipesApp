@@ -29,7 +29,7 @@ class FavoritesMenuActivity : BaseActivity<ActivityFavoritesMenuBinding>() {
         super.onCreate(savedInstanceState)
 
         setupToolbar()
-        setupSubscribeLiveData()
+        //setupSubscribeLiveData()
     }
 
     private fun setupToolbar() {
@@ -41,123 +41,123 @@ class FavoritesMenuActivity : BaseActivity<ActivityFavoritesMenuBinding>() {
         actionBar.setLogo(R.mipmap.ic_launcher)
         actionBar.setDisplayUseLogoEnabled(true)
     }
-
-    private fun setupSubscribeLiveData() {
-        binding.viewModel = viewModel
-
-        DialogUtils.showProgressDialog(
-            this,
-            getString(R.string.progress_msg)
-        )
-        viewModel.fetchAllPostsMenu()
-
-        viewModel.allPostsMenu.observe(this, Observer {
-            DialogUtils.disMissDialog()
-
-            if (it.isNotEmpty()) {
-                if (updateModel(
-                        it!!,
-                        appData.appDataBaseDao().getFavoriteMenu()
-                    ).isNotEmpty()
-                ) {
-                    setupRecyclerView(updateModel(
-                        it,
-                        appData.appDataBaseDao().getFavoriteMenu()
-                    ))
-                }else{
-                    binding.rcView.visibility = View.GONE
-                    binding.tvEmpty.visibility = View.VISIBLE
-                    binding.tvEmpty.text = getString(R.string.favorite_menu_is_empty)
-                }
-
-            } else {
-                binding.rcView.visibility = View.GONE
-                binding.tvEmpty.visibility = View.VISIBLE
-                binding.tvEmpty.text = getString(R.string.favorite_menu_is_empty)
-            }
-        })
-
-    }
-
-    //setup favorite menu.
-    private fun setupRecyclerView(it: List<ServiceResponse>?) {
-        binding.rcView.visibility = View.VISIBLE
-        binding.tvEmpty.visibility = View.GONE
-
-        favoriteMenuRcAdapter =
-            FavoriteMenuRcAdapter(
-                updateModel(
-                    it!!,
-                    appData.appDataBaseDao().getFavoriteMenu()
-                ), this
-            )
-        binding.rcView.apply {
-            setHasFixedSize(true)
-            layoutManager =
-                LinearLayoutManager(
-                    this@FavoritesMenuActivity,
-                    LinearLayoutManager.VERTICAL,
-                    false
-                )
-            adapter = favoriteMenuRcAdapter
-        }
-        favoriteMenuRcAdapter.setOnClickPostsMenu(object : FavoriteMenuRcAdapter.OnClickPostsMenu {
-            override fun onClickPostsMenu(favMenu: ServiceResponse, position: Int) {
-                startActivity(
-                    Intent(
-                        this@FavoritesMenuActivity,
-                        PostsMenuDetailActivity::class.java
-                    ).putExtra("id", favMenu.id)
-                )
-                pageTransition()
-            }
-
-            override fun onClickFavoriteMenu(favMenu: ServiceResponse, position: Int) {
-                val t = appData.appDataBaseDao().getFavoriteMenu()
-                    .filter { p -> (p.id == favMenu.id) && (favMenu.favoriteStatus == true) }
-                if (t.isEmpty()) {
-                    appData.appDataBaseDao().addFavoriteMenu(
-                        Favorite(
-                            favMenu.id!!,
-                            favMenu.title!!.rendered!!,
-                            true
-                        )
-                    )
-                    favoriteMenuRcAdapter.updateData(
-                        updateModel(
-                            it,
-                            appData.appDataBaseDao().getFavoriteMenu()
-                        )
-                    )
-                } else {
-                    appData.appDataBaseDao().addFavoriteMenu(
-                        Favorite(
-                            favMenu.id!!,
-                            favMenu.title!!.rendered!!,
-                            false
-                        )
-                    )
-                    favoriteMenuRcAdapter.updateData(
-                        updateModel(
-                            it,
-                            appData.appDataBaseDao().getFavoriteMenu()
-                        )
-                    )
-                }
-            }
-
-        })
-    }
-
-    //update model for favorite.
-    private fun updateModel(
-        serviceResponse: List<ServiceResponse>,
-        favoriteMenu: List<Favorite>
-    ): List<ServiceResponse> {
-        favoriteMenu.forEach { f ->
-            serviceResponse.find { it.id == f.id }?.favoriteStatus = f.status
-        }
-        return serviceResponse.filter { s -> s.favoriteStatus }
-    }
+//
+//    private fun setupSubscribeLiveData() {
+//        binding.viewModel = viewModel
+//
+//        DialogUtils.showProgressDialog(
+//            this,
+//            getString(R.string.progress_msg)
+//        )
+//        viewModel.fetchAllPostsMenu()
+//
+//        viewModel.allPostsMenu.observe(this, Observer {
+//            DialogUtils.disMissDialog()
+//
+//            if (it.isNotEmpty()) {
+//                if (updateModel(
+//                        it!!,
+//                        appData.appDataBaseDao().getFavoriteMenu()
+//                    ).isNotEmpty()
+//                ) {
+//                    setupRecyclerView(updateModel(
+//                        it,
+//                        appData.appDataBaseDao().getFavoriteMenu()
+//                    ))
+//                }else{
+//                    binding.rcView.visibility = View.GONE
+//                    binding.tvEmpty.visibility = View.VISIBLE
+//                    binding.tvEmpty.text = getString(R.string.favorite_menu_is_empty)
+//                }
+//
+//            } else {
+//                binding.rcView.visibility = View.GONE
+//                binding.tvEmpty.visibility = View.VISIBLE
+//                binding.tvEmpty.text = getString(R.string.favorite_menu_is_empty)
+//            }
+//        })
+//
+//    }
+//
+//    //setup favorite menu.
+//    private fun setupRecyclerView(it: List<ServiceResponse>?) {
+//        binding.rcView.visibility = View.VISIBLE
+//        binding.tvEmpty.visibility = View.GONE
+//
+//        favoriteMenuRcAdapter =
+//            FavoriteMenuRcAdapter(
+//                updateModel(
+//                    it!!,
+//                    appData.appDataBaseDao().getFavoriteMenu()
+//                ), this
+//            )
+//        binding.rcView.apply {
+//            setHasFixedSize(true)
+//            layoutManager =
+//                LinearLayoutManager(
+//                    this@FavoritesMenuActivity,
+//                    LinearLayoutManager.VERTICAL,
+//                    false
+//                )
+//            adapter = favoriteMenuRcAdapter
+//        }
+//        favoriteMenuRcAdapter.setOnClickPostsMenu(object : FavoriteMenuRcAdapter.OnClickPostsMenu {
+//            override fun onClickPostsMenu(favMenu: ServiceResponse, position: Int) {
+//                startActivity(
+//                    Intent(
+//                        this@FavoritesMenuActivity,
+//                        PostsMenuDetailActivity::class.java
+//                    ).putExtra("id", favMenu.id)
+//                )
+//                pageTransition()
+//            }
+//
+//            override fun onClickFavoriteMenu(favMenu: ServiceResponse, position: Int) {
+//                val t = appData.appDataBaseDao().getFavoriteMenu()
+//                    .filter { p -> (p.id == favMenu.id) && (favMenu.favoriteStatus == true) }
+//                if (t.isEmpty()) {
+//                    appData.appDataBaseDao().addFavoriteMenu(
+//                        Favorite(
+//                            favMenu.id!!,
+//                            favMenu.title!!.rendered!!,
+//                            true
+//                        )
+//                    )
+//                    favoriteMenuRcAdapter.updateData(
+//                        updateModel(
+//                            it,
+//                            appData.appDataBaseDao().getFavoriteMenu()
+//                        )
+//                    )
+//                } else {
+//                    appData.appDataBaseDao().addFavoriteMenu(
+//                        Favorite(
+//                            favMenu.id!!,
+//                            favMenu.title!!.rendered!!,
+//                            false
+//                        )
+//                    )
+//                    favoriteMenuRcAdapter.updateData(
+//                        updateModel(
+//                            it,
+//                            appData.appDataBaseDao().getFavoriteMenu()
+//                        )
+//                    )
+//                }
+//            }
+//
+//        })
+//    }
+//
+//    //update model for favorite.
+//    private fun updateModel(
+//        serviceResponse: List<ServiceResponse>,
+//        favoriteMenu: List<Favorite>
+//    ): List<ServiceResponse> {
+//        favoriteMenu.forEach { f ->
+//            serviceResponse.find { it.id == f.id }?.favoriteStatus = f.status
+//        }
+//        return serviceResponse.filter { s -> s.favoriteStatus }
+//    }
 
 }

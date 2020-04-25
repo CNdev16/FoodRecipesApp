@@ -14,18 +14,18 @@ class FavoritesMenuViewModel(private val dataRepository: DataRepository) : BaseV
 
     val allPostsMenu = MutableLiveData<List<ServiceResponse>>()
 
-    fun fetchAllPostsMenu(){
-        viewModelScope.launch {
-            when (val result =
-                withContext(Dispatchers.IO) { dataRepository.getAllPostsMenu() }) {
-                is UseCaseResult.Success -> {
-                    allPostsMenu.postValue(result.data)
-                }
-                is UseCaseResult.Error -> {
-
-                }
-            }
-        }
-    }
+//    fun fetchAllPostsMenu(){
+//        viewModelScope.launch {
+//            when (val result =
+//                withContext(Dispatchers.IO) { dataRepository.getAllPostsMenu() }) {
+//                is UseCaseResult.Success -> {
+//                    allPostsMenu.postValue(result.data)
+//                }
+//                is UseCaseResult.Error -> {
+//
+//                }
+//            }
+//        }
+//    }
 
 }

@@ -50,7 +50,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/imgMenu"
-                        android:background="@color/colorOrange"
+                        android:background="@color/colorDarkGreen"
                         android:padding="4dp">
 
                         <ImageView
