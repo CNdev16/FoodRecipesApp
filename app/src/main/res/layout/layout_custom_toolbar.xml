@@ -34,9 +34,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="4dp"
             android:layout_marginTop="4dp"
-            android:layout_marginRight="4dp"
+            android:layout_marginRight="8dp"
             android:layout_marginBottom="4dp"
             android:layout_toLeftOf="@id/imgRight"
             android:background="@drawable/bg_text_view_corners_redius"
@@ -50,7 +50,7 @@
             android:paddingRight="8dp"
             android:paddingBottom="4dp"
             android:textColor="@color/colorDarkGreen"
-            android:textSize="@dimen/text_size_20sp"
+            android:textSize="@dimen/text_size_18sp"
             android:visibility="gone"
             tools:visibility="visible"/>
 

@@ -38,7 +38,7 @@
     </style>
 
     <style name="Widget.MaterialComponents.BottomNavigationView.Custom" parent="Widget.MaterialComponents.BottomNavigationView">
-        <item name="fontFamily">@font/mitr_medium</item>
+        <item name="fontFamily">@font/mitr_extra_light</item>
     </style>
 
 </resources>

@@ -10,6 +10,8 @@ import android.view.View
 import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.appcompat.app.ActionBar
+import androidx.core.content.ContextCompat
+import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.databinding.LayoutCustomToolbarBinding
 
 class CustomActionbar @JvmOverloads constructor(
@@ -30,7 +32,7 @@ class CustomActionbar @JvmOverloads constructor(
 
     private fun setupCustomToolbar(context: Context, supportActionBar: ActionBar?) {
         binding = LayoutCustomToolbarBinding.inflate(LayoutInflater.from(context))
-        setTypeFaceHeader(StyleFonts.MEDIUM)
+        setTypeFaceHeader(StyleFonts.LIGHT)
         binding.imgRight.setOnClickListener {
             search(isSearchClicked)
         }
@@ -72,13 +74,18 @@ class CustomActionbar @JvmOverloads constructor(
     }
 
     enum class StyleFonts {
-        REGULAR, MEDIUM, BOLD
+        LIGHT, EXTRA_LIGHT, REGULAR, MEDIUM, BOLD
     }
 
     fun setTypeFaceHeader(style: StyleFonts): TextView {
         val tv = binding.tvHeader
         return tv.apply {
             var tf: Typeface? = when (style) {
+                StyleFonts.LIGHT -> Typeface.createFromAsset(context.assets, "fonts/Mitr-Light.ttf")
+                StyleFonts.EXTRA_LIGHT -> Typeface.createFromAsset(
+                    context.assets,
+                    "fonts/Mitr-ExtraLight.ttf"
+                )
                 StyleFonts.REGULAR -> Typeface.createFromAsset(
                     context.assets,
                     "fonts/Mitr-Regular.ttf"
@@ -99,22 +106,31 @@ class CustomActionbar @JvmOverloads constructor(
         if (state) {
             openSearchBox()
         } else {
-            str = ""
-            if (getTextSearch().isEmpty()) {
-                closeSearchBox()
-            } else {
-
-            }
+            closeSearchBox()
         }
     }
 
     fun openSearchBox() {
-        if (getTextSearch().isNotEmpty()){
+        if (getTextSearch().isNotEmpty()) {
+            binding.imgRight.setImageDrawable(
+                ContextCompat.getDrawable(
+                    context,
+                    R.drawable.ic_search_black_24dp
+                )
+            )
             listener?.onClickItemRight(binding.edtSearch.text.toString())
-        }else{
+        } else {
+            binding.imgRight.setImageDrawable(
+                ContextCompat.getDrawable(
+                    context,
+                    R.drawable.ic_clear_black_24dp
+                )
+            )
             binding.edtSearch.apply {
                 visibility = View.VISIBLE
                 setText("")
+                requestFocus()
+                setSelection(this.text.length)
                 slideIn()
             }
             binding.tvHeader.slideOut()
@@ -130,6 +146,12 @@ class CustomActionbar @JvmOverloads constructor(
         }
         binding.tvHeader.slideIn()
         isSearchClicked = true
+        binding.imgRight.setImageDrawable(
+            ContextCompat.getDrawable(
+                context,
+                R.drawable.ic_search_black_24dp
+            )
+        )
     }
 
     fun getTextSearch(): String {
@@ -137,6 +159,21 @@ class CustomActionbar @JvmOverloads constructor(
             override fun afterTextChanged(s: Editable?) {
                 str = s.toString()
                 isSearchClicked = str.isNotEmpty()
+                if (str.isNotEmpty()) {
+                    binding.imgRight.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            context,
+                            R.drawable.ic_search_black_24dp
+                        )
+                    )
+                } else {
+                    binding.imgRight.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            context,
+                            R.drawable.ic_clear_black_24dp
+                        )
+                    )
+                }
             }
 
             override fun beforeTextChanged(
