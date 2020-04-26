@@ -5,18 +5,18 @@ import androidx.lifecycle.viewModelScope
 import com.example.allrecipesfree_foodrecipesapp.base.BaseViewModel
 import com.example.core.UseCaseResult
 import com.example.core.data.ResultResponse
-import com.example.core.usecase.GetAllDataCase
+import com.example.core.usecase.GetAllDataUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class AllRecipesViewModel(private val getAllDataCase: GetAllDataCase) : BaseViewModel() {
+class AllRecipesViewModel(private val getAllDataUseCase: GetAllDataUseCase) : BaseViewModel() {
 
     val allData = MutableLiveData<List<ResultResponse>>()
 
     fun getAllData() {
         viewModelScope.launch {
-            when (val result = withContext(Dispatchers.IO) { getAllDataCase.execute(Unit) }) {
+            when (val result = withContext(Dispatchers.IO) { getAllDataUseCase.execute(Unit) }) {
                 is UseCaseResult.Success -> {
                     allData.value = result.data
                 }
