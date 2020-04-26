@@ -13,7 +13,7 @@ import com.example.core.DataSource
 import com.example.core.remote.ApiService
 import com.example.core.remote.RemoteDataSource
 import com.example.core.remote.ServiceEndPointInterface
-import com.example.core.usecase.GetAllDataCase
+import com.example.core.usecase.GetAllDataUseCase
 import com.example.core.usecase.GetAllPostMenuUseCase
 import com.example.core.usecase.GetPostMenuUseCase
 import com.example.core.usecase.GetSubCategoriesUseCase
@@ -41,7 +41,7 @@ val appModule = module {
 }
 
 val useCaseModule = module {
-    factory { GetAllDataCase(get()) }
+    factory { GetAllDataUseCase(get()) }
     factory { GetAllPostMenuUseCase(get()) }
     factory { GetSubCategoriesUseCase(get()) }
     factory { GetPostMenuUseCase(get()) }

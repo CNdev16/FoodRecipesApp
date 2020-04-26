@@ -1,7 +1,7 @@
 package com.example.core
 
 import com.example.core.data.ResultResponse
-import com.example.core.usecase.GetAllDataCase
+import com.example.core.usecase.GetAllDataUseCase
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
@@ -17,12 +17,12 @@ class GetAllDataUseCaseTest{
 
     @MockK
     lateinit var dataRepository: DataRepository
-    lateinit var getAllDataUseCase: GetAllDataCase
+    lateinit var getAllDataUseUseCase: GetAllDataUseCase
 
     @Before
     fun setUp(){
         MockKAnnotations.init(this)
-        this.getAllDataUseCase = GetAllDataCase(dataRepository)
+        this.getAllDataUseUseCase = GetAllDataUseCase(dataRepository)
     }
 
     @Test
@@ -31,7 +31,7 @@ class GetAllDataUseCaseTest{
         coEvery{
             dataRepository.getAllData()
         } returns UseCaseResult.Success(listOf(ResultResponse(
-            32,
+            31,
             "xx",
             "ttt",
             ArrayList()),
@@ -41,7 +41,7 @@ class GetAllDataUseCaseTest{
                 "ttt",
                 ArrayList())))
 
-        var list = getAllDataUseCase.execute()
+        var list = getAllDataUseUseCase.execute(Unit)
         var l :List<ResultResponse>? = null
         when(list){
             is UseCaseResult.Success->{
