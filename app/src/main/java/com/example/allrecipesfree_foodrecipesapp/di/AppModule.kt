@@ -1,19 +1,19 @@
 package com.example.allrecipesfree_foodrecipesapp.di
 
 import androidx.room.Room
-import com.example.allrecipesfree_foodrecipesapp.ui.f02_all_recipes.AllRecipesViewModel
 import com.example.core.BASE_URL
 import com.example.core.local.AppDataBase
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.MainActivityViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_categories.MenuCategoriesViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_favorite.FavoritesMenuViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_posts_menu_detail.PostsMenuDetailViewModel
+import com.example.allrecipesfree_foodrecipesapp.ui.flow_splash_screen.SplashScreenViewModel
 import com.example.core.DataRepository
 import com.example.core.DataSource
 import com.example.core.remote.ApiService
 import com.example.core.remote.RemoteDataSource
 import com.example.core.remote.ServiceEndPointInterface
-import com.example.core.usecase.GetAllDataCase
+import com.example.core.usecase.GetAllDataUseCase
 import com.example.core.usecase.GetAllPostMenuUseCase
 import com.example.core.usecase.GetPostMenuUseCase
 import com.example.core.usecase.GetSubCategoriesUseCase
@@ -41,11 +41,11 @@ val appModule = module {
 }
 
 val useCaseModule = module {
-        factory { GetAllDataCase(get()) }
-//    factory { GetAllPostMenuUseCase(get()) }
-//    factory { GetSubCategoriesUseCase(get()) }
-//    factory { GetPostMenuUseCase(get()) }
-//    factory { GetSubCategoriesUseCase(get()) }
+    factory { GetAllDataUseCase(get()) }
+    factory { GetAllPostMenuUseCase(get()) }
+    factory { GetSubCategoriesUseCase(get()) }
+    factory { GetPostMenuUseCase(get()) }
+    factory { GetSubCategoriesUseCase(get()) }
 }
 
 val viewModelModule = module {
@@ -53,6 +53,5 @@ val viewModelModule = module {
     viewModel { MenuCategoriesViewModel(get()) }
     viewModel { PostsMenuDetailViewModel(get()) }
     viewModel { FavoritesMenuViewModel(get()) }
-    viewModel { AllRecipesViewModel(get()) }
 }
 
