@@ -9,4 +9,5 @@
     <color name="colorOrange1">#CDDC39</color>
     <color name="colorRed">#E74C3C</color>
     <color name="colorGray">#aeaeae</color>
+    <color name="colorBgTrans">#20000000</color>
 </resources>

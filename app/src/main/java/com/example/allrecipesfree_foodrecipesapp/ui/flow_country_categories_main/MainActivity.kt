@@ -1,34 +1,19 @@
 package com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main
 
-import android.annotation.SuppressLint
-import android.content.Intent
-import android.content.LocusId
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
 import android.widget.RelativeLayout
 import androidx.core.view.size
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.base.BaseActivity
-import com.example.core.data.ServiceResponse
 import com.example.allrecipesfree_foodrecipesapp.databinding.ActivityMainBinding
 import com.example.allrecipesfree_foodrecipesapp.ui.f01_my_foods.MyFoodsFragment
 import com.example.allrecipesfree_foodrecipesapp.ui.f02_all_recipes.AllRecipesFragment
 import com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes.CategoriesRecipesFragment
-import com.example.allrecipesfree_foodrecipesapp.ui.f04_search_recipes.SearchRecipesFragment
-import com.example.allrecipesfree_foodrecipesapp.ui.flow_about.AboutActivity
+import com.example.allrecipesfree_foodrecipesapp.ui.f04_favorite_recipes.FavoriteRecipesFragment
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.adapter.CountryRcAdapter
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.adapter.SearchRcAdapter
-import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_categories.MenuCategoriesActivity
-import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_favorite.FavoritesMenuActivity
-import com.example.allrecipesfree_foodrecipesapp.ui.flow_posts_menu_detail.PostsMenuDetailActivity
 import com.example.allrecipesfree_foodrecipesapp.utility.*
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -63,6 +48,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
     private fun setupToolbar() {
         setSupportActionBar(binding.toolbar)
         customActionbar = CustomActionbar(
+            this,
             this
             , supportActionBar
         )
@@ -111,7 +97,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
                 }
                 R.id.menuFavorite -> {
                     Log.d("ttt=> ", "add SearchRecipesFragment()")
-                    addFragment(R.id.contentContainer, SearchRecipesFragment())
+                    addFragment(R.id.contentContainer, FavoriteRecipesFragment())
                     customActionbar.apply {
                         setTextHeader("Favorite")
                         showSearchIcon(true)

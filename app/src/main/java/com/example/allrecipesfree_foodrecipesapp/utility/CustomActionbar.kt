@@ -1,5 +1,6 @@
 package com.example.allrecipesfree_foodrecipesapp.utility
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.Typeface
 import android.text.Editable
@@ -10,11 +11,17 @@ import android.view.View
 import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.databinding.LayoutCustomToolbarBinding
+import com.example.allrecipesfree_foodrecipesapp.ui.f02_all_recipes.AllRecipesFragment
+import com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes.CategoriesRecipesFragment
+import com.example.allrecipesfree_foodrecipesapp.ui.f04_favorite_recipes.FavoriteRecipesFragment
 
 class CustomActionbar @JvmOverloads constructor(
+    private val activity: AppCompatActivity,
     private val context: Context,
     supportActionBar: ActionBar?
 ) {
@@ -131,11 +138,58 @@ class CustomActionbar @JvmOverloads constructor(
                 setText("")
                 requestFocus()
                 setSelection(this.text.length)
-                slideIn()
+                //slideIn()
             }
-            binding.tvHeader.slideOut()
+            binding.tvHeader.apply {
+                visibility = View.INVISIBLE
+                slideOut()
+            }
             isSearchClicked = false
         }
+
+        val currentFragment: Fragment? =
+            activity.supportFragmentManager.findFragmentById(R.id.contentContainer)
+        currentFragment?.let {
+            when (it) {
+                is AllRecipesFragment -> {
+                    binding.edtSearch.apply {
+                        setCompoundDrawablesWithIntrinsicBounds(
+                            ContextCompat.getDrawable(context, R.drawable.ic_room_service_black_24dp),
+                            null,
+                            null,
+                            null
+                        )
+                        compoundDrawablePadding = 4
+                    }
+                }
+                is CategoriesRecipesFragment -> {
+                    binding.edtSearch.apply {
+                        setCompoundDrawablesWithIntrinsicBounds(
+                            ContextCompat.getDrawable(context, R.drawable.ic_restaurant_black_24dp),
+                            null,
+                            null,
+                            null
+                        )
+                        compoundDrawablePadding = 4
+                    }
+                }
+                is FavoriteRecipesFragment -> {
+                    binding.edtSearch.apply {
+                        setCompoundDrawablesWithIntrinsicBounds(
+                            ContextCompat.getDrawable(context, R.drawable.ic_favorite_black_24dp),
+                            null,
+                            null,
+                            null
+                        )
+                        compoundDrawablePadding = 4
+                    }
+                }
+                else -> {
+                    throw Exception("Error cast fragment.")
+                }
+            }
+        }
+
     }
 
     fun closeSearchBox() {
@@ -144,7 +198,10 @@ class CustomActionbar @JvmOverloads constructor(
             setText("")
             //slideOut()
         }
-        binding.tvHeader.slideIn()
+        binding.tvHeader.apply {
+            visibility = View.VISIBLE
+            slideIn()
+        }
         isSearchClicked = true
         binding.imgRight.setImageDrawable(
             ContextCompat.getDrawable(

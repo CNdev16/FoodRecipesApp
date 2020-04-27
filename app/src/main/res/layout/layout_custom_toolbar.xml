@@ -39,6 +39,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginBottom="4dp"
             android:layout_toLeftOf="@id/imgRight"
+            android:drawableTint="@color/colorWhite"
             android:background="@drawable/bg_text_view_corners_redius"
             android:ellipsize="end"
             android:inputType="text"
@@ -49,7 +50,7 @@
             android:paddingTop="4dp"
             android:paddingRight="8dp"
             android:paddingBottom="4dp"
-            android:textColor="@color/colorDarkGreen"
+            android:textColor="@color/colorWhite"
             android:textSize="@dimen/text_size_18sp"
             android:visibility="gone"
             tools:visibility="visible"/>

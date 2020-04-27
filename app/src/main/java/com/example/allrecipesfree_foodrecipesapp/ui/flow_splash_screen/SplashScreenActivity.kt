@@ -28,7 +28,7 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
                 startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
                 pageTransition()
                 finishAffinity()
-            }, 3000L)
+            }, 1000L)
 
         } else {
             DialogUtils.showDialogOneButton(

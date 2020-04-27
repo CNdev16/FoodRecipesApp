@@ -2,11 +2,35 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes.CategoriesRecipesViewModel" />
+    </data>
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorWhite"
         android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="6dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcCountry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcRecipe"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 </layout>

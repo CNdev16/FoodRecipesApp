@@ -1,4 +1,4 @@
-package com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.adapter
+package com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.example.core.data.ServiceResponse
 import com.example.allrecipesfree_foodrecipesapp.databinding.ItemCountryBinding
 
-class CountryRcAdapter(private val countryList: List<ServiceResponse>, private val context: Context) :
+class CountryRcAdapter() :
     RecyclerView.Adapter<CountryRcViewHolder>() {
 
     private var listener: OnClickCountry? = null
@@ -19,13 +19,9 @@ class CountryRcAdapter(private val countryList: List<ServiceResponse>, private v
         )
     }
 
-    override fun getItemCount(): Int = countryList.size
+    override fun getItemCount(): Int = 10
 
     override fun onBindViewHolder(holder: CountryRcViewHolder, position: Int) {
-
-        val  country : ServiceResponse = countryList[holder.adapterPosition]
-
-        Glide.with(context).load(country.imageCategory?.guid).into(holder.binding.imgCate)
 
 //        holder.binding.tvCountryName.apply {
 //            text = country.name
