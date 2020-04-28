@@ -1,27 +1,29 @@
-package com.example.allrecipesfree_foodrecipesapp.ui.f02_all_recipes.adapter
+package com.example.allrecipesfree_foodrecipesapp.ui.f01_my_foods.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.allrecipesfree_foodrecipesapp.databinding.ItemRecipes4uBinding
 import com.example.core.data.ServiceResponse
 import com.example.allrecipesfree_foodrecipesapp.databinding.ItemRecipesBinding
 
-class AllRecipesRcAdapter() :
-    RecyclerView.Adapter<AllRecipesViewHolder>() {
+class Recipes4uVpAdapter() :
+    RecyclerView.Adapter<Recipes4uViewHolder>() {
 
 //    private var listener: OnClickCountry? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AllRecipesViewHolder {
-        return AllRecipesViewHolder(
-            ItemRecipesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Recipes4uViewHolder {
+        return Recipes4uViewHolder(
+            ItemRecipes4uBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
     override fun getItemCount(): Int = 10
 
-    override fun onBindViewHolder(holder: AllRecipesViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: Recipes4uViewHolder, position: Int) {
 
 //        val  country : ServiceResponse = countryList[holder.adapterPosition]
 //
@@ -48,4 +50,4 @@ class AllRecipesRcAdapter() :
 
 }
 
-class AllRecipesViewHolder(val binding: ItemRecipesBinding) : RecyclerView.ViewHolder(binding.root)
+class Recipes4uViewHolder(val binding: ItemRecipes4uBinding) : RecyclerView.ViewHolder(binding.root)

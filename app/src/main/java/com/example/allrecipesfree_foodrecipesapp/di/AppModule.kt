@@ -1,8 +1,10 @@
 package com.example.allrecipesfree_foodrecipesapp.di
 
 import androidx.room.Room
+import com.example.allrecipesfree_foodrecipesapp.ui.f01_my_foods.MyFoodsViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.f02_all_recipes.AllRecipesViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes.CategoriesRecipesViewModel
+import com.example.allrecipesfree_foodrecipesapp.ui.f04_favorite_recipes.FavoriteRecipesViewModel
 import com.example.core.BASE_URL
 import com.example.core.local.AppDataBase
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.MainActivityViewModel
@@ -56,5 +58,7 @@ val viewModelModule = module {
     viewModel { FavoritesMenuViewModel(get()) }
     viewModel { AllRecipesViewModel(get()) }
     viewModel { CategoriesRecipesViewModel(get()) }
+    viewModel { MyFoodsViewModel(get()) }
+    viewModel { FavoriteRecipesViewModel(get()) }
 }
 
