@@ -36,9 +36,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@color/colorPrimary"
+            android:theme="@style/Widget.MaterialComponents.BottomNavigationView.Custom"
             app:itemIconTint="@color/colorWhite"
             app:itemTextColor="@color/colorWhite"
-            android:theme="@style/Widget.MaterialComponents.BottomNavigationView.Custom"
+            app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_navigation_menu" />
     </RelativeLayout>
 </layout>

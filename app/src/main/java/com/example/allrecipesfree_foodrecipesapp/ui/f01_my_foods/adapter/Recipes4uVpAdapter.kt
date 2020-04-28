@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.allrecipesfree_foodrecipesapp.databinding.ItemRecipes4uBinding
 import com.example.core.data.ServiceResponse
-import com.example.allrecipesfree_foodrecipesapp.databinding.ItemRecipesBinding
 
 class Recipes4uVpAdapter() :
     RecyclerView.Adapter<Recipes4uViewHolder>() {

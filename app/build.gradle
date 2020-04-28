@@ -108,6 +108,13 @@ dependencies {
     //gson
     implementation "com.google.code.gson:gson:$gson_version"
 
+    //indicator
+    implementation "com.romandanylyk:pageindicatorview:$indicator_version"
+
+    //epoxy
+    implementation "com.airbnb.android:epoxy:$epoxy_version"
+    kapt "com.airbnb.android:epoxy-processor:$epoxy_version"
+
     implementation project(":core")
 
     testImplementation 'junit:junit:4.12'
