@@ -44,6 +44,7 @@ class CustomActionbar @JvmOverloads constructor(
             search(isSearchClicked)
         }
         binding.imgLeft.setOnClickListener { listener?.onClickItemLeft() }
+        binding.imgClearText.setOnClickListener { binding.edtSearch.setText("") }
         actionBar = supportActionBar
         actionBar?.let {
             it.setDisplayShowTitleEnabled(false)
@@ -64,7 +65,7 @@ class CustomActionbar @JvmOverloads constructor(
 
     fun showSearchIcon(isShowIconSearch: Boolean) {
         if (isShowIconSearch) {
-            binding.imgRight.visibility =
+            binding.layoutInputSearch.visibility =
                 View.VISIBLE
             binding.imgRight.isEnabled = true
 
@@ -133,8 +134,9 @@ class CustomActionbar @JvmOverloads constructor(
                     R.drawable.ic_clear_black_24dp
                 )
             )
+            binding.layoutInputSearch.visibility = View.VISIBLE
+
             binding.edtSearch.apply {
-                visibility = View.VISIBLE
                 setText("")
                 requestFocus()
                 setSelection(this.text.length)
@@ -160,6 +162,7 @@ class CustomActionbar @JvmOverloads constructor(
                             null
                         )
                         compoundDrawablePadding = 4
+                        hint = "Search... ${AllRecipesFragment::class.java.simpleName}"
                     }
                 }
                 is CategoriesRecipesFragment -> {
@@ -171,6 +174,7 @@ class CustomActionbar @JvmOverloads constructor(
                             null
                         )
                         compoundDrawablePadding = 4
+                        hint = "Search... ${CategoriesRecipesFragment::class.java.simpleName}"
                     }
                 }
                 is FavoriteRecipesFragment -> {
@@ -182,6 +186,7 @@ class CustomActionbar @JvmOverloads constructor(
                             null
                         )
                         compoundDrawablePadding = 4
+                        hint = "Search... ${FavoriteRecipesFragment::class.java.simpleName}"
                     }
                 }
                 else -> {
@@ -193,9 +198,9 @@ class CustomActionbar @JvmOverloads constructor(
     }
 
     fun closeSearchBox() {
-        binding.edtSearch.apply {
+        binding.layoutInputSearch.apply {
             visibility = View.GONE
-            setText("")
+            binding.edtSearch.setText("")
             //slideOut()
         }
         binding.tvHeader.apply {
@@ -223,6 +228,11 @@ class CustomActionbar @JvmOverloads constructor(
                             R.drawable.ic_search_black_24dp
                         )
                     )
+                    binding.imgClearText.apply {
+                        visibility = View.VISIBLE
+                        //fadeIn()
+                    }
+
                 } else {
                     binding.imgRight.setImageDrawable(
                         ContextCompat.getDrawable(
@@ -230,6 +240,10 @@ class CustomActionbar @JvmOverloads constructor(
                             R.drawable.ic_clear_black_24dp
                         )
                     )
+                    binding.imgClearText.apply {
+                        visibility = View.GONE
+                        //fadeOut()
+                    }
                 }
             }
 
