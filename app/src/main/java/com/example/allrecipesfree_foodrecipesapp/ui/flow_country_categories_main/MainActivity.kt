@@ -11,6 +11,7 @@ import com.example.allrecipesfree_foodrecipesapp.ui.f01_my_foods.MyFoodsFragment
 import com.example.allrecipesfree_foodrecipesapp.ui.f02_all_recipes.AllRecipesFragment
 import com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes.CategoriesRecipesFragment
 import com.example.allrecipesfree_foodrecipesapp.ui.f04_favorite_recipes.FavoriteRecipesFragment
+import com.example.allrecipesfree_foodrecipesapp.ui.f05_search.SearchRecipesFragment
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.adapter.CountryRcAdapter
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.adapter.SearchRcAdapter
 import com.example.allrecipesfree_foodrecipesapp.utility.*
@@ -31,10 +32,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
 
     companion object{
         private var searchItemsCallBack: SearchItemsCallBack? = null
+        private var clearTextCallBack: ClearTextCallBack? = null
 
         fun setOnClickSearchItem(searchItemsCallBack: SearchItemsCallBack) {
             this.searchItemsCallBack = searchItemsCallBack
         }
+
+        fun setOnClickClearText(clearTextCallBack: ClearTextCallBack){
+            this.clearTextCallBack = clearTextCallBack
+        }
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -291,6 +298,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
 
     override fun onClickItemLeft() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onClickClearText() {
+        clearTextCallBack?.clearTextCallBack()
     }
 
     override fun onBackPressed() {

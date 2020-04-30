@@ -13,13 +13,22 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp">
 
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgRecipe"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/img_404"/>
+
             <TextView
+                android:layout_toRightOf="@id/imgRecipe"
                 android:id="@+id/tvTitle"
+                android:layout_marginLeft="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@id/imgArrowRight"
                 android:ellipsize="end"
+                android:layout_marginRight="8dp"
                 android:lines="1"
                 android:textColor="@color/colorDarkGreen"
                 android:textSize="@dimen/text_size_18sp" />
@@ -36,7 +45,7 @@
                 android:tint="@color/colorDarkGreen" />
         </RelativeLayout>
 
-        <View style="@style/ViewLineOrange" />
+        <View style="@style/CustomLine" />
 
     </LinearLayout>
 </layout>

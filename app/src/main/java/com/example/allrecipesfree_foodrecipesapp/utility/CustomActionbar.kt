@@ -39,12 +39,15 @@ class CustomActionbar @JvmOverloads constructor(
 
     private fun setupCustomToolbar(context: Context, supportActionBar: ActionBar?) {
         binding = LayoutCustomToolbarBinding.inflate(LayoutInflater.from(context))
-        setTypeFaceHeader(StyleFonts.LIGHT)
+        setTypeFaceHeader(StyleFonts.MEDIUM)
         binding.imgRight.setOnClickListener {
             search(isSearchClicked)
         }
         binding.imgLeft.setOnClickListener { listener?.onClickItemLeft() }
-        binding.imgClearText.setOnClickListener { binding.edtSearch.setText("") }
+        binding.imgClearText.setOnClickListener {
+            binding.edtSearch.setText("")
+            listener?.onClickClearText()
+        }
         actionBar = supportActionBar
         actionBar?.let {
             it.setDisplayShowTitleEnabled(false)
@@ -82,27 +85,21 @@ class CustomActionbar @JvmOverloads constructor(
     }
 
     enum class StyleFonts {
-        LIGHT, EXTRA_LIGHT, REGULAR, MEDIUM, BOLD
+        REGULAR, MEDIUM
     }
 
     fun setTypeFaceHeader(style: StyleFonts): TextView {
         val tv = binding.tvHeader
         return tv.apply {
             var tf: Typeface? = when (style) {
-                StyleFonts.LIGHT -> Typeface.createFromAsset(context.assets, "fonts/Mitr-Light.ttf")
-                StyleFonts.EXTRA_LIGHT -> Typeface.createFromAsset(
-                    context.assets,
-                    "fonts/Mitr-ExtraLight.ttf"
-                )
                 StyleFonts.REGULAR -> Typeface.createFromAsset(
                     context.assets,
-                    "fonts/Mitr-Regular.ttf"
+                    "fonts/Roboto-Regular.ttf"
                 )
                 StyleFonts.MEDIUM -> Typeface.createFromAsset(
                     context.assets,
-                    "fonts/Mitr-Medium.ttf"
+                    "fonts/Roboto-Medium.ttf"
                 )
-                StyleFonts.BOLD -> Typeface.createFromAsset(context.assets, "fonts/Mitr-Bold.ttf")
             }
             tf?.let {
                 tv.typeface = it
@@ -156,7 +153,10 @@ class CustomActionbar @JvmOverloads constructor(
                 is AllRecipesFragment -> {
                     binding.edtSearch.apply {
                         setCompoundDrawablesWithIntrinsicBounds(
-                            ContextCompat.getDrawable(context, R.drawable.ic_room_service_black_24dp),
+                            ContextCompat.getDrawable(
+                                context,
+                                R.drawable.ic_room_service_black_24dp
+                            ),
                             null,
                             null,
                             null
@@ -262,7 +262,6 @@ class CustomActionbar @JvmOverloads constructor(
                 count: Int
             ) {
             }
-
         })
 
         return str
@@ -275,5 +274,6 @@ class CustomActionbar @JvmOverloads constructor(
     interface OnClickItemsToolBar {
         fun onClickItemRight(text: String?)
         fun onClickItemLeft()
+        fun onClickClearText()
     }
 }

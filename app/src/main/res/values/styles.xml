@@ -31,14 +31,14 @@
         <item name="android:background">@color/colorWhite</item>
     </style>
 
-    <style name="ViewLineOrange">
+    <style name="CustomLine">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
         <item name="android:background">@color/colorDarkGreen</item>
     </style>
 
     <style name="Widget.MaterialComponents.BottomNavigationView.Custom" parent="Widget.MaterialComponents.BottomNavigationView">
-        <item name="fontFamily">@font/mitr_extra_light</item>
+        <item name="fontFamily">@font/roboto_regular</item>
     </style>
 
 </resources>

@@ -9,14 +9,15 @@ import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.base.BaseFragment
 import com.example.allrecipesfree_foodrecipesapp.databinding.FragmentAllRecipesBinding
 import com.example.allrecipesfree_foodrecipesapp.ui.f02_all_recipes.adapter.AllRecipesRcAdapter
+import com.example.allrecipesfree_foodrecipesapp.ui.f05_search.SearchRecipesFragment
+import com.example.allrecipesfree_foodrecipesapp.ui.f05_search.adapter.SearchRcAdapter
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.MainActivity
-import com.example.allrecipesfree_foodrecipesapp.utility.SearchItemsCallBack
+import com.example.allrecipesfree_foodrecipesapp.utility.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AllRecipesFragment : BaseFragment<FragmentAllRecipesBinding>(), SearchItemsCallBack{
+class AllRecipesFragment : BaseFragment<FragmentAllRecipesBinding>(), SearchItemsCallBack, ClearTextCallBack {
 
     private val viewModel: AllRecipesViewModel by viewModel()
-    private var searchItemsCallBack: SearchItemsCallBack? = null
 
     override var layoutResource: Int = R.layout.fragment_all_recipes
 
@@ -28,19 +29,37 @@ class AllRecipesFragment : BaseFragment<FragmentAllRecipesBinding>(), SearchItem
         val allRecipesRcAdapter = AllRecipesRcAdapter()
         binding.rcViewAllData.apply {
             setHasFixedSize(true)
-                    layoutManager =
-                        LinearLayoutManager(
-                            activity,
-                            LinearLayoutManager.VERTICAL,
-                            false
-                        )
-                    adapter = allRecipesRcAdapter
+            layoutManager =
+                LinearLayoutManager(
+                    activity,
+                    LinearLayoutManager.VERTICAL,
+                    false
+                )
+            adapter = allRecipesRcAdapter
         }
 
-        MainActivity.setOnClickSearchItem(this)
+        MainActivity.apply {
+            setOnClickSearchItem(this@AllRecipesFragment)
+            setOnClickClearText(this@AllRecipesFragment)
+        }
     }
 
     override fun searchItemsCallBack(s: String?) {
-        Log.d("printtt ", s!!)
+        val adapterSearch = SearchRcAdapter()
+
+        binding.rcViewSearchAllData.apply {
+            visibility = View.VISIBLE
+            slideFromTop()
+            setHasFixedSize(false)
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+            adapter = adapterSearch
+        }
+    }
+
+    override fun clearTextCallBack() {
+        binding.rcViewSearchAllData.apply {
+            visibility = View.GONE
+            slideFromBottom()
+        }
     }
 }

@@ -9,9 +9,13 @@ import com.example.allrecipesfree_foodrecipesapp.base.BaseFragment
 import com.example.allrecipesfree_foodrecipesapp.databinding.FragmentCategoriesRecipesBinding
 import com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes.adapter.CountryRcAdapter
 import com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes.adapter.RecipesRcAdapter
+import com.example.allrecipesfree_foodrecipesapp.ui.f05_search.SearchRecipesFragment
+import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.MainActivity
+import com.example.allrecipesfree_foodrecipesapp.utility.SearchItemsCallBack
+import com.example.allrecipesfree_foodrecipesapp.utility.replaceFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CategoriesRecipesFragment : BaseFragment<FragmentCategoriesRecipesBinding>() {
+class CategoriesRecipesFragment : BaseFragment<FragmentCategoriesRecipesBinding>(), SearchItemsCallBack {
 
     private val viewModel: CategoriesRecipesViewModel by viewModel()
     private lateinit var countryRcAdapter: CountryRcAdapter
@@ -46,5 +50,8 @@ class CategoriesRecipesFragment : BaseFragment<FragmentCategoriesRecipesBinding>
             adapter = recipesRcAdapter
         }
 
+    }
+
+    override fun searchItemsCallBack(s: String?) {
     }
 }

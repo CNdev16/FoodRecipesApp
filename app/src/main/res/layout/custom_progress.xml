@@ -21,7 +21,7 @@
                 android:layout_gravity="center" />
 
             <View
-                style="@style/ViewLineOrange"
+                style="@style/CustomLine"
                 android:layout_marginTop="16dp" />
 
             <TextView

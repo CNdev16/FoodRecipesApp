@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"/>
 
         <View
-            android:layout_marginTop="16dp" style="@style/ViewLineOrange"/>
+            android:layout_marginTop="16dp" style="@style/CustomLine"/>
 
         <TextView
             android:layout_marginTop="16dp"

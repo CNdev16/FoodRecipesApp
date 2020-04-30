@@ -83,7 +83,7 @@
 
         <View
             android:id="@+id/view"
-            style="@style/ViewLineOrange"
+            style="@style/CustomLine"
             android:layout_below="@id/layoutInputSearch" />
 
         <RelativeLayout

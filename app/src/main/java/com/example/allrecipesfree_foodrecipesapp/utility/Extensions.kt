@@ -107,3 +107,21 @@ fun View.slideOut() {
         ) as Animation
     )
 }
+
+fun View.slideFromTop() {
+    this.startAnimation(
+        AnimationUtils.loadAnimation(
+            this.context,
+            R.anim.open_from_top
+        ) as Animation
+    )
+}
+
+fun View.slideFromBottom() {
+    this.startAnimation(
+        AnimationUtils.loadAnimation(
+            this.context,
+            R.anim.close_from_bottom
+        ) as Animation
+    )
+}
