@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.databinding.ItemRecipes4uBinding
+import com.example.core.data.ResultResponse
 import com.example.core.data.ServiceResponse
 
-class Recipes4uVpAdapter() :
+class Recipes4uVpAdapter(private val context: Context, private val data: List<ResultResponse>) :
     RecyclerView.Adapter<Recipes4uViewHolder>() {
-
-//    private var listener: OnClickCountry? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Recipes4uViewHolder {
         return Recipes4uViewHolder(
@@ -20,32 +20,12 @@ class Recipes4uVpAdapter() :
         )
     }
 
-    override fun getItemCount(): Int = 10
+    override fun getItemCount(): Int = data[3].subCateList!![3].postsList.size
 
     override fun onBindViewHolder(holder: Recipes4uViewHolder, position: Int) {
-
-//        val  country : ServiceResponse = countryList[holder.adapterPosition]
-//
-//        Glide.with(context).load(country.imageCategory?.guid).into(holder.binding.imgCate)
-//
-//        holder.binding.tvCountryName.apply {
-//            text = country.name
-//        }
-//
-//        holder.binding.cItem.apply {
-//            setOnClickListener {
-//                listener?.onClickCountry(country, position)
-//            }
-//        }
+        val  recipes = data[3].subCateList!![3].postsList[position].postImg
+        Glide.with(context).load(recipes).placeholder(R.drawable.img_404).into(holder.binding.imgCate)
     }
-
-//    interface OnClickCountry{
-//        fun onClickCountry(country: ServiceResponse, position: Int)
-//    }
-//
-//    fun setOnClickCountry(onClickCountry: OnClickCountry?){
-//        this.listener = onClickCountry
-//    }
 
 }
 

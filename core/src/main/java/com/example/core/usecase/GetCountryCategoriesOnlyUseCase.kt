@@ -5,7 +5,7 @@ import com.example.core.UseCaseResult
 import com.example.core.data.ResultResponse
 import com.example.core.usecase.base.BaseCoroutinesUseCase
 
-class GetCountryCategoriesUseCase(private val dataRepository: DataRepository) :
+class GetCountryCategoriesOnlyUseCase(private val dataRepository: DataRepository) :
     BaseCoroutinesUseCase<Unit, List<ResultResponse>>() {
     override suspend fun execute(param: Unit): UseCaseResult<List<ResultResponse>> {
         return dataRepository.getCountryCategoriesOnly()

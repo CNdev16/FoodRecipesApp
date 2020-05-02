@@ -5,8 +5,8 @@
         android:id="@+id/cItem"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardElevation="6dp"
-        android:layout_marginBottom="8dp">
+        android:layout_marginBottom="8dp"
+        app:cardElevation="6dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -18,23 +18,23 @@
                 android:id="@+id/imgCate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="fitXY"
                 android:adjustViewBounds="true"
+                android:scaleType="fitXY"
                 android:src="@drawable/img_404" />
 
             <TextView
-                android:visibility="gone"
                 android:id="@+id/tvRecipesTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:lines="1"
+                android:layout_alignBottom="@id/imgCate"
                 android:ellipsize="end"
-                android:textColor="@color/colorDarkGreen"
-                android:text="Title"
+                android:lines="1"
                 android:paddingLeft="4dp"
                 android:paddingRight="4dp"
-                android:layout_alignBottom="@id/imgCate"
-                android:textSize="@dimen/text_size_24sp" />
+                android:text="Title"
+                android:textColor="@color/colorDarkGreen"
+                android:textSize="@dimen/text_size_24sp"
+                android:visibility="gone" />
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

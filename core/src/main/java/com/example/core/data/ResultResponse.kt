@@ -10,5 +10,5 @@ data class ResultResponse(
     @SerializedName("parent_cate_name")
     val parentCateName: String,
     @SerializedName("sub_cate_list")
-    val subCateList: List<SubCate>? = null
+    var subCateList: List<SubCate>? = null
 )
