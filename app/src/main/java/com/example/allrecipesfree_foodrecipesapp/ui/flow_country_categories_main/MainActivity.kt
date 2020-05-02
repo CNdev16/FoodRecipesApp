@@ -1,5 +1,6 @@
 package com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.RelativeLayout
@@ -11,6 +12,7 @@ import com.example.allrecipesfree_foodrecipesapp.ui.f01_my_foods.MyFoodsFragment
 import com.example.allrecipesfree_foodrecipesapp.ui.f02_all_recipes.AllRecipesFragment
 import com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes.CategoriesRecipesFragment
 import com.example.allrecipesfree_foodrecipesapp.ui.f04_favorite_recipes.FavoriteRecipesFragment
+import com.example.allrecipesfree_foodrecipesapp.ui.f05_search.SearchAllRecipesActivity
 import com.example.allrecipesfree_foodrecipesapp.ui.f05_search.SearchRecipesFragment
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.adapter.CountryRcAdapter
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.adapter.SearchRcAdapter
@@ -30,7 +32,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
 
     override var layoutResource: Int = R.layout.activity_main
 
-    companion object{
+    companion object {
         private var searchItemsCallBack: SearchItemsCallBack? = null
         private var clearTextCallBack: ClearTextCallBack? = null
 
@@ -38,7 +40,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
             this.searchItemsCallBack = searchItemsCallBack
         }
 
-        fun setOnClickClearText(clearTextCallBack: ClearTextCallBack){
+        fun setOnClickClearText(clearTextCallBack: ClearTextCallBack) {
             this.clearTextCallBack = clearTextCallBack
         }
 
@@ -61,12 +63,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
         )
 
         customActionbar.setOnClickItemsToolBar(this)
-
-//        actionBar!!.title = getString(R.string.app_name)
-//        actionBar.elevation = 4.0F
-//        actionBar.setDisplayShowHomeEnabled(true)
-//        actionBar.setLogo(R.mipmap.ic_launcher)
-//        actionBar.setDisplayUseLogoEnabled(true)
     }
 
     private fun bindBottomNavigation() {
@@ -116,6 +112,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
             true
         }
         binding.bottomNavigation.selectedItemId = R.id.menuMyFood
+
+        binding.fab.setOnClickListener {
+            startActivity(
+                Intent(
+                    this,
+                    SearchAllRecipesActivity::class.java
+                )
+            )
+            pageTransition()
+        }
     }
 
     private fun setStateMenu(id: Int) {

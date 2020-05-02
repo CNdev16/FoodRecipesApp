@@ -84,6 +84,21 @@ class CustomActionbar @JvmOverloads constructor(
         }
     }
 
+    fun showBackIcon(isShow: Boolean = false) {
+        if (isShow) {
+            binding.imgLeft.apply {
+                visibility = View.VISIBLE
+                fadeIn()
+            }
+
+        } else {
+            binding.imgLeft.apply {
+                visibility = View.GONE
+                fadeOut()
+            }
+        }
+    }
+
     enum class StyleFonts {
         REGULAR, MEDIUM
     }
@@ -136,6 +151,7 @@ class CustomActionbar @JvmOverloads constructor(
             binding.edtSearch.apply {
                 setText("")
                 requestFocus()
+                showKeyboard()
                 setSelection(this.text.length)
                 //slideIn()
             }
@@ -207,7 +223,9 @@ class CustomActionbar @JvmOverloads constructor(
             visibility = View.VISIBLE
             slideIn()
         }
+        listener?.onClickClearText()
         isSearchClicked = true
+        binding.edtSearch.hideKeyboard()
         binding.imgRight.setImageDrawable(
             ContextCompat.getDrawable(
                 context,

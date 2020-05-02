@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.base.BaseFragment
@@ -57,9 +58,11 @@ class AllRecipesFragment : BaseFragment<FragmentAllRecipesBinding>(), SearchItem
     }
 
     override fun clearTextCallBack() {
-        binding.rcViewSearchAllData.apply {
-            visibility = View.GONE
-            slideFromBottom()
+        if (binding.rcViewSearchAllData.isVisible) {
+            binding.rcViewSearchAllData.apply {
+                visibility = View.GONE
+                slideFromBottom()
+            }
         }
     }
 }

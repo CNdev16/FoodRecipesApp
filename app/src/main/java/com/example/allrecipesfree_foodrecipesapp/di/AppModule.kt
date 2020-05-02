@@ -5,6 +5,7 @@ import com.example.allrecipesfree_foodrecipesapp.ui.f01_my_foods.MyFoodsViewMode
 import com.example.allrecipesfree_foodrecipesapp.ui.f02_all_recipes.AllRecipesViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes.CategoriesRecipesViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.f04_favorite_recipes.FavoriteRecipesViewModel
+import com.example.allrecipesfree_foodrecipesapp.ui.f05_search.SearchAllRecipesViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.f05_search.SearchRecipesViewModel
 import com.example.core.BASE_URL
 import com.example.core.local.AppDataBase
@@ -62,5 +63,6 @@ val viewModelModule = module {
     viewModel { MyFoodsViewModel(get()) }
     viewModel { FavoriteRecipesViewModel(get()) }
     viewModel { SearchRecipesViewModel(get()) }
+    viewModel { SearchAllRecipesViewModel(get()) }
 }
 
