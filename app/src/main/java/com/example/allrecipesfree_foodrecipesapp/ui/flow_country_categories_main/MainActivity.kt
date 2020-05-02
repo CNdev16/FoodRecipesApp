@@ -28,7 +28,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
     private lateinit var searchRcAdapter: SearchRcAdapter
     private lateinit var sheetBehavior: BottomSheetBehavior<RelativeLayout>
     private lateinit var customActionbar: CustomActionbar
-    //private var searchItemsCallBack: SearchItemsCallBack? = null
 
     override var layoutResource: Int = R.layout.activity_main
 
@@ -69,7 +68,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
         binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.menuMyFood -> {
-                    Log.d("ttt=> ", "add MyFoodsFragment()")
                     addFragment(R.id.contentContainer, MyFoodsFragment())
                     customActionbar.apply {
                         setTextHeader("My Foods")
@@ -77,9 +75,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
                         search(false)
                     }
                     setStateMenu(R.id.menuMyFood)
+                    setFabStatus(true)
                 }
                 R.id.menuAllRecipes -> {
-                    Log.d("ttt=> ", "add AllRecipesFragment()")
                     addFragment(R.id.contentContainer, AllRecipesFragment())
                     customActionbar.apply {
                         setTextHeader("All Recipes")
@@ -87,9 +85,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
                         search(false)
                     }
                     setStateMenu(R.id.menuAllRecipes)
+                    setFabStatus(false)
                 }
                 R.id.menuCategories -> {
-                    Log.d("ttt=> ", "add CategoriesRecipesFragment()")
                     addFragment(R.id.contentContainer, CategoriesRecipesFragment())
                     customActionbar.apply {
                         setTextHeader("Categories")
@@ -97,9 +95,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
                         search(false)
                     }
                     setStateMenu(R.id.menuCategories)
+                    setFabStatus(false)
                 }
                 R.id.menuFavorite -> {
-                    Log.d("ttt=> ", "add SearchRecipesFragment()")
                     addFragment(R.id.contentContainer, FavoriteRecipesFragment())
                     customActionbar.apply {
                         setTextHeader("Favorite")
@@ -107,6 +105,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
                         search(false)
                     }
                     setStateMenu(R.id.menuFavorite)
+                    setFabStatus(false)
                 }
             }
             true
@@ -130,6 +129,20 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
         for (i in 0 until mnSize) {
             val item = mn.getItem(i).itemId
             mn.getItem(i).isEnabled = item != id
+        }
+    }
+
+    private fun setFabStatus(isShow: Boolean) {
+        if (isShow) {
+            binding.fab.apply {
+                visible()
+                fadeIn()
+            }
+        } else {
+            binding.fab.apply {
+                gone()
+                fadeOut()
+            }
         }
     }
 

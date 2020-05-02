@@ -16,25 +16,72 @@
         android:background="@color/colorWhite"
         android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/rootCate"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="6dp"
-            app:cardUseCompatPadding="true">
+            android:layout_height="match_parent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rcCountry"
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </androidx.cardview.widget.CardView>
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                app:elevation="0dp">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcRecipe"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/collap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_scrollFlags="scroll|snap">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="4dp"
+                        android:paddingRight="4dp"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="6dp"
+                        app:cardUseCompatPadding="true">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rcCountry"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+            </com.google.android.material.appbar.AppBarLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="Recipes Categories"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_size_24sp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcRecipe"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     </LinearLayout>
 </layout>

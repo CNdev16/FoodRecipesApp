@@ -18,11 +18,14 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.OneShotPreDrawListener.add
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.allrecipesfree_foodrecipesapp.R
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -144,4 +147,53 @@ fun View.slideFromBottom() {
             R.anim.close_from_bottom
         ) as Animation
     )
+}
+
+fun View.visible() {
+    this.visibility = View.VISIBLE
+}
+
+fun View.inVisible() {
+    this.visibility = View.INVISIBLE
+}
+
+fun View.gone() {
+    this.visibility = View.GONE
+}
+
+enum class CollapStatus(var status: Boolean) {
+    ENABLE(true), DISABLE(false)
+}
+
+fun handleCollap(
+    collap: CollapsingToolbarLayout,
+    appBar: AppBarLayout,
+    collabStatus: CollapStatus
+) {
+
+    val toolbarLayoutParams =
+        collap.layoutParams as AppBarLayout.LayoutParams
+
+    val appBarLayoutParams =
+        appBar.layoutParams as CoordinatorLayout.LayoutParams
+
+    when (collabStatus) {
+        CollapStatus.ENABLE -> {
+
+            toolbarLayoutParams.scrollFlags =
+                AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
+            collap.layoutParams = toolbarLayoutParams
+
+            appBarLayoutParams.behavior = AppBarLayout.Behavior()
+            appBar.layoutParams = appBarLayoutParams
+        }
+        CollapStatus.DISABLE -> {
+            toolbarLayoutParams.scrollFlags = 0
+            collap.layoutParams = toolbarLayoutParams
+
+            appBarLayoutParams.behavior = null
+            appBar.layoutParams = appBarLayoutParams
+        }
+    }
+
 }

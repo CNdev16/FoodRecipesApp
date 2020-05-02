@@ -9,8 +9,10 @@ import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.base.BaseFragment
 import com.example.allrecipesfree_foodrecipesapp.databinding.FragmentMyFoodsBinding
 import com.example.allrecipesfree_foodrecipesapp.ui.f01_my_foods.adapter.Recipes4uVpAdapter
+import com.example.allrecipesfree_foodrecipesapp.utility.CollapStatus
 import com.example.allrecipesfree_foodrecipesapp.utility.PageTransformer
 import com.example.allrecipesfree_foodrecipesapp.utility.epoxy.controller.ItemsController
+import com.example.allrecipesfree_foodrecipesapp.utility.handleCollap
 import com.example.core.data.ResultResponse
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

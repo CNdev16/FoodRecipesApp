@@ -15,46 +15,75 @@
         android:layout_height="match_parent"
         android:background="@color/colorWhite">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cvRecipe4u"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/rootRecipe4u"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardElevation="6dp">
+            android:layout_height="match_parent">
 
-            <RelativeLayout
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                app:elevation="0dp">
 
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/vpRecipe4u"
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/collap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" />
+                    app:layout_scrollFlags="scroll|snap">
 
-                <com.rd.PageIndicatorView
-                    android:id="@+id/pageIndicatorView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/vpRecipe4u"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="10dp"
-                    app:piv_animationType="worm"
-                    app:piv_dynamicCount="true"
-                    app:piv_interactiveAnimation="true"
-                    app:piv_selectedColor="@color/colorPrimary"
-                    app:piv_unselectedColor="@color/colorBgTrans"
-                    app:piv_viewPager="@id/vpRecipe4u"
-                    attrs:piv_padding="8dp"
-                    attrs:piv_radius="4dp" />
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cvRecipe4u"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardElevation="6dp">
 
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcViewRoot"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/cvRecipe4u" />
+                            <androidx.viewpager2.widget.ViewPager2
+                                android:id="@+id/vpRecipe4u"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal" />
+
+                            <com.rd.PageIndicatorView
+                                android:id="@+id/pageIndicatorView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBottom="@id/vpRecipe4u"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginBottom="10dp"
+                                app:piv_animationType="worm"
+                                app:piv_dynamicCount="true"
+                                app:piv_interactiveAnimation="true"
+                                app:piv_selectedColor="@color/colorPrimary"
+                                app:piv_unselectedColor="@color/colorBgTrans"
+                                app:piv_viewPager="@id/vpRecipe4u"
+                                attrs:piv_padding="8dp"
+                                attrs:piv_radius="4dp" />
+
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcViewRoot"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </androidx.core.widget.NestedScrollView>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     </RelativeLayout>
 </layout>

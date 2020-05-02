@@ -152,7 +152,7 @@ class CustomActionbar @JvmOverloads constructor(
                 setText("")
                 requestFocus()
                 showKeyboard()
-                setSelection(this.text.length)
+                setSelection(this.text!!.length)
                 //slideIn()
             }
             binding.tvHeader.apply {
