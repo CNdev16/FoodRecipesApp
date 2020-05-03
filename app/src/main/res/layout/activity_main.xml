@@ -44,7 +44,7 @@
             android:layout_margin="16dp"
             android:src="@drawable/ic_search_black_24dp"
             android:tint="@color/colorWhite"
-            android:visibility="visible"
+            android:visibility="gone"
             app:rippleColor="@color/colorPrimary" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView

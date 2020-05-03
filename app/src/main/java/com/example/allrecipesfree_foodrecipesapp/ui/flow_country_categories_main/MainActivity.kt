@@ -4,7 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.RelativeLayout
+import androidx.core.view.isVisible
 import androidx.core.view.size
+import androidx.lifecycle.Observer
+import com.airbnb.lottie.utils.Utils
 import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.base.BaseActivity
 import com.example.allrecipesfree_foodrecipesapp.databinding.ActivityMainBinding
@@ -48,9 +51,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //subscribeLiveData()
+        binding.viewModel = viewModel
+
         setupToolbar()
-        bindBottomNavigation()
+        subscribeLiveData()
+        setBottomNavigation()
     }
 
     private fun setupToolbar() {
@@ -60,11 +65,48 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
             this
             , supportActionBar
         )
-
         customActionbar.setOnClickItemsToolBar(this)
     }
 
-    private fun bindBottomNavigation() {
+    private fun subscribeLiveData() {
+
+    }
+
+    private fun getPostsMenuOnly() {
+        DialogUtils.showProgressDialog(this, getString(R.string.progress_msg))
+        viewModel.getAllPostsMenuOnlyData()
+        viewModel.allPostsMenuOnlyData.observe(this, Observer {
+            DialogUtils.disMissDialog()
+
+            addFragment(R.id.contentContainer, AllRecipesFragment())
+            customActionbar.apply {
+                setTextHeader("All Recipes")
+                showSearchIcon(true)
+                search(false)
+            }
+            setStateMenu(R.id.menuAllRecipes)
+            setFabStatus(false)
+        })
+    }
+
+    private fun getCategories() {
+        DialogUtils.showProgressDialog(this, getString(R.string.progress_msg))
+        viewModel.getCountryCategoriesOnlyData()
+        viewModel.allCountryCategoriesOnlyData.observe(this, Observer {
+            DialogUtils.disMissDialog()
+
+            addFragment(R.id.contentContainer, CategoriesRecipesFragment())
+            customActionbar.apply {
+                setTextHeader("Categories")
+                showSearchIcon(true)
+                search(false)
+            }
+            setStateMenu(R.id.menuCategories)
+            setFabStatus(false)
+        })
+    }
+
+    private fun setBottomNavigation() {
         binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.menuMyFood -> {
@@ -78,24 +120,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
                     setFabStatus(true)
                 }
                 R.id.menuAllRecipes -> {
-                    addFragment(R.id.contentContainer, AllRecipesFragment())
-                    customActionbar.apply {
-                        setTextHeader("All Recipes")
-                        showSearchIcon(true)
-                        search(false)
-                    }
-                    setStateMenu(R.id.menuAllRecipes)
-                    setFabStatus(false)
+                    getPostsMenuOnly()
                 }
                 R.id.menuCategories -> {
-                    addFragment(R.id.contentContainer, CategoriesRecipesFragment())
-                    customActionbar.apply {
-                        setTextHeader("Categories")
-                        showSearchIcon(true)
-                        search(false)
-                    }
-                    setStateMenu(R.id.menuCategories)
-                    setFabStatus(false)
+                    getCategories()
                 }
                 R.id.menuFavorite -> {
                     addFragment(R.id.contentContainer, FavoriteRecipesFragment())
@@ -136,12 +164,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
         if (isShow) {
             binding.fab.apply {
                 visible()
-                fadeIn()
+                //fadeIn()
             }
         } else {
-            binding.fab.apply {
-                gone()
-                fadeOut()
+            if (binding.fab.isVisible) {
+                binding.fab.apply {
+                    gone()
+                    //()
+                }
             }
         }
     }

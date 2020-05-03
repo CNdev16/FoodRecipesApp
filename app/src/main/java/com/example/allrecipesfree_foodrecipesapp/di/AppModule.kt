@@ -13,6 +13,7 @@ import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_categories.MenuCategoriesViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_favorite.FavoritesMenuViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_posts_menu_detail.PostsMenuDetailViewModel
+import com.example.allrecipesfree_foodrecipesapp.ui.flow_splash_screen.SplashScreenViewModel
 import com.example.core.DataRepository
 import com.example.core.DataSource
 import com.example.core.remote.ApiService
@@ -51,7 +52,7 @@ val useCaseModule = module {
 }
 
 val viewModelModule = module {
-    viewModel { MainActivityViewModel(get(), get(), get(), get(), get()) }
+    viewModel { MainActivityViewModel(get(), get()) }
     viewModel { MenuCategoriesViewModel(get()) }
     viewModel { PostsMenuDetailViewModel(get()) }
     viewModel { FavoritesMenuViewModel(get()) }
@@ -61,5 +62,6 @@ val viewModelModule = module {
     viewModel { FavoriteRecipesViewModel(get()) }
     viewModel { SearchRecipesViewModel(get()) }
     viewModel { SearchAllRecipesViewModel(get()) }
+    viewModel { SplashScreenViewModel(get()) }
 }
 

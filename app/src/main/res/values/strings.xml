@@ -12,7 +12,7 @@
     <string name="result_not_found">Result not found.</string>
     <string name="menu_is_empty">Menu is empty.</string>
     <string name="favorite_menu_is_empty">Favorite Menu is empty.</string>
-    <string name="version">Version</string>
+    <string name="version">Version %s</string>
     <string name="dialog_title">Warning!!</string>
     <string name="dialog_msg">Connection is not available.</string>
     <string name="dialog_btn">Close.</string>

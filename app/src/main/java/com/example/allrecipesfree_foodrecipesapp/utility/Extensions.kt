@@ -83,7 +83,8 @@ inline fun FragmentManager.doTransaction(
     func: FragmentTransaction.() ->
     FragmentTransaction
 ) {
-    beginTransaction().setCustomAnimations(R.anim.activity_open_enter, R.anim.activity_open_exit)
+    beginTransaction()
+        /*.setCustomAnimations(R.anim.activity_open_enter, R.anim.activity_open_exit)*/
         .func().commit()
 }
 

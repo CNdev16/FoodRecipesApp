@@ -63,23 +63,24 @@ class CustomActionbar @JvmOverloads constructor(
 
     fun setTextHeader(str: String) {
         binding.tvHeader.text = str
-        binding.tvHeader.slideIn()
+        //binding.tvHeader.slideIn()
     }
 
     fun showSearchIcon(isShowIconSearch: Boolean) {
         if (isShowIconSearch) {
             binding.layoutInputSearch.visibility =
                 View.VISIBLE
+            binding.imgRight.visibility = View.VISIBLE
             binding.imgRight.isEnabled = true
 
             if (isAnimated) {
-                binding.imgRight.fadeIn()
+                //binding.imgRight.fadeIn()
                 isAnimated = false
             }
         } else {
             binding.imgRight.visibility = View.INVISIBLE
             binding.imgRight.isEnabled = false
-            binding.imgRight.fadeOut()
+            //binding.imgRight.fadeOut()
             isAnimated = true
         }
     }
@@ -88,13 +89,13 @@ class CustomActionbar @JvmOverloads constructor(
         if (isShow) {
             binding.imgLeft.apply {
                 visibility = View.VISIBLE
-                fadeIn()
+                //fadeIn()
             }
 
         } else {
             binding.imgLeft.apply {
                 visibility = View.GONE
-                fadeOut()
+                //fadeOut()
             }
         }
     }
@@ -153,11 +154,10 @@ class CustomActionbar @JvmOverloads constructor(
                 requestFocus()
                 showKeyboard()
                 setSelection(this.text!!.length)
-                //slideIn()
             }
             binding.tvHeader.apply {
                 visibility = View.INVISIBLE
-                slideOut()
+                //slideOut()
             }
             isSearchClicked = false
         }
@@ -217,11 +217,10 @@ class CustomActionbar @JvmOverloads constructor(
         binding.layoutInputSearch.apply {
             visibility = View.GONE
             binding.edtSearch.setText("")
-            //slideOut()
         }
         binding.tvHeader.apply {
             visibility = View.VISIBLE
-            slideIn()
+            //slideIn()
         }
         listener?.onClickClearText()
         isSearchClicked = true
@@ -248,7 +247,6 @@ class CustomActionbar @JvmOverloads constructor(
                     )
                     binding.imgClearText.apply {
                         visibility = View.VISIBLE
-                        //fadeIn()
                     }
 
                 } else {
@@ -260,7 +258,6 @@ class CustomActionbar @JvmOverloads constructor(
                     )
                     binding.imgClearText.apply {
                         visibility = View.GONE
-                        //fadeOut()
                     }
                 }
             }
