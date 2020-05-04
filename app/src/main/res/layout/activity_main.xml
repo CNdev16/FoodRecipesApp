@@ -52,10 +52,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorWhite"
             android:theme="@style/Widget.MaterialComponents.BottomNavigationView.Custom"
-            app:itemIconTint="@color/colorWhite"
-            app:itemTextColor="@color/colorWhite"
+            app:itemIconTint="@color/nv_selector"
+            app:itemTextColor="@color/nv_selector"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_navigation_menu" />
     </RelativeLayout>

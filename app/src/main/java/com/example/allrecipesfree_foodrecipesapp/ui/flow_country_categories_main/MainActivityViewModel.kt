@@ -13,33 +13,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MainActivityViewModel(
-    private val getAllCountryCategoriesOnlyUseCase: GetCountryCategoriesOnlyUseCase,
-    private val getAllPostsMenuOnlyUseCase: GetAllPostsMenuOnlyUseCase
-) : BaseViewModel() {
+class MainActivityViewModel : BaseViewModel() {
 
-    val allPostsMenuOnlyData = MutableLiveData<List<Posts>>()
-    val allCountryCategoriesOnlyData = MutableLiveData<List<ResultResponse>>()
-
-    fun getAllPostsMenuOnlyData() {
-        viewModelScope.launch {
-            when (val result =
-                withContext(Dispatchers.IO) { getAllPostsMenuOnlyUseCase.execute(Unit) }) {
-                is UseCaseResult.Success -> allPostsMenuOnlyData.value = result.data
-                is UseCaseResult.Error -> {
-                }
-            }
-        }
-    }
-
-    fun getCountryCategoriesOnlyData() {
-        viewModelScope.launch {
-            when (val result =
-                withContext(Dispatchers.IO) { getAllCountryCategoriesOnlyUseCase.execute(Unit) }) {
-                is UseCaseResult.Success -> allCountryCategoriesOnlyData.value = result.data
-                is UseCaseResult.Error -> {
-                }
-            }
-        }
-    }
+//    fun getCountryCategoriesOnlyData() {
+//        viewModelScope.launch {
+//            when (val result =
+//                withContext(Dispatchers.IO) { getAllCountryCategoriesOnlyUseCase.execute(Unit) }) {
+//                is UseCaseResult.Success -> allCountryCategoriesOnlyData.value = result.data
+//                is UseCaseResult.Error -> {
+//                }
+//            }
+//        }
+//    }
 }

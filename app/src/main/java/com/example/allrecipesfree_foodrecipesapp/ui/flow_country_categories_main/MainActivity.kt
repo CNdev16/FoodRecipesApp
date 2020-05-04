@@ -73,37 +73,55 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
     }
 
     private fun getPostsMenuOnly() {
-        DialogUtils.showProgressDialog(this, getString(R.string.progress_msg))
-        viewModel.getAllPostsMenuOnlyData()
-        viewModel.allPostsMenuOnlyData.observe(this, Observer {
-            DialogUtils.disMissDialog()
+//        DialogUtils.showProgressDialog(this, getString(R.string.progress_msg))
+//        viewModel.getAllPostsMenuOnlyData()
+//        viewModel.allPostsMenuOnlyData.observe(this, Observer {
+//            DialogUtils.disMissDialog()
+//
+//            addFragment(R.id.contentContainer, AllRecipesFragment())
+//            customActionbar.apply {
+//                setTextHeader("All Recipes")
+//                showSearchIcon(true)
+//                search(false)
+//            }
+//            setStateMenu(R.id.menuAllRecipes)
+//            setFabStatus(false)
+//        })
 
-            addFragment(R.id.contentContainer, AllRecipesFragment())
-            customActionbar.apply {
-                setTextHeader("All Recipes")
-                showSearchIcon(true)
-                search(false)
-            }
-            setStateMenu(R.id.menuAllRecipes)
-            setFabStatus(false)
-        })
+        addFragment(R.id.contentContainer, AllRecipesFragment())
+        customActionbar.apply {
+            setTextHeader("All Recipes")
+            showSearchIcon(true)
+            search(false)
+        }
+        setStateMenu(R.id.menuAllRecipes)
+        setFabStatus(false)
     }
 
     private fun getCategories() {
-        DialogUtils.showProgressDialog(this, getString(R.string.progress_msg))
-        viewModel.getCountryCategoriesOnlyData()
-        viewModel.allCountryCategoriesOnlyData.observe(this, Observer {
-            DialogUtils.disMissDialog()
+//        DialogUtils.showProgressDialog(this, getString(R.string.progress_msg))
+//        viewModel.getCountryCategoriesOnlyData()
+//        viewModel.allCountryCategoriesOnlyData.observe(this, Observer {
+//            DialogUtils.disMissDialog()
+//
+//            addFragment(R.id.contentContainer, CategoriesRecipesFragment())
+//            customActionbar.apply {
+//                setTextHeader("Categories")
+//                showSearchIcon(true)
+//                search(false)
+//            }
+//            setStateMenu(R.id.menuCategories)
+//            setFabStatus(false)
+//        })
 
-            addFragment(R.id.contentContainer, CategoriesRecipesFragment())
-            customActionbar.apply {
-                setTextHeader("Categories")
-                showSearchIcon(true)
-                search(false)
-            }
-            setStateMenu(R.id.menuCategories)
-            setFabStatus(false)
-        })
+        addFragment(R.id.contentContainer, CategoriesRecipesFragment())
+        customActionbar.apply {
+            setTextHeader("Categories")
+            showSearchIcon(true)
+            search(false)
+        }
+        setStateMenu(R.id.menuCategories)
+        setFabStatus(false)
     }
 
     private fun setBottomNavigation() {

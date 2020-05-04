@@ -52,7 +52,7 @@ val useCaseModule = module {
 }
 
 val viewModelModule = module {
-    viewModel { MainActivityViewModel(get(), get()) }
+    viewModel { MainActivityViewModel() }
     viewModel { MenuCategoriesViewModel(get()) }
     viewModel { PostsMenuDetailViewModel(get()) }
     viewModel { FavoritesMenuViewModel(get()) }

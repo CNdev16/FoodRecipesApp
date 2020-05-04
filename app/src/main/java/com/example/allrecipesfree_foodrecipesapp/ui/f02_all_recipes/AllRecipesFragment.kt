@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.base.BaseFragment
@@ -27,22 +28,32 @@ class AllRecipesFragment : BaseFragment<FragmentAllRecipesBinding>(), SearchItem
 
         binding.viewModel = viewModel
 
-        val allRecipesRcAdapter = AllRecipesRcAdapter()
-        binding.rcViewAllData.apply {
-            setHasFixedSize(true)
-            layoutManager =
-                LinearLayoutManager(
-                    activity,
-                    LinearLayoutManager.VERTICAL,
-                    false
-                )
-            adapter = allRecipesRcAdapter
-        }
+//        val allRecipesRcAdapter = AllRecipesRcAdapter()
+//        binding.rcViewAllData.apply {
+//            setHasFixedSize(true)
+//            layoutManager =
+//                LinearLayoutManager(
+//                    activity,
+//                    LinearLayoutManager.VERTICAL,
+//                    false
+//                )
+//            adapter = allRecipesRcAdapter
+//        }
+
+        getPostsMenuOnly()
 
         MainActivity.apply {
             setOnClickSearchItem(this@AllRecipesFragment)
             setOnClickClearText(this@AllRecipesFragment)
         }
+    }
+
+    private fun getPostsMenuOnly() {
+        DialogUtils.showProgressDialog(requireContext(), getString(R.string.progress_msg))
+        viewModel.getAllPostsMenuOnlyData()
+        viewModel.allPostsMenuOnlyData.observe(viewLifecycleOwner, Observer {
+            DialogUtils.disMissDialog()
+        })
     }
 
     override fun searchItemsCallBack(s: String?) {

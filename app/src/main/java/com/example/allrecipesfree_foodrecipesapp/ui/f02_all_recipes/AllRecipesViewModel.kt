@@ -4,24 +4,26 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.allrecipesfree_foodrecipesapp.base.BaseViewModel
 import com.example.core.UseCaseResult
+import com.example.core.data.Posts
 import com.example.core.data.ResultResponse
 import com.example.core.usecase.GetAllDataUseCase
+import com.example.core.usecase.GetAllPostsMenuOnlyUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class AllRecipesViewModel(private val getAllDataUseCase: GetAllDataUseCase) : BaseViewModel() {
+class AllRecipesViewModel(
+    private val getAllPostsMenuOnlyUseCase: GetAllPostsMenuOnlyUseCase
+) : BaseViewModel() {
 
-    val allData = MutableLiveData<List<ResultResponse>>()
+    val allPostsMenuOnlyData = MutableLiveData<List<Posts>>()
 
-    fun getAllData() {
+    fun getAllPostsMenuOnlyData() {
         viewModelScope.launch {
-            when (val result = withContext(Dispatchers.IO) { getAllDataUseCase.execute(Unit) }) {
-                is UseCaseResult.Success -> {
-                    allData.value = result.data
-                }
+            when (val result =
+                withContext(Dispatchers.IO) { getAllPostsMenuOnlyUseCase.execute(Unit) }) {
+                is UseCaseResult.Success -> allPostsMenuOnlyData.value = result.data
                 is UseCaseResult.Error -> {
-
                 }
             }
         }
