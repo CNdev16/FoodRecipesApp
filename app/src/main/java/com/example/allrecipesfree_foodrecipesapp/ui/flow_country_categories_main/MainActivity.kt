@@ -56,6 +56,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
         setupToolbar()
         subscribeLiveData()
         setBottomNavigation()
+
     }
 
     private fun setupToolbar() {
@@ -73,20 +74,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
     }
 
     private fun getPostsMenuOnly() {
-//        DialogUtils.showProgressDialog(this, getString(R.string.progress_msg))
-//        viewModel.getAllPostsMenuOnlyData()
-//        viewModel.allPostsMenuOnlyData.observe(this, Observer {
-//            DialogUtils.disMissDialog()
-//
-//            addFragment(R.id.contentContainer, AllRecipesFragment())
-//            customActionbar.apply {
-//                setTextHeader("All Recipes")
-//                showSearchIcon(true)
-//                search(false)
-//            }
-//            setStateMenu(R.id.menuAllRecipes)
-//            setFabStatus(false)
-//        })
 
         addFragment(R.id.contentContainer, AllRecipesFragment())
         customActionbar.apply {
@@ -357,6 +344,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
 //            }
 //        })
 //    }
+
 
     override fun onClickItemRight(text: String?) {
         Log.d("printtt", "onClickItemRight")

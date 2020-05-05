@@ -19,11 +19,16 @@ class AllRecipesViewModel(
     val allPostsMenuOnlyData = MutableLiveData<List<Posts>>()
 
     fun getAllPostsMenuOnlyData() {
+        showLoading.value = true
         viewModelScope.launch {
             when (val result =
                 withContext(Dispatchers.IO) { getAllPostsMenuOnlyUseCase.execute(Unit) }) {
-                is UseCaseResult.Success -> allPostsMenuOnlyData.value = result.data
+                is UseCaseResult.Success -> {
+                    allPostsMenuOnlyData.value = result.data
+                    showLoading.value = false
+                }
                 is UseCaseResult.Error -> {
+                    showLoading.value = false
                 }
             }
         }

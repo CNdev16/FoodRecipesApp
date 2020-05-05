@@ -17,7 +17,8 @@ import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main
 import com.example.allrecipesfree_foodrecipesapp.utility.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AllRecipesFragment : BaseFragment<FragmentAllRecipesBinding>(), SearchItemsCallBack, ClearTextCallBack {
+class AllRecipesFragment : BaseFragment<FragmentAllRecipesBinding>(), SearchItemsCallBack,
+    ClearTextCallBack {
 
     private val viewModel: AllRecipesViewModel by viewModel()
 
@@ -41,6 +42,7 @@ class AllRecipesFragment : BaseFragment<FragmentAllRecipesBinding>(), SearchItem
 //        }
 
         getPostsMenuOnly()
+        loading()
 
         MainActivity.apply {
             setOnClickSearchItem(this@AllRecipesFragment)
@@ -48,11 +50,19 @@ class AllRecipesFragment : BaseFragment<FragmentAllRecipesBinding>(), SearchItem
         }
     }
 
+    private fun loading() {
+        viewModel.showLoading.observe(viewLifecycleOwner, Observer {
+            if (it) DialogUtils.showProgressDialog(
+                requireContext(),
+                getString(R.string.progress_msg)
+            ) else DialogUtils.disMissDialog()
+        })
+    }
+
     private fun getPostsMenuOnly() {
-        DialogUtils.showProgressDialog(requireContext(), getString(R.string.progress_msg))
         viewModel.getAllPostsMenuOnlyData()
         viewModel.allPostsMenuOnlyData.observe(viewLifecycleOwner, Observer {
-            DialogUtils.disMissDialog()
+
         })
     }
 

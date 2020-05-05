@@ -15,14 +15,4 @@ import kotlinx.coroutines.withContext
 
 class MainActivityViewModel : BaseViewModel() {
 
-//    fun getCountryCategoriesOnlyData() {
-//        viewModelScope.launch {
-//            when (val result =
-//                withContext(Dispatchers.IO) { getAllCountryCategoriesOnlyUseCase.execute(Unit) }) {
-//                is UseCaseResult.Success -> allCountryCategoriesOnlyData.value = result.data
-//                is UseCaseResult.Error -> {
-//                }
-//            }
-//        }
-//    }
 }
