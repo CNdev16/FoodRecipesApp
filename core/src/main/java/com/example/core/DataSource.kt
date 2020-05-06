@@ -9,4 +9,6 @@ interface DataSource{
     suspend fun getSubCategoriesOnly(parent_id: Int): UseCaseResult<List<SubCate>>
     suspend fun getPostsMenuOnly(cate_id: Int): UseCaseResult<List<Posts>>
     suspend fun getAllPostsMenuOnly(): UseCaseResult<List<Posts>>
+    suspend fun addAllPostsDataToDb(resultResponse: ResultResponse):UseCaseResult<Long>
+    suspend fun getAllPostsDataFromDb():UseCaseResult<List<ResultResponse>>
 }

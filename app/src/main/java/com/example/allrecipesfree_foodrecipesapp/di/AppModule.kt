@@ -13,9 +13,9 @@ import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_categories.MenuCategoriesViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_favorite.FavoritesMenuViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_posts_menu_detail.PostsMenuDetailViewModel
-import com.example.allrecipesfree_foodrecipesapp.ui.flow_splash_screen.SplashScreenViewModel
 import com.example.core.DataRepository
 import com.example.core.DataSource
+import com.example.core.local.LocalDataSource
 import com.example.core.remote.ApiService
 import com.example.core.remote.RemoteDataSource
 import com.example.core.remote.ServiceEndPointInterface
@@ -35,7 +35,11 @@ val appModule = module {
         )
     }
 
-    single { DataRepository(get()) }
+    single<DataSource> {
+        LocalDataSource(get())
+    }
+
+    single { DataRepository(get(), get()) }
     single {
         Room.databaseBuilder(androidApplication(), AppDataBase::class.java, "app-db")
             .allowMainThreadQueries().build()

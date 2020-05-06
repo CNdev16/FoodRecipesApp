@@ -3,6 +3,7 @@ package com.example.core.remote
 import com.example.core.DataSource
 import com.example.core.UseCaseResult
 import com.example.core.data.*
+import kotlinx.coroutines.flow.Flow
 
 class RemoteDataSource(private val mService: ServiceEndPointInterface) : DataSource {
     override suspend fun getAllData(): UseCaseResult<List<ResultResponse>> {
@@ -48,5 +49,13 @@ class RemoteDataSource(private val mService: ServiceEndPointInterface) : DataSou
         } catch (e: Exception) {
             UseCaseResult.Error(e)
         }
+    }
+
+    override suspend fun addAllPostsDataToDb(resultResponse: ResultResponse): UseCaseResult<Long>{
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun getAllPostsDataFromDb(): UseCaseResult<List<ResultResponse>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

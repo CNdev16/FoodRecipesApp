@@ -5,6 +5,9 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.core.data.Favorite
+import com.example.core.data.ResultResponse
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface AppDataBaseDao {
@@ -14,4 +17,10 @@ interface AppDataBaseDao {
 
     @Query("SELECT * FROM favorite")
     fun getFavoriteMenu(): List<Favorite>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun addAllPostsData(allPosts: ResultResponse): Long
+
+    @Query("SELECT * FROM result_response")
+    fun getAllPostsData(): List<ResultResponse>
 }

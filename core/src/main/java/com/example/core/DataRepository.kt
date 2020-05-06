@@ -2,14 +2,22 @@ package com.example.core
 
 import com.example.core.data.*
 
-class DataRepository (private var remoteDataSource: DataSource) {
+class DataRepository(
+    private var remoteDataSource: DataSource,
+    private var localDataSource: DataSource
+) {
 
     suspend fun getAllData(): UseCaseResult<List<ResultResponse>> {
         return try {
             val result = remoteDataSource.getAllData()
             result
         } catch (e: Exception) {
-            UseCaseResult.Error(e)
+            try {
+                val resultFromLocal = localDataSource.getAllPostsDataFromDb()
+                resultFromLocal
+            } catch (e: Exception) {
+                UseCaseResult.Error(e)
+            }
         }
     }
 
