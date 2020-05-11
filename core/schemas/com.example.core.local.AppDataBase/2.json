@@ -1,0 +1,250 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "882bd85548d216fa26a7ba627fcbd4a8",
+    "entities": [
+      {
+        "tableName": "favorite",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `status` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "result_response",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`parent_cate_id` INTEGER NOT NULL, `parent_cate_img` TEXT NOT NULL, `parent_cate_name` TEXT NOT NULL, `sub_cate_list` TEXT, PRIMARY KEY(`parent_cate_id`))",
+        "fields": [
+          {
+            "fieldPath": "parentCateId",
+            "columnName": "parent_cate_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "parentCateImg",
+            "columnName": "parent_cate_img",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "parentCateName",
+            "columnName": "parent_cate_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "subCateList",
+            "columnName": "sub_cate_list",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "parent_cate_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "sub_cate",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`parent_id` INTEGER NOT NULL, `parent_name` TEXT NOT NULL, `posts_list` TEXT, `sub_cate_id` INTEGER NOT NULL, `sub_cate_img` TEXT NOT NULL, `sub_cate_name` TEXT NOT NULL, PRIMARY KEY(`sub_cate_id`), FOREIGN KEY(`sub_cate_id`) REFERENCES `result_response`(`parent_cate_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "parentId",
+            "columnName": "parent_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "parentName",
+            "columnName": "parent_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "postsList",
+            "columnName": "posts_list",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "subCateId",
+            "columnName": "sub_cate_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "subCateImg",
+            "columnName": "sub_cate_img",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "subCateName",
+            "columnName": "sub_cate_name",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "sub_cate_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "result_response",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "sub_cate_id"
+            ],
+            "referencedColumns": [
+              "parent_cate_id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "posts",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`parent_cate_id` INTEGER NOT NULL, `patent_cate_name` TEXT NOT NULL, `sub_cate_id` INTEGER NOT NULL, `sub_cate_name` TEXT NOT NULL, `post_author` TEXT NOT NULL, `post_content` TEXT NOT NULL, `post_date` TEXT NOT NULL, `post_id` INTEGER NOT NULL, `post_img` TEXT NOT NULL, `post_name` TEXT NOT NULL, `post_status` TEXT NOT NULL, `post_title` TEXT NOT NULL, `post_type` TEXT NOT NULL, PRIMARY KEY(`post_id`), FOREIGN KEY(`post_id`) REFERENCES `sub_cate`(`sub_cate_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "parentCateId",
+            "columnName": "parent_cate_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "parentCateName",
+            "columnName": "patent_cate_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "subCateId",
+            "columnName": "sub_cate_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "subCateName",
+            "columnName": "sub_cate_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "postAuthor",
+            "columnName": "post_author",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "postContent",
+            "columnName": "post_content",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "postDate",
+            "columnName": "post_date",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "postId",
+            "columnName": "post_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "postImg",
+            "columnName": "post_img",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "postName",
+            "columnName": "post_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "postStatus",
+            "columnName": "post_status",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "postTitle",
+            "columnName": "post_title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "postType",
+            "columnName": "post_type",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "post_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "sub_cate",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "post_id"
+            ],
+            "referencedColumns": [
+              "sub_cate_id"
+            ]
+          }
+        ]
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '882bd85548d216fa26a7ba627fcbd4a8')"
+    ]
+  }
+}

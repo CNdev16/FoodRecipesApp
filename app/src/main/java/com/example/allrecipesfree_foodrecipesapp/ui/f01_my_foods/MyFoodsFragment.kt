@@ -1,6 +1,7 @@
 package com.example.allrecipesfree_foodrecipesapp.ui.f01_my_foods
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
@@ -16,6 +17,7 @@ import com.example.allrecipesfree_foodrecipesapp.utility.PageTransformer
 import com.example.allrecipesfree_foodrecipesapp.utility.epoxy.controller.ItemsController
 import com.example.allrecipesfree_foodrecipesapp.utility.handleCollap
 import com.example.core.data.ResultResponse
+import com.google.gson.Gson
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MyFoodsFragment : BaseFragment<FragmentMyFoodsBinding>() {
@@ -30,9 +32,15 @@ class MyFoodsFragment : BaseFragment<FragmentMyFoodsBinding>() {
         binding.viewModel = viewModel
 
         subscribeLiveData()
+        loading()
     }
 
     private fun subscribeLiveData() {
+
+        viewModel.getAllDataFromDb()
+        viewModel.allDataFromDb.observe(viewLifecycleOwner, Observer {
+            Log.d("printtt==>", Gson().toJson(it))
+        })
 
 //        val vpRecipesRcAdapter = Recipes4uVpAdapter(requireContext(), resultResponse)
 //        val itemAdapter = ItemsController().apply {
@@ -73,5 +81,14 @@ class MyFoodsFragment : BaseFragment<FragmentMyFoodsBinding>() {
 //                }
 //            })
 //        }
+    }
+
+    private fun loading() {
+        viewModel.showLoading.observe(viewLifecycleOwner, Observer {
+            if (it) DialogUtils.showProgressDialog(
+                requireContext(),
+                getString(R.string.progress_msg)
+            ) else DialogUtils.disMissDialog()
+        })
     }
 }

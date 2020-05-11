@@ -1,14 +1,19 @@
 package com.example.core.data
 
-import androidx.room.ColumnInfo
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
+import androidx.room.ForeignKey.CASCADE
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "sub_cate")
+@Entity(
+    tableName = "sub_cate",
+    foreignKeys = [ForeignKey(
+        entity = ResultResponse::class,
+        parentColumns = ["parent_cate_id"],
+        childColumns = ["sub_cate_id"],
+        onDelete = CASCADE
+    )]
+)
 data class SubCate(
-    @PrimaryKey
     @ColumnInfo(name = "parent_id")
     @SerializedName("parent_id")
     var parentId: Int,
@@ -18,6 +23,7 @@ data class SubCate(
     @ColumnInfo(name = "posts_list")
     @SerializedName("posts_list")
     var postsList: List<Posts>?,
+    @PrimaryKey
     @ColumnInfo(name = "sub_cate_id")
     @SerializedName("sub_cate_id")
     var subCateId: Int,

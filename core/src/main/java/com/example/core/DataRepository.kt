@@ -11,6 +11,7 @@ class DataRepository(
         return try {
             val result = remoteDataSource.getAllData()
             result
+
         } catch (e: Exception) {
             try {
                 val resultFromLocal = localDataSource.getAllPostsDataFromDb()
@@ -52,6 +53,25 @@ class DataRepository(
         return try {
             val result = remoteDataSource.getAllPostsMenuOnly()
             result
+        } catch (e: Exception) {
+            UseCaseResult.Error(e)
+        }
+    }
+
+    suspend fun addAllPostsMenuToDb(resultResponse: ResultResponse): UseCaseResult<Long> {
+        return try {
+            val result = localDataSource.addAllPostsDataToDb(resultResponse)
+            result
+        } catch (e: Exception) {
+            UseCaseResult.Error(e)
+        }
+    }
+
+    suspend fun getAllDataFromDb(): UseCaseResult<List<ResultResponse>> {
+        return try {
+            val resultFromLocal = localDataSource.getAllPostsDataFromDb()
+            resultFromLocal
+
         } catch (e: Exception) {
             UseCaseResult.Error(e)
         }

@@ -20,10 +20,10 @@ class Recipes4uVpAdapter(private val context: Context, private val data: List<Re
         )
     }
 
-    override fun getItemCount(): Int = data[3].subCateList!![3].postsList.size
+    override fun getItemCount(): Int = data[3].subCateList!![3].postsList!!.size
 
     override fun onBindViewHolder(holder: Recipes4uViewHolder, position: Int) {
-        val  recipes = data[3].subCateList!![3].postsList[position].postImg
+        val  recipes = data[3].subCateList!![3].postsList!![position].postImg
         Glide.with(context).load(recipes).placeholder(R.drawable.img_404).into(holder.binding.imgCate)
     }
 

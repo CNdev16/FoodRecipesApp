@@ -13,9 +13,11 @@ import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_categories.MenuCategoriesViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_favorite.FavoritesMenuViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_posts_menu_detail.PostsMenuDetailViewModel
+import com.example.allrecipesfree_foodrecipesapp.ui.flow_splash_screen.SplashScreenViewModel
 import com.example.core.DataRepository
 import com.example.core.DataSource
 import com.example.core.local.LocalDataSource
+import com.example.core.local.migrations.MIGRATION_1_2
 import com.example.core.remote.ApiService
 import com.example.core.remote.RemoteDataSource
 import com.example.core.remote.ServiceEndPointInterface
@@ -35,14 +37,16 @@ val appModule = module {
         )
     }
 
-    single<DataSource> {
+    single {
         LocalDataSource(get())
     }
 
     single { DataRepository(get(), get()) }
     single {
         Room.databaseBuilder(androidApplication(), AppDataBase::class.java, "app-db")
-            .allowMainThreadQueries().build()
+            .allowMainThreadQueries()
+            .addMigrations(MIGRATION_1_2)
+            .build()
     }
     single { get<AppDataBase>().appDataBaseDao() }
 }
@@ -53,6 +57,8 @@ val useCaseModule = module {
     factory { GetCountryCategoriesOnlyUseCase(get()) }
     factory { GetPostsMenuOnlyUseCase(get()) }
     factory { GetSubCategoriesOnlyUseCase(get()) }
+    factory { AddAllDataUseCase(get()) }
+    factory { GetAllDataFromDbUseCase(get()) }
 }
 
 val viewModelModule = module {
@@ -66,6 +72,6 @@ val viewModelModule = module {
     viewModel { FavoriteRecipesViewModel(get()) }
     viewModel { SearchRecipesViewModel(get()) }
     viewModel { SearchAllRecipesViewModel(get()) }
-    viewModel { SplashScreenViewModel(get()) }
+    viewModel { SplashScreenViewModel(get(), get()) }
 }
 

@@ -52,10 +52,18 @@ class RemoteDataSource(private val mService: ServiceEndPointInterface) : DataSou
     }
 
     override suspend fun addAllPostsDataToDb(resultResponse: ResultResponse): UseCaseResult<Long>{
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return try {
+            UseCaseResult.Success(-1L)
+        } catch (e: Exception) {
+            UseCaseResult.Error(e)
+        }
     }
 
     override suspend fun getAllPostsDataFromDb(): UseCaseResult<List<ResultResponse>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return try {
+            UseCaseResult.Success(ArrayList())
+        } catch (e: Exception) {
+            UseCaseResult.Error(e)
+        }
     }
 }

@@ -19,8 +19,8 @@ interface AppDataBaseDao {
     fun getFavoriteMenu(): List<Favorite>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addAllPostsData(allPosts: ResultResponse): Long
+    suspend fun addAllPostsData(allPosts: ResultResponse): Long
 
     @Query("SELECT * FROM result_response")
-    fun getAllPostsData(): List<ResultResponse>
+    suspend fun getAllPostsData(): List<ResultResponse>
 }
