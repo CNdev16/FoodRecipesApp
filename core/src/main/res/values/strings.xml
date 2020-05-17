@@ -1,0 +1,6 @@
+<resources>
+    <string name="no_internet">Internet connection failed, please try again.</string>
+    <string name="response_success">Response success.</string>
+    <string name="response_fail">Response failed.</string>
+
+</resources>

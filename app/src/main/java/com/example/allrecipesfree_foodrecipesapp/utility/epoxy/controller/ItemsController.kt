@@ -4,9 +4,8 @@ import com.airbnb.epoxy.Carousel
 import com.airbnb.epoxy.CarouselModel_
 import com.airbnb.epoxy.EpoxyController
 import com.example.allrecipesfree_foodrecipesapp.utility.epoxy.HeaderLabelEpoxyModel_
-import com.example.allrecipesfree_foodrecipesapp.utility.epoxy.ItemsRecipesEpoxy
 import com.example.allrecipesfree_foodrecipesapp.utility.epoxy.ItemsRecipesEpoxyModel_
-import com.example.core.data.ResultResponse
+import com.example.core.data.CountryCategory
 import kotlin.properties.Delegates
 
 class ItemsController : EpoxyController() {
@@ -14,7 +13,7 @@ class ItemsController : EpoxyController() {
         Carousel.setDefaultGlobalSnapHelperFactory(null)
     }
 
-    var itemsRecipe by Delegates.observable(emptyList<ResultResponse>()) { _, _, _ ->
+    var itemsRecipe by Delegates.observable(emptyList<CountryCategory>()) { _, _, _ ->
         requestModelBuild()
     }
 

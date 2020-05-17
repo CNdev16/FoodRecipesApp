@@ -1,6 +1,7 @@
 package com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -10,12 +11,12 @@ import com.example.allrecipesfree_foodrecipesapp.base.BaseFragment
 import com.example.allrecipesfree_foodrecipesapp.databinding.FragmentCategoriesRecipesBinding
 import com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes.adapter.CountryRcAdapter
 import com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes.adapter.RecipesRcAdapter
-import com.example.allrecipesfree_foodrecipesapp.ui.f05_search.SearchRecipesFragment
-import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.MainActivity
 import com.example.allrecipesfree_foodrecipesapp.utility.DialogUtils
 import com.example.allrecipesfree_foodrecipesapp.utility.SearchItemsCallBack
-import com.example.allrecipesfree_foodrecipesapp.utility.addFragment
-import com.example.allrecipesfree_foodrecipesapp.utility.replaceFragment
+import com.example.allrecipesfree_foodrecipesapp.utility.isInternetConnected
+import com.example.allrecipesfree_foodrecipesapp.utility.logD
+import com.example.core.data.CountryCategory
+import com.google.gson.Gson
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CategoriesRecipesFragment : BaseFragment<FragmentCategoriesRecipesBinding>(),
@@ -31,35 +32,47 @@ class CategoriesRecipesFragment : BaseFragment<FragmentCategoriesRecipesBinding>
         super.onViewCreated(view, savedInstanceState)
 
         binding.viewModel = viewModel
-
-//        countryRcAdapter = CountryRcAdapter()
-//        binding.rcCountry.apply {
-//            setHasFixedSize(true)
-//            layoutManager =
-//                LinearLayoutManager(
-//                    activity,
-//                    LinearLayoutManager.HORIZONTAL,
-//                    false
-//                )
-//            adapter = countryRcAdapter
-//        }
-//
-//        recipesRcAdapter = RecipesRcAdapter()
-//        binding.rcRecipe.apply {
-//            setHasFixedSize(true)
-//            layoutManager = GridLayoutManager(
-//                activity,
-//                2
-//            )
-//            adapter = recipesRcAdapter
-//        }
-
-        loading()
-        getCategories()
-
     }
 
-    private fun loading() {
+    override fun subscribeLiveData() {
+
+        viewModel.getAllDataFromDb(requireContext().isInternetConnected())
+        viewModel.allDataFromDb.observe(viewLifecycleOwner, Observer {
+            Log.d("printtt==>", "${Gson().toJson(it)} \n ${it.size}")
+            Log.d("printtt==>", "${it.size}")
+
+            countryRcAdapter = CountryRcAdapter(it)
+            binding.rcCountry.apply {
+                setHasFixedSize(true)
+                layoutManager =
+                    LinearLayoutManager(
+                        activity,
+                        LinearLayoutManager.HORIZONTAL,
+                        false
+                    )
+                adapter = countryRcAdapter
+            }
+            countryRcAdapter.setOnClickCountry(object : CountryRcAdapter.OnClickCountry{
+                override fun onClickCountry(country: CountryCategory, position: Int) {
+                    recipesRcAdapter = RecipesRcAdapter(it[position].menuCategoryList!!)
+                    binding.rcRecipe.apply {
+                        setHasFixedSize(true)
+                        layoutManager = GridLayoutManager(
+                            activity,
+                            2
+                        )
+                        adapter = recipesRcAdapter
+                    }
+                }
+
+            })
+        })
+    }
+
+    override fun searchItemsCallBack(s: String?) {
+    }
+
+    override fun loading() {
         viewModel.showLoading.observe(viewLifecycleOwner, Observer {
             if (it) DialogUtils.showProgressDialog(
                 requireContext(),
@@ -68,12 +81,20 @@ class CategoriesRecipesFragment : BaseFragment<FragmentCategoriesRecipesBinding>
         })
     }
 
-    private fun getCategories() {
-        viewModel.getCountryCategoriesOnlyData()
-        viewModel.allCountryCategoriesOnlyData.observe(viewLifecycleOwner, Observer {
+    override fun handleError() {
+        viewModel.handleError.observe(this, Observer {
+            logD(it)
+            DialogUtils.showDialogOneButton(
+                requireContext(),
+                "Error.",
+                it,
+                "Ok",
+                object : DialogUtils.OnClickButtonDialog {
+                    override fun onClickButtonDialog() {
+                        DialogUtils.disMissDialog()
+                    }
+                }
+            )
         })
-    }
-
-    override fun searchItemsCallBack(s: String?) {
     }
 }

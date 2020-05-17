@@ -1,14 +1,12 @@
 package com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.core.data.ServiceResponse
 import com.example.allrecipesfree_foodrecipesapp.databinding.ItemCountryCateBinding
+import com.example.core.data.CountryCategory
 
-class CountryRcAdapter :
+class CountryRcAdapter(private val data: List<CountryCategory>) :
     RecyclerView.Adapter<CountryRcViewHolder>() {
 
     private var listener: OnClickCountry? = null
@@ -19,7 +17,7 @@ class CountryRcAdapter :
         )
     }
 
-    override fun getItemCount(): Int = 10
+    override fun getItemCount(): Int = data.size
 
     override fun onBindViewHolder(holder: CountryRcViewHolder, position: Int) {
 
@@ -27,15 +25,15 @@ class CountryRcAdapter :
 //            text = country.name
 //        }
 //
-//        holder.binding.cItem.apply {
-//            setOnClickListener {
-//                listener?.onClickCountry(country, position)
-//            }
-//        }
+        holder.binding.cItem.apply {
+            setOnClickListener {
+                listener?.onClickCountry(data[position], position)
+            }
+        }
     }
 
     interface OnClickCountry{
-        fun onClickCountry(country: ServiceResponse, position: Int)
+        fun onClickCountry(country: CountryCategory, position: Int)
     }
 
     fun setOnClickCountry(onClickCountry: OnClickCountry?){

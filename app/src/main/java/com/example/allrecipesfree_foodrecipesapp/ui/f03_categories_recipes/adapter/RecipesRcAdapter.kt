@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.allrecipesfree_foodrecipesapp.databinding.ItemRecipesCateBinding
 import com.example.core.data.ServiceResponse
+import com.example.core.data.MenuCategory
 
-class RecipesRcAdapter :
+class RecipesRcAdapter(private val data: List<MenuCategory>) :
     RecyclerView.Adapter<RecipesRcViewHolder>() {
 
     private var listener: OnClickCountry? = null
@@ -17,7 +18,7 @@ class RecipesRcAdapter :
         )
     }
 
-    override fun getItemCount(): Int = 10
+    override fun getItemCount(): Int = data.size
 
     override fun onBindViewHolder(holder: RecipesRcViewHolder, position: Int) {
 

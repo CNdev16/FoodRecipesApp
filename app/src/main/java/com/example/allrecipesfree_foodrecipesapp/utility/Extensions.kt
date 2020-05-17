@@ -4,10 +4,12 @@ import android.app.Activity
 import android.content.Context
 import android.content.res.AssetManager
 import android.graphics.Typeface
+import android.net.ConnectivityManager
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.TextUtils.replace
 import android.text.style.TypefaceSpan
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +21,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.app.ActivityCompat
 import androidx.core.view.OneShotPreDrawListener.add
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -197,4 +200,13 @@ fun handleCollap(
         }
     }
 
+}
+
+fun logD(logMsg: String) = Log.d("APP_LOG", logMsg)
+
+fun Context.isInternetConnected(): Boolean {
+    val connectivityManager =
+        this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val activeNetworkInfo = connectivityManager.activeNetworkInfo
+    return activeNetworkInfo != null && activeNetworkInfo.isConnected
 }

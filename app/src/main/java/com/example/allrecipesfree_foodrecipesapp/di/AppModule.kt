@@ -24,11 +24,12 @@ import com.example.core.remote.ServiceEndPointInterface
 import com.example.core.usecase.*
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.qualifier.StringQualifier
 import org.koin.dsl.module
 
 val appModule = module {
     single { ApiService(BASE_URL) }
-    single<DataSource> {
+    single<DataSource> (StringQualifier("remote")){
         val apiService: ApiService = get()
         RemoteDataSource(
             apiService.getEndpointInterface(
@@ -37,14 +38,13 @@ val appModule = module {
         )
     }
 
-    single {
+    single<DataSource> (StringQualifier("local")){
         LocalDataSource(get())
     }
 
-    single { DataRepository(get(), get()) }
+    single { DataRepository(get(StringQualifier("remote")), get(StringQualifier("local"))) }
     single {
         Room.databaseBuilder(androidApplication(), AppDataBase::class.java, "app-db")
-            .allowMainThreadQueries()
             .addMigrations(MIGRATION_1_2)
             .build()
     }
@@ -59,6 +59,7 @@ val useCaseModule = module {
     factory { GetSubCategoriesOnlyUseCase(get()) }
     factory { AddAllDataUseCase(get()) }
     factory { GetAllDataFromDbUseCase(get()) }
+    factory { DeleteAllDataFromDbUseCase(get()) }
 }
 
 val viewModelModule = module {
@@ -67,11 +68,11 @@ val viewModelModule = module {
     viewModel { PostsMenuDetailViewModel(get()) }
     viewModel { FavoritesMenuViewModel(get()) }
     viewModel { AllRecipesViewModel(get()) }
-    viewModel { CategoriesRecipesViewModel(get()) }
+    viewModel { CategoriesRecipesViewModel(get(), get()) }
     viewModel { MyFoodsViewModel(get()) }
     viewModel { FavoriteRecipesViewModel(get()) }
     viewModel { SearchRecipesViewModel(get()) }
     viewModel { SearchAllRecipesViewModel(get()) }
-    viewModel { SplashScreenViewModel(get(), get()) }
+    viewModel { SplashScreenViewModel(get(), get(), get()) }
 }
 

@@ -1,13 +1,8 @@
 package com.example.core.local
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.core.data.Favorite
-import com.example.core.data.ResultResponse
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.flow.Flow
+import com.example.core.data.CountryCategory
 
 @Dao
 interface AppDataBaseDao {
@@ -19,8 +14,11 @@ interface AppDataBaseDao {
     fun getFavoriteMenu(): List<Favorite>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addAllPostsData(allPosts: ResultResponse): Long
+    fun addCountryCategoryData(countryCategory: CountryCategory): Long
 
-    @Query("SELECT * FROM result_response")
-    suspend fun getAllPostsData(): List<ResultResponse>
+    @Query("SELECT * FROM country_category")
+    fun getCountryCategoryData(): List<CountryCategory>
+
+    @Delete
+    fun deleteCountryCategoryFromDb(countryCategory: CountryCategory):Int
 }

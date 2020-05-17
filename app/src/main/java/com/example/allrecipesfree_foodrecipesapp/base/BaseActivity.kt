@@ -7,10 +7,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.example.allrecipesfree_foodrecipesapp.R
+import com.example.allrecipesfree_foodrecipesapp.utility.DialogUtils
 import com.example.allrecipesfree_foodrecipesapp.utility.hideKeyboard
+import com.example.allrecipesfree_foodrecipesapp.utility.isInternetConnected
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 
-abstract class BaseActivity <VB: ViewDataBinding>: AppCompatActivity(){
+abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity() {
 
     abstract var layoutResource: Int
     lateinit var binding: VB
@@ -19,15 +21,33 @@ abstract class BaseActivity <VB: ViewDataBinding>: AppCompatActivity(){
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, layoutResource)
 
+        if (isInternetConnected()) {
+            loading()
+            subscribeLiveData()
+            handleError()
+        } else {
+            DialogUtils.showDialogOneButton(
+                this,
+                getString(R.string.dialog_title),
+                getString(R.string.no_internet),
+                getString(R.string.dialog_btn),
+                object : DialogUtils.OnClickButtonDialog {
+                    override fun onClickButtonDialog() {
+                        DialogUtils.disMissDialog()
+                        finishAffinity()
+                    }
+                })
+        }
     }
 
-    fun isInternetConnected(): Boolean {
-        val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val activeNetworkInfo = connectivityManager.activeNetworkInfo
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected
-    }
+    open fun subscribeLiveData() {}
 
-    fun pageTransition() = overridePendingTransition(R.anim.activity_open_enter, R.anim.activity_open_exit)
+    open fun loading() {}
+
+    open fun handleError() {}
+
+    fun pageTransition() =
+        overridePendingTransition(R.anim.activity_open_enter, R.anim.activity_open_exit)
 
     override fun attachBaseContext(newBase: Context?) {
         super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase!!))

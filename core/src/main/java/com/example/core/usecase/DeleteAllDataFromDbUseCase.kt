@@ -5,12 +5,12 @@ import com.example.core.UseCaseResult
 import com.example.core.data.CountryCategory
 import com.example.core.usecase.base.BaseCoroutinesUseCase
 
-class GetAllDataUseCase(private val dataRepository: DataRepository) :
-    BaseCoroutinesUseCase<Unit, List<CountryCategory>>() {
+class DeleteAllDataFromDbUseCase(private val dataRepository: DataRepository) :
+    BaseCoroutinesUseCase<CountryCategory, Int>() {
     override suspend fun execute(
-        param: Unit,
+        param: CountryCategory,
         isInternetConnected: Boolean
-    ): UseCaseResult<List<CountryCategory>> {
-        return dataRepository.getAllData(isInternetConnected)
+    ): UseCaseResult<Int> {
+        return dataRepository.deleteCountryCategoryFromDb(param)
     }
 }

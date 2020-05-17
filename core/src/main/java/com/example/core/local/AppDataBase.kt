@@ -4,15 +4,15 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.core.data.Favorite
-import com.example.core.data.Posts
-import com.example.core.data.ResultResponse
-import com.example.core.data.SubCate
+import com.example.core.data.RecipePosts
+import com.example.core.data.CountryCategory
+import com.example.core.data.MenuCategory
 import com.example.core.local.converter.DateTimeConverter
 import com.example.core.local.converter.PostsConverter
 import com.example.core.local.converter.SubCateConverter
 
 @Database(
-    entities = [Favorite::class, ResultResponse::class, SubCate::class, Posts::class],
+    entities = [Favorite::class, CountryCategory::class, MenuCategory::class, RecipePosts::class],
     version = 2,
     exportSchema = true
 )

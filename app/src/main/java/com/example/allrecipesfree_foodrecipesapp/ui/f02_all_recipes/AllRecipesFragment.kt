@@ -29,40 +29,26 @@ class AllRecipesFragment : BaseFragment<FragmentAllRecipesBinding>(), SearchItem
 
         binding.viewModel = viewModel
 
-//        val allRecipesRcAdapter = AllRecipesRcAdapter()
-//        binding.rcViewAllData.apply {
-//            setHasFixedSize(true)
-//            layoutManager =
-//                LinearLayoutManager(
-//                    activity,
-//                    LinearLayoutManager.VERTICAL,
-//                    false
-//                )
-//            adapter = allRecipesRcAdapter
-//        }
-
-        getPostsMenuOnly()
-        loading()
-
         MainActivity.apply {
             setOnClickSearchItem(this@AllRecipesFragment)
             setOnClickClearText(this@AllRecipesFragment)
         }
     }
 
-    private fun loading() {
-        viewModel.showLoading.observe(viewLifecycleOwner, Observer {
-            if (it) DialogUtils.showProgressDialog(
-                requireContext(),
-                getString(R.string.progress_msg)
-            ) else DialogUtils.disMissDialog()
-        })
-    }
-
-    private fun getPostsMenuOnly() {
-        viewModel.getAllPostsMenuOnlyData()
+    override fun subscribeLiveData() {
+        viewModel.getAllPostsMenuOnlyData(requireContext().isInternetConnected())
         viewModel.allPostsMenuOnlyData.observe(viewLifecycleOwner, Observer {
-
+            val allRecipesRcAdapter = AllRecipesRcAdapter()
+            binding.rcViewAllData.apply {
+                setHasFixedSize(true)
+                layoutManager =
+                    LinearLayoutManager(
+                        activity,
+                        LinearLayoutManager.VERTICAL,
+                        false
+                    )
+                adapter = allRecipesRcAdapter
+            }
         })
     }
 
@@ -85,5 +71,31 @@ class AllRecipesFragment : BaseFragment<FragmentAllRecipesBinding>(), SearchItem
                 slideFromBottom()
             }
         }
+    }
+
+    override fun loading() {
+        viewModel.showLoading.observe(viewLifecycleOwner, Observer {
+            if (it) DialogUtils.showProgressDialog(
+                requireContext(),
+                getString(R.string.progress_msg)
+            ) else DialogUtils.disMissDialog()
+        })
+    }
+
+    override fun handleError() {
+        viewModel.handleError.observe(this, Observer {
+            logD(it)
+            DialogUtils.showDialogOneButton(
+                requireContext(),
+                "Error.",
+                it,
+                "Ok",
+                object : DialogUtils.OnClickButtonDialog {
+                    override fun onClickButtonDialog() {
+                        DialogUtils.disMissDialog()
+                    }
+                }
+            )
+        })
     }
 }

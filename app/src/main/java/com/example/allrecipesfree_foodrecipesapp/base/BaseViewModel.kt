@@ -10,6 +10,7 @@ import kotlin.coroutines.CoroutineContext
 abstract class BaseViewModel: ViewModel(), CoroutineScope{
 
     var showLoading = MutableLiveData<Boolean>(true)
+    var handleError = MutableLiveData<String>()
 
     private val job = Job()
 

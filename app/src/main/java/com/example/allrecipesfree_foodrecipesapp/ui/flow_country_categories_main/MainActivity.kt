@@ -69,7 +69,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
         customActionbar.setOnClickItemsToolBar(this)
     }
 
-    private fun subscribeLiveData() {
+    override fun subscribeLiveData() {
 
     }
 

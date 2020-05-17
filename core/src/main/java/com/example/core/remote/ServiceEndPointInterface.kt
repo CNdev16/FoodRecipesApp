@@ -8,13 +8,13 @@ import retrofit2.http.Path
 interface ServiceEndPointInterface {
 
     @GET("data")
-    fun getAllDataAsync():Deferred<List<ResultResponse>>
+    fun getAllDataAsync():Deferred<List<CountryCategory>>
     @GET("parentCategory")
-    fun getCountryCategoriesOnlyAsync(): Deferred<List<ResultResponse>>
+    fun getCountryCategoriesOnlyAsync(): Deferred<List<CountryCategory>>
     @GET("subCategory/{id}")
-    fun getSubCategoriesOnlyAsync(@Path("id") parent_id: Int): Deferred<List<SubCate>>
+    fun getSubCategoriesOnlyAsync(@Path("id") parent_id: Int): Deferred<List<MenuCategory>>
     @GET("postsList/{id}")
-    fun getPostsMenuOnlyAsync(@Path("id") cate_id: Int): Deferred<List<Posts>>
+    fun getPostsMenuOnlyAsync(@Path("id") cate_id: Int): Deferred<List<RecipePosts>>
     @GET("postsList")
-    fun getAllPostsMenuOnlyAsync(): Deferred<List<Posts>>
+    fun getAllPostsMenuOnlyAsync(): Deferred<List<RecipePosts>>
 }

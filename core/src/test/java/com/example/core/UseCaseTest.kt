@@ -1,6 +1,6 @@
 package com.example.core
 
-import com.example.core.data.ResultResponse
+import com.example.core.data.CountryCategory
 import com.example.core.usecase.GetAllDataUseCase
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -30,19 +30,19 @@ class GetAllDataUseCaseTest{
 
         coEvery{
             dataRepository.getAllData()
-        } returns UseCaseResult.Success(listOf(ResultResponse(
+        } returns UseCaseResult.Success(listOf(CountryCategory(
             31,
             "xx",
             "ttt",
             ArrayList()),
-            ResultResponse(
+            CountryCategory(
                 16,
                 "xx",
                 "ttt",
                 ArrayList())))
 
         var list = getAllDataUseUseCase.execute(Unit)
-        var l :List<ResultResponse>? = null
+        var l :List<CountryCategory>? = null
         when(list){
             is UseCaseResult.Success->{
                 l = list.data
