@@ -7,7 +7,6 @@ import android.widget.RelativeLayout
 import androidx.core.view.isVisible
 import androidx.core.view.size
 import androidx.lifecycle.Observer
-import com.airbnb.lottie.utils.Utils
 import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.base.BaseActivity
 import com.example.allrecipesfree_foodrecipesapp.databinding.ActivityMainBinding
@@ -16,11 +15,11 @@ import com.example.allrecipesfree_foodrecipesapp.ui.f02_all_recipes.AllRecipesFr
 import com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes.CategoriesRecipesFragment
 import com.example.allrecipesfree_foodrecipesapp.ui.f04_favorite_recipes.FavoriteRecipesFragment
 import com.example.allrecipesfree_foodrecipesapp.ui.f05_search.SearchAllRecipesActivity
-import com.example.allrecipesfree_foodrecipesapp.ui.f05_search.SearchRecipesFragment
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.adapter.CountryRcAdapter
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.adapter.SearchRcAdapter
 import com.example.allrecipesfree_foodrecipesapp.utility.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.gson.Gson
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClickItemsToolBar {
@@ -54,8 +53,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
         binding.viewModel = viewModel
 
         setupToolbar()
-        subscribeLiveData()
-        setBottomNavigation()
+        //setBottomNavigation()
 
     }
 
@@ -70,75 +68,59 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
     }
 
     override fun subscribeLiveData() {
+        viewModel.getAllDataFromService(isInternetConnected())
 
-    }
+        viewModel.allDataFromService.observe(this, Observer {
+            logD("Get Data Successfully... ${Gson().toJson(it)}")
 
-    private fun getPostsMenuOnly() {
+            it.forEach { i ->
+                viewModel.insertCountryData(i, isInternetConnected())
+            }
 
-        addFragment(R.id.contentContainer, AllRecipesFragment())
-        customActionbar.apply {
-            setTextHeader("All Recipes")
-            showSearchIcon(true)
-            search(false)
-        }
-        setStateMenu(R.id.menuAllRecipes)
-        setFabStatus(false)
-    }
+            it.forEach { i ->
+                i.menuCategoryList!!.forEach { j ->
+                    viewModel.insertMenuData(j, isInternetConnected())
+                }
+            }
 
-    private fun getCategories() {
-//        DialogUtils.showProgressDialog(this, getString(R.string.progress_msg))
-//        viewModel.getCountryCategoriesOnlyData()
-//        viewModel.allCountryCategoriesOnlyData.observe(this, Observer {
-//            DialogUtils.disMissDialog()
-//
-//            addFragment(R.id.contentContainer, CategoriesRecipesFragment())
-//            customActionbar.apply {
-//                setTextHeader("Categories")
-//                showSearchIcon(true)
-//                search(false)
-//            }
-//            setStateMenu(R.id.menuCategories)
-//            setFabStatus(false)
-//        })
+            it.forEach { i ->
+                i.menuCategoryList!!.forEach { j ->
+                    j.recipePostsList!!.forEach { k ->
+                        viewModel.insertRecipeData(k, isInternetConnected())
+                    }
+                }
+            }
 
-        addFragment(R.id.contentContainer, CategoriesRecipesFragment())
-        customActionbar.apply {
-            setTextHeader("Categories")
-            showSearchIcon(true)
-            search(false)
-        }
-        setStateMenu(R.id.menuCategories)
-        setFabStatus(false)
+            viewModel.insertCountryToLocal.observe(this, Observer {
+                logD("Insert Country Data Successfully...")
+            })
+
+            viewModel.insertMenuToLocal.observe(this, Observer {
+                logD("Insert Menu Data Successfully...")
+            })
+
+            viewModel.insertRecipeToLocal.observe(this, Observer {
+                logD("Insert Recipe Data Successfully...")
+            })
+
+            setBottomNavigation()
+        })
     }
 
     private fun setBottomNavigation() {
         binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.menuMyFood -> {
-                    addFragment(R.id.contentContainer, MyFoodsFragment())
-                    customActionbar.apply {
-                        setTextHeader("My Foods")
-                        showSearchIcon(false)
-                        search(false)
-                    }
-                    setStateMenu(R.id.menuMyFood)
-                    setFabStatus(true)
+                    goToMyFoodMenu()
                 }
                 R.id.menuAllRecipes -> {
-                    getPostsMenuOnly()
+                    goToAllRecipesMenu()
                 }
                 R.id.menuCategories -> {
-                    getCategories()
+                    goToCategoryMenu()
                 }
                 R.id.menuFavorite -> {
-                    addFragment(R.id.contentContainer, FavoriteRecipesFragment())
-                    customActionbar.apply {
-                        setTextHeader("Favorite")
-                        showSearchIcon(true)
-                        search(false)
-                    }
-                    setStateMenu(R.id.menuFavorite)
-                    setFabStatus(false)
+                    goToFavoriteMenu()
                 }
             }
             true
@@ -154,6 +136,50 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
             )
             pageTransition()
         }
+    }
+
+    private fun goToMyFoodMenu(){
+        addFragment(R.id.contentContainer, MyFoodsFragment())
+        customActionbar.apply {
+            setTextHeader("My Foods")
+            showSearchIcon(false)
+            search(false)
+        }
+        setStateMenu(R.id.menuMyFood)
+        setFabStatus(true)
+    }
+
+    private fun goToAllRecipesMenu() {
+        addFragment(R.id.contentContainer, AllRecipesFragment())
+        customActionbar.apply {
+            setTextHeader("All Recipes")
+            showSearchIcon(true)
+            search(false)
+        }
+        setStateMenu(R.id.menuAllRecipes)
+        setFabStatus(false)
+    }
+
+    private fun goToCategoryMenu() {
+        addFragment(R.id.contentContainer, CategoriesRecipesFragment())
+        customActionbar.apply {
+            setTextHeader("Categories")
+            showSearchIcon(true)
+            search(false)
+        }
+        setStateMenu(R.id.menuCategories)
+        setFabStatus(false)
+    }
+
+    private fun goToFavoriteMenu(){
+        addFragment(R.id.contentContainer, FavoriteRecipesFragment())
+        customActionbar.apply {
+            setTextHeader("Favorite")
+            showSearchIcon(true)
+            search(false)
+        }
+        setStateMenu(R.id.menuFavorite)
+        setFabStatus(false)
     }
 
     private fun setStateMenu(id: Int) {
@@ -345,6 +371,30 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
 //        })
 //    }
 
+    override fun loading() {
+        viewModel.showLoading.observe(this, Observer {
+            if (it) DialogUtils.showProgressDialog(
+                this,
+                getString(R.string.progress_msg)
+            ) else DialogUtils.disMissDialog()
+        })
+    }
+
+    override fun handleError() {
+        viewModel.handleError.observe(this, Observer {
+            DialogUtils.showDialogOneButton(
+                this,
+                it[0],
+                it[1],
+                "Ok",
+                object : DialogUtils.OnClickButtonDialog {
+                    override fun onClickButtonDialog() {
+                        DialogUtils.disMissDialog()
+                    }
+                }
+            )
+        })
+    }
 
     override fun onClickItemRight(text: String?) {
         Log.d("printtt", "onClickItemRight")

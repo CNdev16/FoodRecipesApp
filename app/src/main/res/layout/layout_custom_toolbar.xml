@@ -30,7 +30,6 @@
             android:layout_toRightOf="@id/imgLeft"
             android:gravity="center"
             android:padding="8dp"
-            android:text="xxxxx"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/text_size_24sp" />
 

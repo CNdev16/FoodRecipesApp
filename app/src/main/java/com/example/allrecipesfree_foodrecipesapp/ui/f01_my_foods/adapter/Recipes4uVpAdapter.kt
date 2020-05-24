@@ -8,8 +8,9 @@ import com.bumptech.glide.Glide
 import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.databinding.ItemRecipes4uBinding
 import com.example.core.data.CountryCategory
+import com.example.core.data.RecipePosts
 
-class Recipes4uVpAdapter(private val context: Context, private val data: List<CountryCategory>) :
+class Recipes4uVpAdapter(private val context: Context, private val data: List<RecipePosts>) :
     RecyclerView.Adapter<Recipes4uViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Recipes4uViewHolder {
@@ -18,10 +19,10 @@ class Recipes4uVpAdapter(private val context: Context, private val data: List<Co
         )
     }
 
-    override fun getItemCount(): Int = data[3].menuCategoryList!![3].recipePostsList!!.size
+    override fun getItemCount(): Int = data.size
 
     override fun onBindViewHolder(holder: Recipes4uViewHolder, position: Int) {
-        val  recipes = data[3].menuCategoryList!![3].recipePostsList!![position].recipePostImg
+        val  recipes = data[position]
         Glide.with(context).load(recipes).placeholder(R.drawable.img_404).into(holder.binding.imgCate)
     }
 

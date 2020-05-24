@@ -83,11 +83,10 @@ class CategoriesRecipesFragment : BaseFragment<FragmentCategoriesRecipesBinding>
 
     override fun handleError() {
         viewModel.handleError.observe(this, Observer {
-            logD(it)
             DialogUtils.showDialogOneButton(
                 requireContext(),
-                "Error.",
-                it,
+                it[0],
+                it[1],
                 "Ok",
                 object : DialogUtils.OnClickButtonDialog {
                     override fun onClickButtonDialog() {

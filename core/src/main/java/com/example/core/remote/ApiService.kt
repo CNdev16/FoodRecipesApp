@@ -47,7 +47,7 @@ class ApiService(private val baseUrl: String = "") {
             retrofit = Retrofit.Builder()
                 .client(getHttpClient())
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(CoroutineCallAdapterFactory())
+                //.addCallAdapterFactory(CoroutineCallAdapterFactory())
                 //.addConverterFactory(ScalarsConverterFactory.create())
                 .baseUrl(baseUrl)
                 .build()

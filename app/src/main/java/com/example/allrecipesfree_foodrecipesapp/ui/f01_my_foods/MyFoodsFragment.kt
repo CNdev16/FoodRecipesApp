@@ -31,20 +31,20 @@ class MyFoodsFragment : BaseFragment<FragmentMyFoodsBinding>() {
 
     override fun subscribeLiveData() {
 
-        viewModel.getAllDataFromDb(requireContext().isInternetConnected())
-        viewModel.allDataFromDb.observe(viewLifecycleOwner, Observer {
-            Log.d("printtt==>", Gson().toJson(it))
+        viewModel.getThaiRecipePosts(requireContext().isInternetConnected())
+        viewModel.thaiRecipeData.observe(viewLifecycleOwner, Observer {
+            logD(Gson().toJson(it))
 
             val vpRecipesRcAdapter = Recipes4uVpAdapter(requireContext(), it)
-            val itemAdapter = ItemsController().apply {
-                itemsRecipe = it
-            }
+//            val itemAdapter = ItemsController().apply {
+//                itemsRecipe = it
+//            }
 
-            binding.rcViewRoot.apply {
-                layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-                setHasFixedSize(false)
-                adapter = itemAdapter.adapter
-            }
+//            binding.rcViewRoot.apply {
+//                layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+//                setHasFixedSize(false)
+//                adapter = itemAdapter.adapter
+//            }
             binding.vpRecipe4u.apply {
                 clipToPadding = false
                 clipChildren = false
@@ -88,11 +88,10 @@ class MyFoodsFragment : BaseFragment<FragmentMyFoodsBinding>() {
 
     override fun handleError() {
         viewModel.handleError.observe(this, Observer {
-            logD(it)
             DialogUtils.showDialogOneButton(
                 requireContext(),
-                "Error.",
-                it,
+                it[0],
+                it[1],
                 "Ok",
                 object : DialogUtils.OnClickButtonDialog {
                     override fun onClickButtonDialog() {

@@ -14,7 +14,7 @@ val MIGRATION_1_2 = object : Migration(1, 2) {
         )
 
         database.execSQL(
-            "CREATE TABLE IF NOT EXISTS `menu_category` (`menu_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `country_cate_id` INTEGER NOT NULL, `country_cate_name` TEXT NOT NULL, `menu_cate_id` INTEGER NOT NULL, `menu_cate_name` TEXT NOT NULL, `menu_cate_img` TEXT NOT NULL, `recipe_posts_list` TEXT, FOREIGN KEY(`menu_id`) REFERENCES `country_category`(`country_id`) ON UPDATE NO ACTION ON DELETE CASCADE )"
+            "CREATE TABLE IF NOT EXISTS `menu_category` (`menu_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `country_rt_id` INTEGER NOT NULL, `country_cate_id` INTEGER NOT NULL, `country_cate_name` TEXT NOT NULL, `menu_cate_id` INTEGER NOT NULL, `menu_cate_name` TEXT NOT NULL, `menu_cate_img` TEXT NOT NULL, `recipe_posts_list` TEXT, FOREIGN KEY(`country_rt_id`) REFERENCES `country_category`(`country_id`) ON UPDATE NO ACTION ON DELETE CASCADE )"
         )
 
         database.execSQL(
@@ -22,7 +22,7 @@ val MIGRATION_1_2 = object : Migration(1, 2) {
         )
 
         database.execSQL(
-            "CREATE TABLE IF NOT EXISTS `recipe_posts` (`recipe_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `country_cate_id` INTEGER NOT NULL, `country_cate_name` TEXT NOT NULL, `menu_cate_id` INTEGER NOT NULL, `menu_cate_name` TEXT NOT NULL, `recipe_post_id` INTEGER NOT NULL, `recipe_post_author` TEXT NOT NULL, `recipe_post_name` TEXT NOT NULL, `recipe_post_date` TEXT NOT NULL, `recipe_post_title` TEXT NOT NULL, `recipe_post_content` TEXT NOT NULL, `recipe_post_status` TEXT NOT NULL, `recipe_post_type` TEXT NOT NULL, `recipe_post_img` TEXT NOT NULL, `recipe_post_modified` TEXT NOT NULL, `recipe_post_favorite` INTEGER NOT NULL, FOREIGN KEY(`recipe_id`) REFERENCES `menu_category`(`menu_id`) ON UPDATE NO ACTION ON DELETE CASCADE )"
+            "CREATE TABLE IF NOT EXISTS `recipe_posts` (`recipe_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `country_cate_id` INTEGER NOT NULL, `country_cate_name` TEXT NOT NULL, `menu_rt_id` INTEGER NOT NULL, `menu_cate_id` INTEGER NOT NULL, `menu_cate_name` TEXT NOT NULL, `recipe_post_id` INTEGER NOT NULL, `recipe_post_author` TEXT NOT NULL, `recipe_post_name` TEXT NOT NULL, `recipe_post_date` TEXT NOT NULL, `recipe_post_title` TEXT NOT NULL, `recipe_post_content` TEXT NOT NULL, `recipe_post_status` TEXT NOT NULL, `recipe_post_type` TEXT NOT NULL, `recipe_post_img` TEXT NOT NULL, `recipe_post_modified` TEXT NOT NULL, `recipe_post_favorite` INTEGER NOT NULL, FOREIGN KEY(`menu_rt_id`) REFERENCES `menu_category`(`menu_id`) ON UPDATE NO ACTION ON DELETE CASCADE )"
         )
 
         database.execSQL(

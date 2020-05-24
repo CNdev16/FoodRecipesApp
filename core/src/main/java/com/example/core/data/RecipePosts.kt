@@ -6,13 +6,7 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(
     tableName = "recipe_posts",
-    indices = [Index(value = ["recipe_post_id"], unique = true)],
-    foreignKeys = [ForeignKey(
-        entity = MenuCategory::class,
-        parentColumns = ["menu_id"],
-        childColumns = ["recipe_id"],
-        onDelete = CASCADE
-    )]
+    indices = [Index(value = ["recipe_post_id"], unique = true)]
 )
 data class RecipePosts(
     @PrimaryKey(autoGenerate = true)

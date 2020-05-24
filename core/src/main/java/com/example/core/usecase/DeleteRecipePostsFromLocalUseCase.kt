@@ -3,14 +3,16 @@ package com.example.core.usecase
 import com.example.core.DataRepository
 import com.example.core.UseCaseResult
 import com.example.core.data.CountryCategory
+import com.example.core.data.MenuCategory
+import com.example.core.data.RecipePosts
 import com.example.core.usecase.base.BaseCoroutinesUseCase
 
-class DeleteAllDataFromDbUseCase(private val dataRepository: DataRepository) :
-    BaseCoroutinesUseCase<CountryCategory, Int>() {
+class DeleteRecipePostsFromLocalUseCase(private val dataRepository: DataRepository) :
+    BaseCoroutinesUseCase<RecipePosts, Int>() {
     override suspend fun execute(
-        param: CountryCategory,
+        param: RecipePosts,
         isInternetConnected: Boolean
     ): UseCaseResult<Int> {
-        return dataRepository.deleteCountryCategoryFromDb(param)
+        return dataRepository.deleteRecipePostsFromLocal(param)
     }
 }

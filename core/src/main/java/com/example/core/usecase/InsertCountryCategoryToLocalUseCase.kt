@@ -5,12 +5,13 @@ import com.example.core.UseCaseResult
 import com.example.core.data.CountryCategory
 import com.example.core.usecase.base.BaseCoroutinesUseCase
 
-class GetAllDataFromDbUseCase(private val dataRepository: DataRepository) :
-    BaseCoroutinesUseCase<Unit, List<CountryCategory>>() {
+class InsertCountryCategoryToLocalUseCase(private val dataRepository: DataRepository) :
+    BaseCoroutinesUseCase<CountryCategory, Long>() {
     override suspend fun execute(
-        param: Unit,
+        param: CountryCategory,
         isInternetConnected: Boolean
-    ): UseCaseResult<List<CountryCategory>> {
-        return dataRepository.getCountryCategoryDataFromDb()
+    ): UseCaseResult<Long> {
+        return dataRepository.insertCountryCategoryToLocal(param)
     }
+
 }

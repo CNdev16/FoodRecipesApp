@@ -13,8 +13,8 @@ import com.example.core.local.converter.SubCateConverter
 
 @Database(
     entities = [Favorite::class, CountryCategory::class, MenuCategory::class, RecipePosts::class],
-    version = 2,
-    exportSchema = true
+    version = 1,
+    exportSchema = false
 )
 @TypeConverters(value = [PostsConverter::class, SubCateConverter::class, DateTimeConverter::class])
 abstract class AppDataBase : RoomDatabase() {

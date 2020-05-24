@@ -1,7 +1,6 @@
 package com.example.core
 
 import com.example.core.data.*
-import retrofit2.HttpException
 
 class DataRepository(
     private var remoteDataSource: DataSource,
@@ -10,122 +9,133 @@ class DataRepository(
 
     suspend fun getAllData(isNetworkEnabled: Boolean): UseCaseResult<List<CountryCategory>> {
         return try {
-            if (isNetworkEnabled) {
-                remoteDataSource.getAllData()
-            }
-            localDataSource.getCountryCategoryDataFromDb()
-
+            remoteDataSource.getAllDataFromService()
         } catch (t: Throwable) {
-            when (t) {
-                is HttpException -> {
-                    UseCaseResult.Error(responseMessage = "Code : ${t.code()}\nMessage: ${t.message()}")
-                }
-                else -> {
-                    UseCaseResult.Error(responseMessage = t.message ?: "")
-                }
-            }
+            t.handleThrowable()
         }
     }
 
-    suspend fun getCountryCategoriesOnly(isNetworkEnabled: Boolean): UseCaseResult<List<CountryCategory>> {
+    suspend fun getCountryCategory(isNetworkEnabled: Boolean): UseCaseResult<List<CountryCategory>> {
         return try {
             if (isNetworkEnabled) {
-                remoteDataSource.getCountryCategoriesOnly()
+                remoteDataSource.getCountryCategoryFromService()
+            } else {
+                localDataSource.getCountryCategoryFromLocal()
             }
-            localDataSource.getCountryCategoryDataFromDb()
         } catch (t: Throwable) {
-            when (t) {
-                is HttpException -> {
-                    UseCaseResult.Error(responseMessage = "Code : ${t.code()}\nMessage: ${t.message()}")
-                }
-                else -> {
-                    UseCaseResult.Error(responseMessage = t.message ?: "")
-                }
-            }
+            t.handleThrowable()
         }
     }
 
-    suspend fun getSubCategoriesOnly(parent_id: Int, isNetworkEnabled: Boolean): UseCaseResult<List<MenuCategory>> {
+    suspend fun getMenuCategoryByCountryCategoryId(
+        countryId: Int,
+        isNetworkEnabled: Boolean
+    ): UseCaseResult<List<MenuCategory>> {
         return try {
             if (isNetworkEnabled) {
-                remoteDataSource.getSubCategoriesOnly(parent_id)
+                remoteDataSource.getMenuCategoryByCountryCategoryIdFromService(countryId)
+            } else {
+                localDataSource.getMenuCategoryByCountryCategoryIdFromLocal(countryId)
             }
-            remoteDataSource.getSubCategoriesOnly(parent_id)
-            //localDataSource.getAllPostsDataFromDb()
         } catch (t: Throwable) {
-            when (t) {
-                is HttpException -> {
-                    UseCaseResult.Error(responseMessage = "Code : ${t.code()}\nMessage: ${t.message()}")
-                }
-                else -> {
-                    UseCaseResult.Error(responseMessage = t.message ?: "")
-                }
-            }
+            t.handleThrowable()
         }
     }
 
-    suspend fun getPostsMenuOnly(cate_id: Int, isNetworkEnabled: Boolean): UseCaseResult<List<RecipePosts>> {
+    suspend fun getRecipePostsByMenuCategoryId(
+        menuCateId: Int,
+        isNetworkEnabled: Boolean
+    ): UseCaseResult<List<RecipePosts>> {
         return try {
             if (isNetworkEnabled) {
-                remoteDataSource.getPostsMenuOnly(cate_id)
+                remoteDataSource.getRecipePostsByMenuCategoryIdFromService(menuCateId)
+            } else {
+                localDataSource.getRecipePostsByMenuCategoryIdFromLocal(menuCateId)
             }
-            remoteDataSource.getPostsMenuOnly(cate_id)
-            //localDataSource.getAllPostsDataFromDb()
         } catch (t: Throwable) {
-            when (t) {
-                is HttpException -> {
-                    UseCaseResult.Error(responseMessage = "Code : ${t.code()}\nMessage: ${t.message()}")
-                }
-                else -> {
-                    UseCaseResult.Error(responseMessage = t.message ?: "")
-                }
-            }
+            t.handleThrowable()
         }
     }
 
-    suspend fun getAllPostsMenuOnly(isNetworkEnabled: Boolean): UseCaseResult<List<RecipePosts>> {
+    suspend fun getAllRecipePosts(isNetworkEnabled: Boolean): UseCaseResult<List<RecipePosts>> {
         return try {
             if (isNetworkEnabled) {
-                remoteDataSource.getAllPostsMenuOnly()
+                remoteDataSource.getAllRecipePostsFromService()
+            } else {
+                localDataSource.getAllRecipePostsFromLocal()
             }
-            remoteDataSource.getAllPostsMenuOnly()
-            //localDataSource.getAllPostsDataFromDb()
         } catch (t: Throwable) {
-            when (t) {
-                is HttpException -> {
-                    UseCaseResult.Error(responseMessage = "Code : ${t.code()}\nMessage: ${t.message()}")
-                }
-                else -> {
-                    UseCaseResult.Error(responseMessage = t.message ?: "")
-                }
-            }
+            t.handleThrowable()
         }
     }
 
-    suspend fun addCountryCategoryDataToDb(countryCategory: CountryCategory): UseCaseResult<Long> {
+    suspend fun getRecipePostsDetails(
+        recipeId: Int,
+        isNetworkEnabled: Boolean
+    ): UseCaseResult<RecipePosts> {
         return try {
-            val result = localDataSource.addCountryCategoryDataToDb(countryCategory)
+            if (isNetworkEnabled) {
+                remoteDataSource.getRecipePostsDetailsFromService(recipeId)
+            } else {
+                localDataSource.getRecipePostsDetailsFromLocal(recipeId)
+            }
+        } catch (t: Throwable) {
+            t.handleThrowable()
+        }
+    }
+
+    suspend fun insertCountryCategoryToLocal(countryCategory: CountryCategory): UseCaseResult<Long> {
+        return try {
+            val result = localDataSource.insertCountryCategoryToLocal(countryCategory)
             result
         } catch (t: Throwable) {
-            UseCaseResult.Error(responseMessage = t.message ?: "")
+            t.handleThrowable()
         }
     }
 
-    suspend fun getCountryCategoryDataFromDb(): UseCaseResult<List<CountryCategory>> {
+    suspend fun deleteCountryCategoryFromLocal(countryCategory: CountryCategory): UseCaseResult<Int> {
         return try {
-            val result = localDataSource.getCountryCategoryDataFromDb()
+            val result = localDataSource.deleteCountryCategoryFromLocal(countryCategory)
             result
         } catch (t: Throwable) {
-            UseCaseResult.Error(responseMessage = t.message ?: "")
+            t.handleThrowable()
         }
     }
 
-    suspend fun deleteCountryCategoryFromDb(countryCategory: CountryCategory): UseCaseResult<Int> {
+    suspend fun insertMenuCategoryToLocal(menuCategory: MenuCategory): UseCaseResult<Long> {
         return try {
-            val result = localDataSource.deleteCountryCategoryFromDb(countryCategory)
+            val result = localDataSource.insertMenuCategoryToLocal(menuCategory)
             result
         } catch (t: Throwable) {
-            UseCaseResult.Error(responseMessage = t.message ?: "")
+            t.handleThrowable()
         }
     }
+
+    suspend fun deleteMenuCategoryFromLocal(menuCategory: MenuCategory): UseCaseResult<Int> {
+        return try {
+            val result = localDataSource.deleteMenuCategoryFromLocal(menuCategory)
+            result
+        } catch (t: Throwable) {
+            t.handleThrowable()
+        }
+    }
+
+    suspend fun insertRecipePostsToLocal(recipePosts: RecipePosts): UseCaseResult<Long> {
+        return try {
+            val result = localDataSource.insertRecipePostsToLocal(recipePosts)
+            result
+        } catch (t: Throwable) {
+            t.handleThrowable()
+        }
+    }
+
+    suspend fun deleteRecipePostsFromLocal(recipePosts: RecipePosts): UseCaseResult<Int> {
+        return try {
+            val result = localDataSource.deleteRecipePostsFromLocal(recipePosts)
+            result
+        } catch (t: Throwable) {
+            t.handleThrowable()
+        }
+    }
+
 }
