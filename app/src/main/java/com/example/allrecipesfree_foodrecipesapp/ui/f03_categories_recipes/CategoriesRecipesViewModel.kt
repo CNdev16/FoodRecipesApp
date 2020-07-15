@@ -5,26 +5,33 @@ import androidx.lifecycle.viewModelScope
 import com.example.allrecipesfree_foodrecipesapp.base.BaseViewModel
 import com.example.core.UseCaseResult
 import com.example.core.data.CountryCategory
-import com.example.core.usecase.GetCountryCategoryFromLocalUseCase
-import com.example.core.usecase.GetCountryCategoryOnlyUseCase
+import com.example.core.data.MenuCategory
+import com.example.core.usecase.GetCountryCategoryUseCase
+import com.example.core.usecase.GetMenuCategoryUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class CategoriesRecipesViewModel(private val getCountryCategoryOnlyUseCase: GetCountryCategoryOnlyUseCase,
-                                 private val getCountryCategoryFromLocalUseCase: GetCountryCategoryFromLocalUseCase
-): BaseViewModel() {
+class CategoriesRecipesViewModel(
+    private val getCountryCategoryUseCase: GetCountryCategoryUseCase,
+    private val getMenuCategoryUseCase: GetMenuCategoryUseCase
+) : BaseViewModel() {
 
-    val allCountryCategoriesOnlyData = MutableLiveData<List<CountryCategory>>()
-    val allDataFromDb = MutableLiveData<List<CountryCategory>>()
+    val allCountryCategoryData = MutableLiveData<List<CountryCategory>>()
+    val menuCategoryData = MutableLiveData<List<MenuCategory>>()
 
-    fun getCountryCategoriesOnlyData(isInternetConnected: Boolean) {
+    fun getCountryCategory(isInternetConnected: Boolean) {
         showLoading.value = true
         viewModelScope.launch {
             when (val result =
-                withContext(Dispatchers.IO) { getCountryCategoryOnlyUseCase.execute(Unit, isInternetConnected) }) {
+                withContext(Dispatchers.IO) {
+                    getCountryCategoryUseCase.execute(
+                        Unit,
+                        isInternetConnected
+                    )
+                }) {
                 is UseCaseResult.Success -> {
-                    allCountryCategoriesOnlyData.value = result.data
+                    allCountryCategoryData.value = result.data
                     showLoading.value = false
                 }
                 is UseCaseResult.Error -> {
@@ -34,12 +41,18 @@ class CategoriesRecipesViewModel(private val getCountryCategoryOnlyUseCase: GetC
         }
     }
 
-    fun getAllDataFromDb(isInternetConnected: Boolean){
+    fun getMenuCategory(countryCateId: Int, isInternetConnected: Boolean) {
+        showLoading.value = true
         viewModelScope.launch {
-            when(val result = withContext(Dispatchers.IO){getCountryCategoryFromLocalUseCase.execute(Unit, isInternetConnected)}){
+            when (val result = withContext(Dispatchers.IO) {
+                getMenuCategoryUseCase.execute(
+                    countryCateId,
+                    isInternetConnected
+                )
+            }) {
                 is UseCaseResult.Success -> {
                     showLoading.value = false
-                    allDataFromDb.value = result.data
+                    menuCategoryData.value = result.data
                 }
                 is UseCaseResult.Error -> {
                     showLoading.value = false

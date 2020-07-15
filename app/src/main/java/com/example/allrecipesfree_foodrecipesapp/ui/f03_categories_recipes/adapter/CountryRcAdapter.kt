@@ -10,6 +10,7 @@ class CountryRcAdapter(private val data: List<CountryCategory>) :
     RecyclerView.Adapter<CountryRcViewHolder>() {
 
     private var listener: OnClickCountry? = null
+    private var isFirstTime: Boolean = true
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryRcViewHolder {
         return CountryRcViewHolder(
@@ -25,6 +26,11 @@ class CountryRcAdapter(private val data: List<CountryCategory>) :
 //            text = country.name
 //        }
 //
+        if (position == 0 && isFirstTime){
+            listener?.onClickCountry(data[position], position)
+            isFirstTime = false
+        }
+
         holder.binding.cItem.apply {
             setOnClickListener {
                 listener?.onClickCountry(data[position], position)
@@ -32,14 +38,15 @@ class CountryRcAdapter(private val data: List<CountryCategory>) :
         }
     }
 
-    interface OnClickCountry{
+    interface OnClickCountry {
         fun onClickCountry(country: CountryCategory, position: Int)
     }
 
-    fun setOnClickCountry(onClickCountry: OnClickCountry?){
+    fun setOnClickCountry(onClickCountry: OnClickCountry?) {
         this.listener = onClickCountry
     }
 
 }
 
-class CountryRcViewHolder(val binding: ItemCountryCateBinding) : RecyclerView.ViewHolder(binding.root)
+class CountryRcViewHolder(val binding: ItemCountryCateBinding) :
+    RecyclerView.ViewHolder(binding.root)

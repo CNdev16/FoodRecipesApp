@@ -5,7 +5,7 @@ import com.example.core.UseCaseResult
 import com.example.core.data.MenuCategory
 import com.example.core.usecase.base.BaseCoroutinesUseCase
 
-class GetMenuCategoryOnlyUseCase(private val dataRepository: DataRepository) :
+class GetMenuCategoryUseCase(private val dataRepository: DataRepository) :
     BaseCoroutinesUseCase<Int, List<MenuCategory>>() {
     override suspend fun execute(
         param: Int,

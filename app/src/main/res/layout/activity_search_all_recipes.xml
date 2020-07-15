@@ -13,8 +13,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite"
-        tools:context=".ui.flow_country_categories_main.MainActivity">
+        android:background="@color/colorPrimary"
+        tools:context=".ui.main.MainActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"

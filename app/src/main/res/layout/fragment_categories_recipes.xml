@@ -13,7 +13,7 @@
         android:id="@+id/layoutRoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite"
+        android:background="@color/colorPrimary"
         android:orientation="vertical">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -25,7 +25,7 @@
                 android:id="@+id/appBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorWhite"
+                android:background="@color/colorPrimary"
                 app:elevation="0dp">
 
                 <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -34,47 +34,78 @@
                     android:layout_height="wrap_content"
                     app:layout_scrollFlags="scroll|snap">
 
-                    <androidx.cardview.widget.CardView
+                    <LinearLayout
+                        android:id="@+id/layout_country_cate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="4dp"
-                        android:paddingRight="4dp"
-                        app:cardCornerRadius="8dp"
-                        app:cardElevation="6dp"
-                        app:cardUseCompatPadding="true">
+                        android:orientation="vertical"
+                        android:visibility="gone"
+                        tools:visibility="visible">
 
-                        <RelativeLayout
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="4dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="8dp"
+                            android:text="Country Category"
+                            android:textColor="@color/colorPrimary"
+                            android:background="@drawable/bg_corners_radius"
+                            android:textSize="@dimen/text_size_22sp" />
+
+                        <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="4dp"
+                            android:paddingRight="4dp"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="6dp"
+                            app:cardUseCompatPadding="true">
 
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/rcCountry"
+                            <RelativeLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
-                        </RelativeLayout>
-                    </androidx.cardview.widget.CardView>
+                                android:layout_height="wrap_content">
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/rcCountry"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
+                            </RelativeLayout>
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
 
                 </com.google.android.material.appbar.CollapsingToolbarLayout>
             </com.google.android.material.appbar.AppBarLayout>
 
                 <LinearLayout
+                    android:id="@+id/layout_menu_cate"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
+                    android:visibility="gone"
+                    tools:visibility="visible"
                     app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:paddingTop="4dp"
-                        android:paddingBottom="4dp"
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp"
-                        android:text="Recipes Categories"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="8dp"
+                        android:text="Menu Category"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/text_size_24sp" />
+                        android:background="@drawable/bg_corners_radius"
+                        android:textSize="@dimen/text_size_22sp" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rcRecipe"

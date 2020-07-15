@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.allrecipesfree_foodrecipesapp.ui.flow_splash_screen.SplashScreenViewModel" />
+            type="com.example.allrecipesfree_foodrecipesapp.ui.splash_screen.SplashScreenViewModel" />
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -31,7 +31,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:text="Food Recipes App"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorGreen"
             android:textSize="@dimen/text_size_28sp" />
 
         <TextView
@@ -42,7 +42,7 @@
             android:layout_centerHorizontal="true"
             android:text="@{@string/version(viewModel.version)}"
             android:layout_margin="16dp"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorGreen"
             android:textSize="@dimen/text_size_18sp" />
 
     </RelativeLayout>

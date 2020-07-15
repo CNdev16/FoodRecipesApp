@@ -36,15 +36,15 @@ class MyFoodsFragment : BaseFragment<FragmentMyFoodsBinding>() {
             logD(Gson().toJson(it))
 
             val vpRecipesRcAdapter = Recipes4uVpAdapter(requireContext(), it)
-//            val itemAdapter = ItemsController().apply {
-//                itemsRecipe = it
-//            }
+            val itemAdapter = ItemsController().apply {
+                itemsRecipe = it
+            }
 
-//            binding.rcViewRoot.apply {
-//                layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-//                setHasFixedSize(false)
-//                adapter = itemAdapter.adapter
-//            }
+            binding.rcViewRoot.apply {
+                layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+                setHasFixedSize(false)
+                adapter = itemAdapter.adapter
+            }
             binding.vpRecipe4u.apply {
                 clipToPadding = false
                 clipChildren = false

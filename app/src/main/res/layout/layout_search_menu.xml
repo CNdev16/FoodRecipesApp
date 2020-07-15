@@ -29,7 +29,7 @@
                 android:paddingLeft="4dp"
                 android:paddingRight="4dp"
                 android:text="@string/search"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorGreen"
                 android:textSize="@dimen/text_size_16sp" />
 
             <ImageView
@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_search_black_24dp"
-                android:tint="@color/colorWhite" />
+                android:tint="@color/colorGreen" />
 
         </LinearLayout>
 
@@ -90,7 +90,7 @@
             android:id="@+id/layoutResult"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorWhite"
+            android:background="@color/colorGreen"
             android:layout_below="@id/view">
 
             <androidx.recyclerview.widget.RecyclerView

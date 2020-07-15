@@ -9,16 +9,16 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite"
+        android:background="@color/colorPrimary"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
             android:padding="1dp"
             android:id="@+id/toolbar"
-            app:titleTextColor="@color/colorWhite"
+            app:titleTextColor="@color/colorGreen"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorDarkGreen" />
+            android:background="@color/colorPrimary" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcView"

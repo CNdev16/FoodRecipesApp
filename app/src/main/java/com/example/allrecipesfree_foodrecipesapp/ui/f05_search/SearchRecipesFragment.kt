@@ -18,14 +18,14 @@ class SearchRecipesFragment : BaseFragment<FragmentSearchRecipesBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.viewModel = viewModel
-        val adapterSearch = SearchRcAdapter()
-
-        binding.rcSearchList.apply {
-            visibility = View.VISIBLE
-
-            setHasFixedSize(false)
-            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-            adapter = adapterSearch
-        }
+//        val adapterSearch = SearchRcAdapter()
+//
+//        binding.rcSearchList.apply {
+//            visibility = View.VISIBLE
+//
+//            setHasFixedSize(false)
+//            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+//            adapter = adapterSearch
+//        }
     }
 }

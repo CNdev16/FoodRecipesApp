@@ -9,14 +9,14 @@
         android:name=".MyApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
-        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.NoActionBar"
+        android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.flow_country_categories_main.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
@@ -32,7 +32,7 @@
             android:name=".ui.flow_about.AboutActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.flow_splash_screen.SplashScreenActivity"
+            android:name=".ui.splash_screen.SplashScreenActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,7 +40,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.f05_search.SearchAllRecipesActivity"
+        <activity
+            android:name=".ui.f05_search.SearchAllRecipesActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.f06_recipe_detail.RecipeDetailActivity"
             android:screenOrientation="portrait"/>
     </application>
 

@@ -7,11 +7,12 @@ import com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes.Categ
 import com.example.allrecipesfree_foodrecipesapp.ui.f04_favorite_recipes.FavoriteRecipesViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.f05_search.SearchAllRecipesViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.f05_search.SearchRecipesViewModel
-import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.MainActivityViewModel
+import com.example.allrecipesfree_foodrecipesapp.ui.f06_recipe_detail.RecipeDetailViewModel
+import com.example.allrecipesfree_foodrecipesapp.ui.main.MainActivityViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_categories.MenuCategoriesViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_favorite.FavoritesMenuViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.flow_posts_menu_detail.PostsMenuDetailViewModel
-import com.example.allrecipesfree_foodrecipesapp.ui.flow_splash_screen.SplashScreenViewModel
+import com.example.allrecipesfree_foodrecipesapp.ui.splash_screen.SplashScreenViewModel
 import com.example.core.BASE_URL
 import com.example.core.DataRepository
 import com.example.core.DataSource
@@ -52,18 +53,15 @@ val appModule = module {
 
 val useCaseModule = module {
     factory { GetAllDataUseCase(get()) }
-    factory { GetAllRecipePostsOnlyUseCase(get()) }
-    factory { GetCountryCategoryOnlyUseCase(get()) }
-    factory { GetRecipePostsOnlyUseCase(get()) }
-    factory { GetMenuCategoryOnlyUseCase(get()) }
+    factory { GetRecipePostsUseCase(get()) }
+    factory { GetCountryCategoryUseCase(get()) }
+    factory { GetMenuCategoryUseCase(get()) }
+    factory { GetRecipePostsDetailsUseCase(get()) }
     factory { InsertCountryCategoryToLocalUseCase(get()) }
-    factory { GetCountryCategoryFromLocalUseCase(get()) }
     factory { DeleteCountryCategoryFromLocalUseCase(get()) }
     factory { InsertMenuCategoryToLocalUseCase(get()) }
-    factory { GetMenuCategoryFromLocalUseCase(get()) }
     factory { DeleteMenuCategoryFromLocalUseCase(get()) }
     factory { InsertRecipePostsToLocalUseCase(get()) }
-    factory { GetRecipePostsFromLocalUseCase(get()) }
     factory { DeleteRecipePostsFromLocalUseCase(get()) }
 }
 
@@ -79,5 +77,6 @@ val viewModelModule = module {
     viewModel { SearchRecipesViewModel(get()) }
     viewModel { SearchAllRecipesViewModel(get()) }
     viewModel { SplashScreenViewModel() }
+    viewModel { RecipeDetailViewModel() }
 }
 

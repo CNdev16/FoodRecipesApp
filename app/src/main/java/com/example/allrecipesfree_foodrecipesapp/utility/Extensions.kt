@@ -5,10 +5,13 @@ import android.content.Context
 import android.content.res.AssetManager
 import android.graphics.Typeface
 import android.net.ConnectivityManager
+import android.os.Build
+import android.os.SystemClock
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.TextUtils.replace
 import android.text.style.TypefaceSpan
+import android.transition.TransitionInflater
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -87,8 +90,47 @@ inline fun FragmentManager.doTransaction(
     FragmentTransaction
 ) {
     beginTransaction()
-        /*.setCustomAnimations(R.anim.activity_open_enter, R.anim.activity_open_exit)*/
+        .setCustomAnimations(
+            R.animator.fragment_open_enter,
+            R.animator.fragment_open_exit,
+            0,
+            0
+        )
         .func().commit()
+}
+
+inline fun FragmentManager.doTransactionWithTransition(
+    context: Context,
+    currentFragment: Fragment,
+    newFragment: Fragment,
+    sharedView: View,
+    sharedElementName: String,
+    func: FragmentTransaction.() ->
+    FragmentTransaction
+) {
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        currentFragment.sharedElementReturnTransition =
+            TransitionInflater.from(context).inflateTransition(R.transition.default_transition)
+        currentFragment.exitTransition =
+            TransitionInflater.from(context).inflateTransition(android.R.transition.no_transition)
+
+        newFragment.sharedElementEnterTransition =
+            TransitionInflater.from(context).inflateTransition(R.transition.default_transition)
+        newFragment.enterTransition =
+            TransitionInflater.from(context).inflateTransition(android.R.transition.no_transition)
+    }
+    beginTransaction()
+        .addToBackStack("TAG")
+        .setCustomAnimations(
+            0,
+            0,
+            R.animator.fragment_close_enter,
+            R.animator.fragment_close_exit
+        )
+        .func()
+        .addSharedElement(sharedView, sharedElementName)
+        .commit()
 }
 
 fun AppCompatActivity.addFragment(frameId: Int, fragment: Fragment) {
@@ -101,6 +143,54 @@ fun AppCompatActivity.replaceFragment(frameId: Int, fragment: Fragment) {
 
 fun AppCompatActivity.removeFragment(fragment: Fragment) {
     supportFragmentManager.doTransaction { remove(fragment) }
+}
+
+fun AppCompatActivity.addFragmentWithTransition(
+    context: Context, frameId: Int,
+    currentFragment: Fragment,
+    newFragment: Fragment,
+    sharedView: View,
+    sharedElementName: String
+) {
+    supportFragmentManager.doTransactionWithTransition(
+        context,
+        currentFragment,
+        newFragment,
+        sharedView,
+        sharedElementName
+    ) { add(frameId, newFragment) }
+}
+
+fun AppCompatActivity.replaceFragmentWithTransition(
+    context: Context, frameId: Int,
+    currentFragment: Fragment,
+    newFragment: Fragment,
+    sharedView: View,
+    sharedElementName: String
+) {
+    supportFragmentManager.doTransactionWithTransition(
+        context,
+        currentFragment,
+        newFragment,
+        sharedView,
+        sharedElementName
+    ) { replace(frameId, newFragment) }
+}
+
+fun AppCompatActivity.removeFragmentWithTransition(
+    context: Context, frameId: Int,
+    currentFragment: Fragment,
+    newFragment: Fragment,
+    sharedView: View,
+    sharedElementName: String
+) {
+    supportFragmentManager.doTransactionWithTransition(
+        context,
+        currentFragment,
+        newFragment,
+        sharedView,
+        sharedElementName
+    ) { remove(newFragment) }
 }
 
 fun View.fadeIn(durationMillis: Long = 250) {
@@ -209,4 +299,16 @@ fun Context.isInternetConnected(): Boolean {
         this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     val activeNetworkInfo = connectivityManager.activeNetworkInfo
     return activeNetworkInfo != null && activeNetworkInfo.isConnected
+}
+
+fun View.onClickApplicationListener(time: Long = 600L, action: () -> Unit) {
+    this.setOnClickListener(object : View.OnClickListener {
+        private var lastClick: Long = 0
+        override fun onClick(v: View?) {
+            if (SystemClock.elapsedRealtime() - lastClick < time) return
+            else action()
+
+            lastClick = SystemClock.elapsedRealtime()
+        }
+    })
 }

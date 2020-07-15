@@ -1,9 +1,12 @@
 package com.example.core.data
 
+import android.os.Parcelable
 import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(
     tableName = "recipe_posts",
     indices = [Index(value = ["recipe_post_id"], unique = true)]
@@ -57,4 +60,4 @@ data class RecipePosts(
     @ColumnInfo(name = "recipe_post_favorite")
     @SerializedName("recipe_post_favorite")
     var recipePostFavorite: Boolean
-)
+) : Parcelable

@@ -5,17 +5,14 @@ import androidx.lifecycle.viewModelScope
 import com.example.allrecipesfree_foodrecipesapp.base.BaseViewModel
 import com.example.allrecipesfree_foodrecipesapp.utility.logD
 import com.example.core.UseCaseResult
-import com.example.core.data.CountryCategory
 import com.example.core.data.RecipePosts
-import com.example.core.usecase.GetAllRecipePostsOnlyUseCase
-import com.example.core.usecase.GetCountryCategoryFromLocalUseCase
-import com.example.core.usecase.GetRecipePostsFromLocalUseCase
+import com.example.core.usecase.GetRecipePostsUseCase
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MyFoodsViewModel(private val getRecipePostsFromLocalUseCase: GetRecipePostsFromLocalUseCase) :
+class MyFoodsViewModel(private val getRecipePostsUseCase: GetRecipePostsUseCase) :
     BaseViewModel() {
 
     val thaiRecipeData = MutableLiveData<List<RecipePosts>>()
@@ -25,7 +22,7 @@ class MyFoodsViewModel(private val getRecipePostsFromLocalUseCase: GetRecipePost
         viewModelScope.launch {
             when (val result =
                 withContext(Dispatchers.IO) {
-                    getRecipePostsFromLocalUseCase.execute(
+                    getRecipePostsUseCase.execute(
                         Unit,
                         isInternetConnected
                     )

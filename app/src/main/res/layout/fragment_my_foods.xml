@@ -13,7 +13,7 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite">
+        android:background="@color/colorPrimary">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/rootRecipe4u"
@@ -24,7 +24,7 @@
                 android:id="@+id/appBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorWhite"
+                android:background="@color/colorPrimary"
                 app:elevation="0dp">
 
                 <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -59,7 +59,7 @@
                                 app:piv_animationType="worm"
                                 app:piv_dynamicCount="true"
                                 app:piv_interactiveAnimation="true"
-                                app:piv_selectedColor="@color/colorPrimary"
+                                app:piv_selectedColor="@color/colorGreen"
                                 app:piv_unselectedColor="@color/colorBgTrans"
                                 app:piv_viewPager="@id/vpRecipe4u"
                                 attrs:piv_padding="8dp"
@@ -71,19 +71,17 @@
                 </com.google.android.material.appbar.CollapsingToolbarLayout>
             </com.google.android.material.appbar.AppBarLayout>
 
-            <androidx.core.widget.NestedScrollView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fillViewport="true"
                 app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcViewRoot"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
+            </LinearLayout>
 
-            </androidx.core.widget.NestedScrollView>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
     </RelativeLayout>
 </layout>

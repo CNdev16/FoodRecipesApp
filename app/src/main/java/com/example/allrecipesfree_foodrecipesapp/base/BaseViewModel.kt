@@ -9,7 +9,7 @@ import kotlin.coroutines.CoroutineContext
 
 abstract class BaseViewModel: ViewModel(), CoroutineScope{
 
-    var showLoading = MutableLiveData<Boolean>(true)
+    var showLoading = MutableLiveData<Boolean>()
     var handleError = MutableLiveData<ArrayList<String>>()
 
     private val job = Job()
@@ -18,6 +18,7 @@ abstract class BaseViewModel: ViewModel(), CoroutineScope{
 
     override fun onCleared() {
         job.cancel()
+        showLoading.value = false
         super.onCleared()
     }
 }

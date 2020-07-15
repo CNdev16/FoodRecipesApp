@@ -8,8 +8,6 @@ import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.base.BaseFragment
 import com.example.allrecipesfree_foodrecipesapp.databinding.FragmentFavoriteRecipesBinding
 import com.example.allrecipesfree_foodrecipesapp.ui.f04_favorite_recipes.adapter.FavoriteRcAdapter
-import com.example.allrecipesfree_foodrecipesapp.ui.f05_search.SearchRecipesFragment
-import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.MainActivity
 import com.example.allrecipesfree_foodrecipesapp.utility.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

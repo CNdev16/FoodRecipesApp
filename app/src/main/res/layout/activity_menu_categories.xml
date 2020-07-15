@@ -12,39 +12,39 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite"
+        android:background="@color/colorPrimary"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
             android:padding="1dp"
             android:id="@+id/toolbar"
-            app:titleTextColor="@color/colorWhite"
+            app:titleTextColor="@color/colorGreen"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorDarkGreen" />
+            android:background="@color/colorPrimary" />
 
         <View style="@style/ViewLine" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorDarkGreen"
+            android:background="@color/colorPrimary"
             android:gravity="center"
             android:padding="8dp"
             android:text="@string/select_menu_category"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_20sp" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorDarkGreen"
+            android:background="@color/colorPrimary"
             app:tabGravity="fill"
             app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/colorWhite"
-            app:tabIndicatorColor="@color/colorWhite"
-            app:tabTextColor="@color/colorWhite" />
+            app:tabSelectedTextColor="@color/colorPrimary"
+            app:tabIndicatorColor="@color/colorPrimary"
+            app:tabTextColor="@color/colorPrimary" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcView"

@@ -121,6 +121,9 @@ dependencies {
     implementation "com.airbnb.android:epoxy:$epoxy_version"
     kapt "com.airbnb.android:epoxy-processor:$epoxy_version"
 
+    //snaphelper
+    implementation "com.github.rubensousa:gravitysnaphelper:$snaphelper_version"
+
     implementation project(":core")
 
     testImplementation 'junit:junit:4.12'

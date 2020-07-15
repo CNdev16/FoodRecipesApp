@@ -8,7 +8,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:textColor="@color/colorDarkGreen"
+            android:textColor="@color/colorGreen"
             android:lines="1"
             android:ellipsize="end"
             android:textSize="@dimen/text_size_28sp"
@@ -18,7 +18,7 @@
 
         <TextView
             android:layout_marginTop="16dp"
-            android:textColor="@color/colorDarkGreen"
+            android:textColor="@color/colorGreen"
             android:lines="1"
             android:ellipsize="end"
             android:textSize="@dimen/text_size_28sp"
@@ -31,7 +31,7 @@
 
         <TextView
             android:layout_marginTop="16dp"
-            android:textColor="@color/colorDarkGreen"
+            android:textColor="@color/colorGreen"
             android:lines="1"
             android:ellipsize="end"
             android:textSize="@dimen/text_size_28sp"

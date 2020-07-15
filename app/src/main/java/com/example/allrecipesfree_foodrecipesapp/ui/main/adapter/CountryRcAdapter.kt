@@ -1,4 +1,4 @@
-package com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.adapter
+package com.example.allrecipesfree_foodrecipesapp.ui.main.adapter
 
 import android.content.Context
 import android.view.LayoutInflater

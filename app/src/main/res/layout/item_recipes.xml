@@ -1,41 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/cItem"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardUseCompatPadding="true"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="6dp">
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="4dp">
 
-        <RelativeLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:contentDescription="@string/app_name"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="6dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/imgCate"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="fitXY"
-                android:adjustViewBounds="true"
-                android:src="@drawable/img_404" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvRecipesTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:lines="1"
-                android:ellipsize="end"
-                android:textColor="@color/colorDarkGreen"
-                android:text="Title"
-                android:paddingLeft="4dp"
-                android:paddingRight="4dp"
-                android:layout_alignBottom="@id/imgCate"
-                android:textSize="@dimen/text_size_24sp" />
+                <ImageView
+                    android:id="@+id/imgCate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:transitionName="transit"
+                    android:src="@drawable/img_404" />
 
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+                <LinearLayout
+                    android:id="@+id/layoutDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/imgCate"
+                    android:layout_toLeftOf="@id/imgFav"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvRecipesTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:paddingLeft="4dp"
+                        android:paddingRight="4dp"
+                        android:text="Title"
+                        android:textColor="@color/colorGreen"
+                        android:textSize="@dimen/text_size_24sp" />
+
+                    <TextView
+                        android:id="@+id/tvRecipesDesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:paddingLeft="4dp"
+                        android:paddingRight="4dp"
+                        android:text="Title"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_size_20sp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_margin="8dp"
+                    android:id="@+id/imgFav"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignBottom="@id/imgCate"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_favorite_black_24dp" />
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -2,6 +2,7 @@ package com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,8 +15,8 @@ import com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes.adapt
 import com.example.allrecipesfree_foodrecipesapp.utility.DialogUtils
 import com.example.allrecipesfree_foodrecipesapp.utility.SearchItemsCallBack
 import com.example.allrecipesfree_foodrecipesapp.utility.isInternetConnected
-import com.example.allrecipesfree_foodrecipesapp.utility.logD
 import com.example.core.data.CountryCategory
+import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper
 import com.google.gson.Gson
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -36,11 +37,8 @@ class CategoriesRecipesFragment : BaseFragment<FragmentCategoriesRecipesBinding>
 
     override fun subscribeLiveData() {
 
-        viewModel.getAllDataFromDb(requireContext().isInternetConnected())
-        viewModel.allDataFromDb.observe(viewLifecycleOwner, Observer {
-            Log.d("printtt==>", "${Gson().toJson(it)} \n ${it.size}")
-            Log.d("printtt==>", "${it.size}")
-
+        viewModel.getCountryCategory(requireContext().isInternetConnected())
+        viewModel.allCountryCategoryData.observe(viewLifecycleOwner, Observer {
             countryRcAdapter = CountryRcAdapter(it)
             binding.rcCountry.apply {
                 setHasFixedSize(true)
@@ -52,20 +50,31 @@ class CategoriesRecipesFragment : BaseFragment<FragmentCategoriesRecipesBinding>
                     )
                 adapter = countryRcAdapter
             }
-            countryRcAdapter.setOnClickCountry(object : CountryRcAdapter.OnClickCountry{
-                override fun onClickCountry(country: CountryCategory, position: Int) {
-                    recipesRcAdapter = RecipesRcAdapter(it[position].menuCategoryList!!)
-                    binding.rcRecipe.apply {
-                        setHasFixedSize(true)
-                        layoutManager = GridLayoutManager(
-                            activity,
-                            2
-                        )
-                        adapter = recipesRcAdapter
-                    }
-                }
+            binding.layoutCountryCate.visibility = if(it.isNotEmpty()) View.VISIBLE else View.GONE
 
+            GravitySnapHelper(Gravity.CENTER).attachToRecyclerView(binding.rcCountry)
+
+            countryRcAdapter.setOnClickCountry(object : CountryRcAdapter.OnClickCountry {
+                override fun onClickCountry(country: CountryCategory, position: Int) {
+                    viewModel.getMenuCategory(
+                        country.countryCateId,
+                        requireContext().isInternetConnected()
+                    )
+                }
             })
+        })
+
+        viewModel.menuCategoryData.observe(viewLifecycleOwner, Observer {
+            recipesRcAdapter = RecipesRcAdapter(it)
+            binding.rcRecipe.apply {
+                setHasFixedSize(true)
+                layoutManager = GridLayoutManager(
+                    activity,
+                    2
+                )
+                adapter = recipesRcAdapter
+            }
+            binding.layoutMenuCate.visibility = if(it.isNotEmpty()) View.VISIBLE else View.GONE
         })
     }
 

@@ -12,7 +12,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite">
+        android:background="@color/colorPrimary">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,21 +28,27 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="@color/colorDarkGreen"
-                    app:titleTextColor="@color/colorWhite" />
+                    android:background="@color/colorPrimary"
+                    app:titleTextColor="@color/colorGreen" />
 
             </RelativeLayout>
 
             <View style="@style/ViewLine" />
 
+            <ImageView
+                android:id="@+id/imgMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:transitionName="imgMenu"/>
+
             <TextView
                 android:id="@+id/tvTitlePost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorDarkGreen"
+                android:background="@color/colorPrimary"
                 android:gravity="center"
                 android:padding="8dp"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorGreen"
                 android:textSize="@dimen/text_size_20sp" />
 
             <WebView

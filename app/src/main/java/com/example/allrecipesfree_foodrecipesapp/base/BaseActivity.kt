@@ -10,6 +10,7 @@ import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.utility.DialogUtils
 import com.example.allrecipesfree_foodrecipesapp.utility.hideKeyboard
 import com.example.allrecipesfree_foodrecipesapp.utility.isInternetConnected
+import com.example.allrecipesfree_foodrecipesapp.utility.logD
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 
 abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity() {
@@ -40,7 +41,9 @@ abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity() {
         }
     }
 
-    open fun subscribeLiveData() {}
+    open fun subscribeLiveData() {
+        logD("subscribeLiveData from activity")
+    }
 
     open fun loading() {}
 
@@ -56,6 +59,6 @@ abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         hideKeyboard()
-        overridePendingTransition(R.anim.activity_close_enter, R.anim.activity_close_exit)
+        //overridePendingTransition(R.anim.activity_close_enter, R.anim.activity_close_exit)
     }
 }

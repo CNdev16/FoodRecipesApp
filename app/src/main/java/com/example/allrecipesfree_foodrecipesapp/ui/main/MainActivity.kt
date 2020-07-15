@@ -1,4 +1,4 @@
-package com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main
+package com.example.allrecipesfree_foodrecipesapp.ui.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -15,8 +15,8 @@ import com.example.allrecipesfree_foodrecipesapp.ui.f02_all_recipes.AllRecipesFr
 import com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes.CategoriesRecipesFragment
 import com.example.allrecipesfree_foodrecipesapp.ui.f04_favorite_recipes.FavoriteRecipesFragment
 import com.example.allrecipesfree_foodrecipesapp.ui.f05_search.SearchAllRecipesActivity
-import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.adapter.CountryRcAdapter
-import com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main.adapter.SearchRcAdapter
+import com.example.allrecipesfree_foodrecipesapp.ui.main.adapter.CountryRcAdapter
+import com.example.allrecipesfree_foodrecipesapp.ui.main.adapter.SearchRcAdapter
 import com.example.allrecipesfree_foodrecipesapp.utility.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.gson.Gson
@@ -127,14 +127,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
         }
         binding.bottomNavigation.selectedItemId = R.id.menuMyFood
 
-        binding.fab.setOnClickListener {
+        binding.fab.onClickApplicationListener {
             startActivity(
                 Intent(
                     this,
                     SearchAllRecipesActivity::class.java
                 )
             )
-            pageTransition()
+            //pageTransition()
         }
     }
 
@@ -300,7 +300,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
 //    }
 //
 //    private fun setupButtonMenu() {
-//        binding.layoutFav.setOnClickListener {
+//        binding.layoutFav.onClickApplicationListener {
 //            startActivity(
 //                Intent(
 //                    this,
@@ -310,8 +310,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
 //            toggleBottomSheetSwipe()
 //            pageTransition()
 //        }
-//        binding.search.layoutTextSearch.setOnClickListener { toggleBottomSheet() }
-//        binding.layoutAbout.setOnClickListener {
+//        binding.search.layoutTextSearch.onClickApplicationListener { toggleBottomSheet() }
+//        binding.layoutAbout.onClickApplicationListener {
 //            startActivity(
 //                Intent(
 //                    this,
@@ -322,7 +322,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
 //            pageTransition()
 //        }
 //
-//        binding.search.imgBtnSearch.setOnClickListener { if (binding.search.edtSearch.text.isNotEmpty()) searchResult() }
+//        binding.search.imgBtnSearch.onClickApplicationListener { if (binding.search.edtSearch.text.isNotEmpty()) searchResult() }
 //
 //    }
 //

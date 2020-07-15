@@ -1,4 +1,4 @@
-package com.example.allrecipesfree_foodrecipesapp.ui.flow_country_categories_main
+package com.example.allrecipesfree_foodrecipesapp.ui.main
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -29,6 +29,7 @@ class MainActivityViewModel(private val getAllDataUseCase: GetAllDataUseCase,
     val version = MutableLiveData<String>(BuildConfig.VERSION_NAME)
 
     fun getAllDataFromService(isInternetConnected: Boolean) {
+        showLoading.value = true
         viewModelScope.launch {
             when (val result = withContext(Dispatchers.IO) { getAllDataUseCase.execute(Unit, isInternetConnected) }) {
                 is UseCaseResult.Success -> {

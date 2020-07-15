@@ -5,12 +5,12 @@ import com.example.core.UseCaseResult
 import com.example.core.data.RecipePosts
 import com.example.core.usecase.base.BaseCoroutinesUseCase
 
-class GetRecipePostsOnlyUseCase(private val dataRepository: DataRepository) :
-    BaseCoroutinesUseCase<Int, List<RecipePosts>>() {
+class GetRecipePostsDetailsUseCase(private val dataRepository: DataRepository) :
+    BaseCoroutinesUseCase<Int, RecipePosts>() {
     override suspend fun execute(
         param: Int,
         isInternetConnected: Boolean
-    ): UseCaseResult<List<RecipePosts>> {
-        return dataRepository.getRecipePostsByMenuCategoryId(param, isInternetConnected)
+    ): UseCaseResult<RecipePosts> {
+        return dataRepository.getRecipePostsDetails(param, isInternetConnected)
     }
 }

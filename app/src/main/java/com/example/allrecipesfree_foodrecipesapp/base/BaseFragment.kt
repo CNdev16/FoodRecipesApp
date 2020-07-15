@@ -1,5 +1,7 @@
 package com.example.allrecipesfree_foodrecipesapp.base
 
+import android.animation.Animator
+import android.animation.AnimatorInflater
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,27 +29,51 @@ abstract class BaseFragment<VB : ViewDataBinding> : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        if (requireActivity().isInternetConnected()) {
-            loading()
-            subscribeLiveData()
-            handleError()
-        } else {
-            DialogUtils.showDialogOneButton(
-                requireContext(),
-                getString(R.string.dialog_title),
-                getString(R.string.no_internet),
-                getString(R.string.dialog_btn),
-                object : DialogUtils.OnClickButtonDialog {
-                    override fun onClickButtonDialog() {
-                        DialogUtils.disMissDialog()
-                        activity!!.finishAffinity()
-                    }
-                })
-        }
     }
 
-    open fun subscribeLiveData() {}
+    override fun onCreateAnimator(transit: Int, enter: Boolean, nextAnim: Int): Animator? {
+        if (nextAnim != 0x0){
+            val animator = AnimatorInflater.loadAnimator(requireContext(), nextAnim)
+            animator.addListener(object : Animator.AnimatorListener{
+                override fun onAnimationRepeat(animation: Animator?) {
+                }
+
+                override fun onAnimationEnd(animation: Animator?) {
+                    if (enter){
+                        if (requireActivity().isInternetConnected()) {
+                            loading()
+                            subscribeLiveData()
+                            handleError()
+                        } else {
+                            DialogUtils.showDialogOneButton(
+                                requireContext(),
+                                getString(R.string.dialog_title),
+                                getString(R.string.no_internet),
+                                getString(R.string.dialog_btn),
+                                object : DialogUtils.OnClickButtonDialog {
+                                    override fun onClickButtonDialog() {
+                                        DialogUtils.disMissDialog()
+                                        activity!!.finishAffinity()
+                                    }
+                                })
+                        }
+                    }
+                }
+
+                override fun onAnimationCancel(animation: Animator?) {
+                }
+
+                override fun onAnimationStart(animation: Animator?) {
+                }
+
+            })
+            return animator
+        }
+        return null
+    }
+
+    open fun subscribeLiveData() {
+    }
 
     open fun loading() {}
 

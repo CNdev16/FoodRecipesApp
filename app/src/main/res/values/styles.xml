@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowContentTransitions">true</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -14,7 +15,7 @@
     </style>
 
     <style name="BackgroundWhite">
-        <item name="android:background">@color/colorWhite</item>
+        <item name="android:background">@color/colorGreen</item>
     </style>
 
     <style name="ToolbarColorBackArrow" parent="AppTheme">
@@ -28,13 +29,13 @@
     <style name="ViewLine">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
-        <item name="android:background">@color/colorWhite</item>
+        <item name="android:background">@color/colorGreen</item>
     </style>
 
     <style name="CustomLine">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
-        <item name="android:background">@color/colorDarkGreen</item>
+        <item name="android:background">@color/colorGreen</item>
     </style>
 
     <style name="Widget.MaterialComponents.BottomNavigationView.Custom" parent="Widget.MaterialComponents.BottomNavigationView">

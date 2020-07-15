@@ -41,7 +41,7 @@ class FavoriteMenuRcAdapter(
         holder.binding.imgFav.apply {
             when (postMenu.favoriteStatus) {
                 true -> {setColorFilter(ContextCompat.getColor(context, R.color.colorRed))}
-                false -> {setColorFilter(ContextCompat.getColor(context, R.color.colorWhite))}
+                false -> {setColorFilter(ContextCompat.getColor(context, R.color.colorGreen))}
             }
 
             setOnClickListener {

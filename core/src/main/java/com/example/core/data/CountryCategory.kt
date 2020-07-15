@@ -1,11 +1,14 @@
 package com.example.core.data
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(
     tableName = "country_category",
     indices = [Index(value = ["country_cate_id"], unique = true)]
@@ -26,4 +29,4 @@ data class CountryCategory(
     @ColumnInfo(name = "menu_category_list")
     @SerializedName("menu_category_list")
     var menuCategoryList: List<MenuCategory>?
-)
+) : Parcelable

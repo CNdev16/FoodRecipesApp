@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.webkit.WebChromeClient
 import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
 import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.base.BaseActivity
 import com.example.allrecipesfree_foodrecipesapp.databinding.ActivityPostsMenuDetailBinding
@@ -21,6 +22,10 @@ class PostsMenuDetailActivity : BaseActivity<ActivityPostsMenuDetailBinding>() {
         val postsId = intent.getIntExtra("id", -1)
 
         setupToolbar()
+        binding.imgMenu.transitionName = "imgMenu"
+        Glide.with(this)
+            .load("https://wordpress-281738-974608.cloudwaysapps.com/wp-content/uploads/2020/02/Android-Logo-2019-800x722-2.png")
+            .into(binding.imgMenu)
         //subscribeLiveData(postsId)
     }
 
