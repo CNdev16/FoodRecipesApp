@@ -6,45 +6,45 @@
 
         <variable
             name="viewModel"
-            type="com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_categories.MenuCategoriesViewModel" />
+            type="com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes.CategoriesRecipesViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorWhite"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
             android:padding="1dp"
             android:id="@+id/toolbar"
-            app:titleTextColor="@color/colorGreen"
+            app:titleTextColor="@color/colorBlack"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary" />
+            android:background="@color/colorWhite" />
 
         <View style="@style/ViewLine" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorWhite"
             android:gravity="center"
             android:padding="8dp"
             android:text="@string/select_menu_category"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorBlack"
             android:textSize="@dimen/text_size_20sp" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorWhite"
             app:tabGravity="fill"
             app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/colorPrimary"
+            app:tabSelectedTextColor="@color/colorGray"
             app:tabIndicatorColor="@color/colorPrimary"
-            app:tabTextColor="@color/colorPrimary" />
+            app:tabTextColor="@color/colorBlack" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcView"

@@ -22,7 +22,7 @@ class ItemsRecipesEpoxy @JvmOverloads constructor(
         Glide.with(context)
             .load(imageUrl)
             .fitCenter()
-            .placeholder(R.drawable.img_404)
+            .placeholder(R.drawable.test_img)
             .into(imageItems)
     }
 

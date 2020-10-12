@@ -12,6 +12,8 @@ import com.example.allrecipesfree_foodrecipesapp.base.BaseActivity
 import com.example.allrecipesfree_foodrecipesapp.databinding.ActivityRecipeDetailBinding
 import com.example.allrecipesfree_foodrecipesapp.utility.CustomActionbar
 import com.example.core.data.RecipePosts
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -19,16 +21,16 @@ class RecipeDetailActivity : BaseActivity<ActivityRecipeDetailBinding>(),
     CustomActionbar.OnClickItemsToolBar {
 
     private val viewModel: RecipeDetailViewModel by viewModel()
-    private var elementName: String? = "transit"
     private var data: RecipePosts? = null
     private lateinit var customActionbar: CustomActionbar
 
     override var layoutResource: Int = R.layout.activity_recipe_detail
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        data = intent?.getParcelableExtra("data")
         super.onCreate(savedInstanceState)
-        setupToolbar()
+
+        binding.viewModel = viewModel
+
     }
 
     private fun setupToolbar() {
@@ -48,15 +50,12 @@ class RecipeDetailActivity : BaseActivity<ActivityRecipeDetailBinding>(),
     }
 
     override fun subscribeLiveData() {
-        binding.viewModel = viewModel
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            binding.imgRecipe.transitionName = elementName
-        }
+        data = intent?.getParcelableExtra("data")
+        setupToolbar()
 
         Glide.with(this)
             .load(data?.recipePostImg)
-            .placeholder(R.drawable.img_404)
+            .placeholder(R.drawable.test_img)
             .into(binding.imgRecipe)
 
         binding.webViewDetail.apply {
@@ -64,25 +63,29 @@ class RecipeDetailActivity : BaseActivity<ActivityRecipeDetailBinding>(),
             webViewClient = WebViewClient()
             webChromeClient = WebChromeClient()
 
-            settings . setAppCacheEnabled (true)
+            settings.setAppCacheEnabled(true)
             settings.cacheMode = LOAD_CACHE_ELSE_NETWORK
             settings.javaScriptEnabled = true
             settings.loadWithOverviewMode = true
-            settings.useWideViewPort = true
+            //settings.useWideViewPort = true
             settings.domStorageEnabled = true
-
-//            loadData(
-//                "<html><head><style type='text/css'>body{margin-top:auto; margin-bottom:auto;} img{width:100%25;} </style></head><body>${data?.recipeContent}</body></html>",
-//                "text/html",
-//                "utf-8"
-//            )
 
             val text =
                 ("<html><style type='text/css'>@font-face { font-family: roboto; src: url('fonts/Roboto-Regular.ttf'); } body p {font-family: roboto;}</style>"
                         + "<body >" + "<p align=\"justify\" style=\"font-size: 22px; font-family: roboto;\">" + data?.recipeContent + "</p> " + "</body></html>")
 
-            binding.webViewDetail.loadDataWithBaseURL("file:///android_asset/", text, "text/html", "utf-8", null)
+            loadDataWithBaseURL("file:///android_asset/", text, "text/html", "utf-8", null)
         }
+
+
+        binding.youtubeView.apply {
+            addYouTubePlayerListener(object : AbstractYouTubePlayerListener(){
+                override fun onReady(youTubePlayer: YouTubePlayer) {
+                    youTubePlayer.loadVideo("cEs2gVzRSGE", 0F)
+                }
+            })
+        }
+        lifecycle.addObserver(binding.youtubeView)
     }
 
     override fun onClickItemRight(text: String?) {

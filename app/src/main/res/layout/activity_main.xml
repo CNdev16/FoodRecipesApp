@@ -14,7 +14,7 @@
         android:id="@+id/rootView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorWhite"
         android:clickable="true"
         android:focusable="true"
         android:focusableInTouchMode="true"
@@ -24,8 +24,9 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
-            android:padding="1dp" />
+            android:background="@color/colorWhite"
+            android:padding="1dp"
+            android:visibility="gone"/>
 
         <FrameLayout
             android:id="@+id/contentContainer"
@@ -42,10 +43,11 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_margin="16dp"
-            android:src="@drawable/ic_search_black_24dp"
-            android:tint="@color/colorPrimary"
+            android:src="@drawable/round_search_black_18dp"
+            android:tint="@color/colorWhite"
             android:visibility="gone"
-            app:rippleColor="@color/colorGreen" />
+            app:rippleColor="@color/colorPrimaryDark"
+            tools:visibility="visible" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
@@ -54,8 +56,9 @@
             android:layout_alignParentBottom="true"
             android:background="@color/colorPrimary"
             android:theme="@style/Widget.MaterialComponents.BottomNavigationView.Custom"
-            app:itemIconTint="@color/nv_selector"
-            app:itemTextColor="@color/nv_selector"
+            app:itemBackground="@drawable/bg_nv_selector"
+            app:itemIconTint="@color/colorWhite"
+            app:itemTextColor="@color/colorWhite"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_navigation_menu" />
     </RelativeLayout>

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.base.BaseFragment
 import com.example.allrecipesfree_foodrecipesapp.databinding.FragmentAllRecipesBinding
-import com.example.allrecipesfree_foodrecipesapp.ui.f02_all_recipes.adapter.AllRecipesRcAdapter
+import com.example.allrecipesfree_foodrecipesapp.ui.f02_all_recipes.adapter.AllMenuRcAdapter
 import com.example.allrecipesfree_foodrecipesapp.ui.f05_search.adapter.SearchRcAdapter
 import com.example.allrecipesfree_foodrecipesapp.ui.f06_recipe_detail.RecipeDetailActivity
 import com.example.allrecipesfree_foodrecipesapp.ui.main.MainActivity
@@ -19,11 +19,11 @@ import com.example.allrecipesfree_foodrecipesapp.utility.*
 import com.example.core.data.RecipePosts
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AllRecipesFragment : BaseFragment<FragmentAllRecipesBinding>(), SearchItemsCallBack,
+class AllMenuFragment : BaseFragment<FragmentAllRecipesBinding>(), SearchItemsCallBack,
     ClearTextCallBack {
 
-    private val viewModel: AllRecipesViewModel by viewModel()
-    private var allRecipesRcAdapter: AllRecipesRcAdapter? = null
+    private val viewModel: AllMenuViewModel by viewModel()
+    private var allMenuRcAdapter: AllMenuRcAdapter? = null
     private var recipePostsData: List<RecipePosts>? = null
 
     override var layoutResource: Int = R.layout.fragment_all_recipes
@@ -42,11 +42,11 @@ class AllRecipesFragment : BaseFragment<FragmentAllRecipesBinding>(), SearchItem
             it?.let {
                 recipePostsData = it
                 MainActivity.apply {
-                    setOnClickSearchItem(this@AllRecipesFragment)
-                    setOnClickClearText(this@AllRecipesFragment)
+                    setOnClickSearchItem(this@AllMenuFragment)
+                    setOnClickClearText(this@AllMenuFragment)
                 }
 
-                allRecipesRcAdapter = AllRecipesRcAdapter(requireContext(), it)
+                allMenuRcAdapter = AllMenuRcAdapter(requireContext(), it)
                 binding.rcViewAllData.apply {
                     setHasFixedSize(true)
                     layoutManager =
@@ -55,19 +55,18 @@ class AllRecipesFragment : BaseFragment<FragmentAllRecipesBinding>(), SearchItem
                             LinearLayoutManager.VERTICAL,
                             false
                         )
-                    adapter = allRecipesRcAdapter
+                    adapter = allMenuRcAdapter
                 }
 
-                allRecipesRcAdapter?.setOnClickRecipePost(object : AllRecipesRcAdapter.OnClickRecipePost{
-                    override fun onClickRecipePost(
+                allMenuRcAdapter?.setOnClickMenu(object : AllMenuRcAdapter.OnClickMenu{
+                    override fun onClickMenu(
                         recipePosts: RecipePosts,
                         position: Int,
                         imageView: ImageView
                     ) {
-                        val option = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity(), imageView, "transit")
                         val intent = Intent(requireContext(), RecipeDetailActivity::class.java)
                         intent.putExtra("data", recipePosts)
-                        startActivity(intent, option.toBundle())
+                        startActivity(intent)
                     }
                 })
             }
@@ -88,7 +87,9 @@ class AllRecipesFragment : BaseFragment<FragmentAllRecipesBinding>(), SearchItem
 
         adapterSearch.setOnClickResult(object : SearchRcAdapter.OnClickResult {
             override fun onClickResult(recipePosts: RecipePosts, position: Int) {
-                binding.rcViewAllData.scrollToPosition(recipeFilter.indexOfFirst { r -> r.recipePostId == recipePosts.recipePostId })
+                val lym = binding.rcViewAllData.layoutManager as LinearLayoutManager
+                lym.scrollToPositionWithOffset(recipeFilter.indexOfFirst { r -> r.recipePostId == recipePosts.recipePostId }, 0)
+                //binding.rcViewAllData.layoutManager.(recipeFilter.indexOfFirst { r -> r.recipePostId == recipePosts.recipePostId })
 
                 binding.rcViewSearchAllData.apply {
                     visibility = View.GONE

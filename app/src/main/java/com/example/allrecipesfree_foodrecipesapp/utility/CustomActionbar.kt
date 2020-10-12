@@ -1,12 +1,10 @@
 package com.example.allrecipesfree_foodrecipesapp.utility
 
-import android.app.Activity
 import android.content.Context
 import android.graphics.Typeface
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
-import android.view.TextureView
 import android.view.View
 import android.widget.TextView
 import androidx.annotation.StringRes
@@ -15,8 +13,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.allrecipesfree_foodrecipesapp.R
-import com.example.allrecipesfree_foodrecipesapp.databinding.LayoutCustomToolbarBinding
-import com.example.allrecipesfree_foodrecipesapp.ui.f02_all_recipes.AllRecipesFragment
+import com.example.allrecipesfree_foodrecipesapp.databinding.CustomToolbarBinding
+import com.example.allrecipesfree_foodrecipesapp.ui.f02_all_recipes.AllMenuFragment
 import com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes.CategoriesRecipesFragment
 import com.example.allrecipesfree_foodrecipesapp.ui.f04_favorite_recipes.FavoriteRecipesFragment
 
@@ -26,7 +24,7 @@ class CustomActionbar @JvmOverloads constructor(
     supportActionBar: ActionBar?
 ) {
 
-    private lateinit var binding: LayoutCustomToolbarBinding
+    private lateinit var binding: CustomToolbarBinding
     private var actionBar: ActionBar? = null
     private var isAnimated = true
     private var isSearchClicked = true
@@ -38,7 +36,7 @@ class CustomActionbar @JvmOverloads constructor(
     }
 
     private fun setupCustomToolbar(context: Context, supportActionBar: ActionBar?) {
-        binding = LayoutCustomToolbarBinding.inflate(LayoutInflater.from(context))
+        binding = CustomToolbarBinding.inflate(LayoutInflater.from(context))
         setTypeFaceHeader(StyleFonts.MEDIUM)
         binding.imgRight.setOnClickListener {
             search(isSearchClicked)
@@ -61,7 +59,8 @@ class CustomActionbar @JvmOverloads constructor(
         setTextHeader(s)
     }
 
-    fun setTextHeader(str: String) {
+    fun setTextHeader(str: String = "") {
+        if (str == "") binding.tvHeader.inVisible() else binding.tvHeader.visible()
         binding.tvHeader.text = str
         //binding.tvHeader.slideIn()
     }
@@ -136,7 +135,7 @@ class CustomActionbar @JvmOverloads constructor(
             binding.imgRight.setImageDrawable(
                 ContextCompat.getDrawable(
                     context,
-                    R.drawable.ic_search_black_24dp
+                    R.drawable.round_search_black_18dp
                 )
             )
             listener?.onClickItemRight(binding.edtSearch.text.toString())
@@ -166,25 +165,25 @@ class CustomActionbar @JvmOverloads constructor(
             activity.supportFragmentManager.findFragmentById(R.id.contentContainer)
         currentFragment?.let {
             when (it) {
-                is AllRecipesFragment -> {
+                is AllMenuFragment -> {
                     binding.edtSearch.apply {
                         setCompoundDrawablesWithIntrinsicBounds(
                             ContextCompat.getDrawable(
                                 context,
-                                R.drawable.ic_room_service_black_24dp
+                                R.drawable.round_room_service_white_18dp
                             ),
                             null,
                             null,
                             null
                         )
                         compoundDrawablePadding = 4
-                        hint = "Search... ${AllRecipesFragment::class.java.simpleName}"
+                        hint = "Search... ${AllMenuFragment::class.java.simpleName}"
                     }
                 }
                 is CategoriesRecipesFragment -> {
                     binding.edtSearch.apply {
                         setCompoundDrawablesWithIntrinsicBounds(
-                            ContextCompat.getDrawable(context, R.drawable.ic_restaurant_black_24dp),
+                            ContextCompat.getDrawable(context, R.drawable.round_restaurant_white_18dp),
                             null,
                             null,
                             null
@@ -196,7 +195,7 @@ class CustomActionbar @JvmOverloads constructor(
                 is FavoriteRecipesFragment -> {
                     binding.edtSearch.apply {
                         setCompoundDrawablesWithIntrinsicBounds(
-                            ContextCompat.getDrawable(context, R.drawable.ic_favorite_black_24dp),
+                            ContextCompat.getDrawable(context, R.drawable.round_favorite_black_18dp),
                             null,
                             null,
                             null
@@ -228,7 +227,7 @@ class CustomActionbar @JvmOverloads constructor(
         binding.imgRight.setImageDrawable(
             ContextCompat.getDrawable(
                 context,
-                R.drawable.ic_search_black_24dp
+                R.drawable.round_search_black_18dp
             )
         )
     }
@@ -242,7 +241,7 @@ class CustomActionbar @JvmOverloads constructor(
                     binding.imgRight.setImageDrawable(
                         ContextCompat.getDrawable(
                             context,
-                            R.drawable.ic_search_black_24dp
+                            R.drawable.round_search_black_18dp
                         )
                     )
                     binding.imgClearText.apply {

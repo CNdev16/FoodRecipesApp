@@ -3,25 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menuMyFood"
-        android:icon="@drawable/ic_restaurant_black_24dp"
+        android:icon="@drawable/round_restaurant_white_18dp"
         android:title="My Foods"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/menuAllRecipes"
-        android:icon="@drawable/ic_room_service_black_24dp"
-        android:title="All Recipes"
+        android:id="@+id/menuAllmenu"
+        android:icon="@drawable/round_room_service_white_18dp"
+        android:title="All Menu"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menuCategories"
-        android:icon="@drawable/ic_import_contacts_black_24dp"
+        android:icon="@drawable/round_menu_book_white_18dp"
         android:title="Categories"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menuFavorite"
-        android:icon="@drawable/ic_favorite_black_24dp"
+        android:icon="@drawable/round_favorite_white_18dp"
         android:title="Favorite"
         app:showAsAction="ifRoom" />
 </menu>

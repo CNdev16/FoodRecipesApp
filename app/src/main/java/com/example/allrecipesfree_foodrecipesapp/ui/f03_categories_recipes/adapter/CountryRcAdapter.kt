@@ -3,7 +3,7 @@ package com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes.adap
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.allrecipesfree_foodrecipesapp.databinding.ItemCountryCateBinding
+import com.example.allrecipesfree_foodrecipesapp.databinding.ItemCountryRcBinding
 import com.example.core.data.CountryCategory
 
 class CountryRcAdapter(private val data: List<CountryCategory>) :
@@ -14,7 +14,7 @@ class CountryRcAdapter(private val data: List<CountryCategory>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryRcViewHolder {
         return CountryRcViewHolder(
-            ItemCountryCateBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemCountryRcBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
@@ -48,5 +48,5 @@ class CountryRcAdapter(private val data: List<CountryCategory>) :
 
 }
 
-class CountryRcViewHolder(val binding: ItemCountryCateBinding) :
+class CountryRcViewHolder(val binding: ItemCountryRcBinding) :
     RecyclerView.ViewHolder(binding.root)

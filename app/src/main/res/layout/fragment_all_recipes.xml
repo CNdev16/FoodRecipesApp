@@ -3,16 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
-            type="com.example.allrecipesfree_foodrecipesapp.ui.f02_all_recipes.AllRecipesViewModel" />
+            type="com.example.allrecipesfree_foodrecipesapp.ui.f02_all_recipes.AllMenuViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/layoutRootAllRecipes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorWhite"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -22,15 +23,14 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcViewAllData"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:background="@drawable/bg_corners_radius_orange4r"
                 android:id="@+id/rcViewSearchAllData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:visibility="gone"/>
+                android:background="@drawable/bg_corners_radius_orange4r"
+                android:visibility="gone" />
 
         </RelativeLayout>
 

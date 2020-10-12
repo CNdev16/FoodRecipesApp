@@ -32,7 +32,7 @@ class SearchRcAdapter(private val context: Context, private val data: List<Recip
 
         val recipe = data[position]
 
-        Glide.with(context).load(recipe.recipePostImg).fitCenter().placeholder(R.drawable.img_404)
+        Glide.with(context).load(recipe.recipePostImg).fitCenter().placeholder(R.drawable.test_img)
             .into(holder.binding.imgRecipe)
         holder.binding.tvTitle.text = recipe.recipePostTitle
         holder.binding.layoutRootSearchResult.setOnClickListener {

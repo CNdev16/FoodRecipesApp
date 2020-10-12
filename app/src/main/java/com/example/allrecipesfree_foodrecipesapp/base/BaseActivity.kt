@@ -3,6 +3,8 @@ package com.example.allrecipesfree_foodrecipesapp.base
 import android.content.Context
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.os.SystemClock
+import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding

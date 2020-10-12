@@ -30,7 +30,7 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center"
                     android:text="Msg"
-                    android:textColor="@color/colorGreen"
+                    android:textColor="@color/colorBlack"
                     android:textSize="20sp" />
 
             </LinearLayout>

@@ -1,12 +1,11 @@
 package com.example.allrecipesfree_foodrecipesapp.ui.f04_favorite_recipes.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.core.data.ServiceResponse
-import com.example.allrecipesfree_foodrecipesapp.databinding.ItemRecipesBinding
+import com.example.allrecipesfree_foodrecipesapp.databinding.ItemMenuRcBinding
+import com.example.allrecipesfree_foodrecipesapp.utility.gone
+import com.example.allrecipesfree_foodrecipesapp.utility.visible
 
 class FavoriteRcAdapter() :
     RecyclerView.Adapter<FavoriteViewHolder>() {
@@ -15,13 +14,16 @@ class FavoriteRcAdapter() :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
         return FavoriteViewHolder(
-            ItemRecipesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemMenuRcBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
     override fun getItemCount(): Int = 10
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
+
+        holder.binding.tvCateName.gone()
+        holder.binding.fav.visible()
 
 //        val  country : ServiceResponse = countryList[holder.adapterPosition]
 //
@@ -48,4 +50,4 @@ class FavoriteRcAdapter() :
 
 }
 
-class FavoriteViewHolder(val binding: ItemRecipesBinding) : RecyclerView.ViewHolder(binding.root)
+class FavoriteViewHolder(val binding: ItemMenuRcBinding) : RecyclerView.ViewHolder(binding.root)

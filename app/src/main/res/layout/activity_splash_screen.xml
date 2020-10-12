@@ -11,7 +11,7 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorWhite"
         android:orientation="vertical">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -31,7 +31,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:text="Food Recipes App"
-            android:textColor="@color/colorGreen"
+            android:textColor="@color/colorBlack"
             android:textSize="@dimen/text_size_28sp" />
 
         <TextView
@@ -42,7 +42,7 @@
             android:layout_centerHorizontal="true"
             android:text="@{@string/version(viewModel.version)}"
             android:layout_margin="16dp"
-            android:textColor="@color/colorGreen"
+            android:textColor="@color/colorBlack"
             android:textSize="@dimen/text_size_18sp" />
 
     </RelativeLayout>

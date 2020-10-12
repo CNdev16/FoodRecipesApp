@@ -124,6 +124,8 @@ dependencies {
     //snaphelper
     implementation "com.github.rubensousa:gravitysnaphelper:$snaphelper_version"
 
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
+
     implementation project(":core")
 
     testImplementation 'junit:junit:4.12'

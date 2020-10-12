@@ -2,16 +2,13 @@ package com.example.allrecipesfree_foodrecipesapp.di
 
 import androidx.room.Room
 import com.example.allrecipesfree_foodrecipesapp.ui.f01_my_foods.MyFoodsViewModel
-import com.example.allrecipesfree_foodrecipesapp.ui.f02_all_recipes.AllRecipesViewModel
+import com.example.allrecipesfree_foodrecipesapp.ui.f02_all_recipes.AllMenuViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes.CategoriesRecipesViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.f04_favorite_recipes.FavoriteRecipesViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.f05_search.SearchAllRecipesViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.f05_search.SearchRecipesViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.f06_recipe_detail.RecipeDetailViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.main.MainActivityViewModel
-import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_categories.MenuCategoriesViewModel
-import com.example.allrecipesfree_foodrecipesapp.ui.flow_menu_favorite.FavoritesMenuViewModel
-import com.example.allrecipesfree_foodrecipesapp.ui.flow_posts_menu_detail.PostsMenuDetailViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.splash_screen.SplashScreenViewModel
 import com.example.core.BASE_URL
 import com.example.core.DataRepository
@@ -66,17 +63,14 @@ val useCaseModule = module {
 }
 
 val viewModelModule = module {
-    viewModel { MainActivityViewModel(get(), get(), get(), get()) }
-    viewModel { MenuCategoriesViewModel(get()) }
-    viewModel { PostsMenuDetailViewModel(get()) }
-    viewModel { FavoritesMenuViewModel(get()) }
-    viewModel { AllRecipesViewModel(get()) }
+    viewModel { MainActivityViewModel() }
+    viewModel { AllMenuViewModel(get()) }
     viewModel { CategoriesRecipesViewModel(get(), get()) }
     viewModel { MyFoodsViewModel(get()) }
     viewModel { FavoriteRecipesViewModel(get()) }
     viewModel { SearchRecipesViewModel(get()) }
     viewModel { SearchAllRecipesViewModel(get()) }
-    viewModel { SplashScreenViewModel() }
+    viewModel { SplashScreenViewModel(get(), get(), get(), get()) }
     viewModel { RecipeDetailViewModel() }
 }
 

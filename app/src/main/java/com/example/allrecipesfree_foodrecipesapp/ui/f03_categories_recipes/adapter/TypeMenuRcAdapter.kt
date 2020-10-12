@@ -3,24 +3,27 @@ package com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes.adap
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.allrecipesfree_foodrecipesapp.databinding.ItemRecipesCateBinding
+import com.example.allrecipesfree_foodrecipesapp.databinding.ItemMenuRcBinding
+import com.example.allrecipesfree_foodrecipesapp.utility.gone
 import com.example.core.data.ServiceResponse
 import com.example.core.data.MenuCategory
 
-class RecipesRcAdapter(private val data: List<MenuCategory>) :
-    RecyclerView.Adapter<RecipesRcViewHolder>() {
+class TypeMenuRcAdapter(private val data: List<MenuCategory>) :
+    RecyclerView.Adapter<TypeMenuRcViewHolder>() {
 
     private var listener: OnClickCountry? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipesRcViewHolder {
-        return RecipesRcViewHolder(
-            ItemRecipesCateBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TypeMenuRcViewHolder {
+        return TypeMenuRcViewHolder(
+            ItemMenuRcBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
     override fun getItemCount(): Int = data.size
 
-    override fun onBindViewHolder(holder: RecipesRcViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TypeMenuRcViewHolder, position: Int) {
+
+        holder.binding.tvCateName.gone()
 
 //        holder.binding.tvCountryName.apply {
 //            text = country.name
@@ -43,4 +46,4 @@ class RecipesRcAdapter(private val data: List<MenuCategory>) :
 
 }
 
-class RecipesRcViewHolder(val binding: ItemRecipesCateBinding) : RecyclerView.ViewHolder(binding.root)
+class TypeMenuRcViewHolder(val binding: ItemMenuRcBinding) : RecyclerView.ViewHolder(binding.root)

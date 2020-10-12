@@ -38,7 +38,7 @@
                             android:gravity="center"
                             android:maxLines="2"
                             android:text="Title"
-                            android:textColor="@color/colorGreen"
+                            android:textColor="@color/colorPrimaryDark"
                             android:textSize="@dimen/text_size_28sp" />
 
                         <TextView
@@ -49,7 +49,7 @@
                             android:ellipsize="end"
                             android:gravity="center"
                             android:text="Msg"
-                            android:textColor="@color/colorPrimaryDark"
+                            android:textColor="@color/colorGray"
                             android:textSize="@dimen/text_size_22sp" />
                     </LinearLayout>
 
@@ -64,14 +64,13 @@
                     android:gravity="center"
                     android:text="btn"
                     android:textAllCaps="false"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorWhite"
                     android:textSize="@dimen/text_size_28sp" />
 
                 <ImageView
                     android:visibility="gone"
                     android:id="@+id/retry"
                     android:layout_marginTop="8dp"
-                    android:src="@drawable/ic_refresh_black_24dp"
                     android:adjustViewBounds="true"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>

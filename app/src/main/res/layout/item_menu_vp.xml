@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/cItem"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="8dp"
-        app:cardElevation="6dp">
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="H, 4:3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/imgCate"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                android:src="@drawable/img_404" />
+                android:src="@drawable/test_img" />
 
             <TextView
                 android:id="@+id/tvRecipesTitle"
@@ -32,10 +34,11 @@
                 android:paddingLeft="4dp"
                 android:paddingRight="4dp"
                 android:text="Title"
-                android:textColor="@color/colorGreen"
+                android:textColor="@color/colorBlack"
                 android:textSize="@dimen/text_size_24sp"
                 android:visibility="gone" />
 
         </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

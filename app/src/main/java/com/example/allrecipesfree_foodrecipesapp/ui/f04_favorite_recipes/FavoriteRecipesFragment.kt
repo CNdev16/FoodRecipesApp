@@ -22,8 +22,6 @@ class FavoriteRecipesFragment() : BaseFragment<FragmentFavoriteRecipesBinding>()
         super.onViewCreated(view, savedInstanceState)
 
         binding.viewModel = viewModel
-
-        subscribeLiveData()
     }
 
     override fun subscribeLiveData() {

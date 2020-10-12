@@ -1,7 +1,6 @@
 package com.example.allrecipesfree_foodrecipesapp.ui.f01_my_foods
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,7 +8,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.base.BaseFragment
 import com.example.allrecipesfree_foodrecipesapp.databinding.FragmentMyFoodsBinding
-import com.example.allrecipesfree_foodrecipesapp.ui.f01_my_foods.adapter.Recipes4uVpAdapter
+import com.example.allrecipesfree_foodrecipesapp.ui.f01_my_foods.adapter.MenuVpAdapter
 import com.example.allrecipesfree_foodrecipesapp.utility.DialogUtils
 import com.example.allrecipesfree_foodrecipesapp.utility.epoxy.controller.ItemsController
 import com.example.allrecipesfree_foodrecipesapp.utility.isInternetConnected
@@ -35,7 +34,7 @@ class MyFoodsFragment : BaseFragment<FragmentMyFoodsBinding>() {
         viewModel.thaiRecipeData.observe(viewLifecycleOwner, Observer {
             logD(Gson().toJson(it))
 
-            val vpRecipesRcAdapter = Recipes4uVpAdapter(requireContext(), it)
+            val vpRecipesRcAdapter = MenuVpAdapter(requireContext(), it)
             val itemAdapter = ItemsController().apply {
                 itemsRecipe = it
             }

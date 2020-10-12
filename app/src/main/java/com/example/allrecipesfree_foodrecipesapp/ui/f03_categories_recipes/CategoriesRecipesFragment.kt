@@ -11,13 +11,12 @@ import com.example.allrecipesfree_foodrecipesapp.R
 import com.example.allrecipesfree_foodrecipesapp.base.BaseFragment
 import com.example.allrecipesfree_foodrecipesapp.databinding.FragmentCategoriesRecipesBinding
 import com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes.adapter.CountryRcAdapter
-import com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes.adapter.RecipesRcAdapter
+import com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes.adapter.TypeMenuRcAdapter
 import com.example.allrecipesfree_foodrecipesapp.utility.DialogUtils
 import com.example.allrecipesfree_foodrecipesapp.utility.SearchItemsCallBack
 import com.example.allrecipesfree_foodrecipesapp.utility.isInternetConnected
 import com.example.core.data.CountryCategory
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper
-import com.google.gson.Gson
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CategoriesRecipesFragment : BaseFragment<FragmentCategoriesRecipesBinding>(),
@@ -25,7 +24,7 @@ class CategoriesRecipesFragment : BaseFragment<FragmentCategoriesRecipesBinding>
 
     private val viewModel: CategoriesRecipesViewModel by viewModel()
     private lateinit var countryRcAdapter: CountryRcAdapter
-    private lateinit var recipesRcAdapter: RecipesRcAdapter
+    private lateinit var recipesRcAdapter: TypeMenuRcAdapter
 
     override var layoutResource: Int = R.layout.fragment_categories_recipes
 
@@ -65,7 +64,7 @@ class CategoriesRecipesFragment : BaseFragment<FragmentCategoriesRecipesBinding>
         })
 
         viewModel.menuCategoryData.observe(viewLifecycleOwner, Observer {
-            recipesRcAdapter = RecipesRcAdapter(it)
+            recipesRcAdapter = TypeMenuRcAdapter(it)
             binding.rcRecipe.apply {
                 setHasFixedSize(true)
                 layoutManager = GridLayoutManager(

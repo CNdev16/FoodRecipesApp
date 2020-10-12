@@ -20,18 +20,6 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
-            android:name=".ui.flow_menu_categories.MenuCategoriesActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.flow_posts_menu_detail.PostsMenuDetailActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.flow_menu_favorite.FavoritesMenuActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.flow_about.AboutActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ui.splash_screen.SplashScreenActivity"
             android:screenOrientation="portrait">
             <intent-filter>

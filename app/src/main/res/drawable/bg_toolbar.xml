@@ -5,10 +5,8 @@
     <solid android:color="@color/colorPrimary" />
 
     <gradient
-        android:type="radial"
-        android:angle="90"
-        android:centerColor="@color/colorAccent"
-        android:endColor="@color/colorPrimary"
-        android:startColor="@color/colorGreen" />
+        android:type="linear"
+        android:endColor="@color/colorWhite"
+        android:startColor="@color/colorPrimary" />
 
 </shape>

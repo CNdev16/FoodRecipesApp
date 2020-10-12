@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.core.data.ServiceResponse
-import com.example.allrecipesfree_foodrecipesapp.databinding.ItemCountryCateBinding
+import com.example.allrecipesfree_foodrecipesapp.databinding.ItemCountryRcBinding
 
 class CountryRcAdapter(private val countryList: List<ServiceResponse>, private val context: Context) :
     RecyclerView.Adapter<CountryRcViewHolder>() {
@@ -15,7 +15,7 @@ class CountryRcAdapter(private val countryList: List<ServiceResponse>, private v
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryRcViewHolder {
         return CountryRcViewHolder(
-            ItemCountryCateBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemCountryRcBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
@@ -25,7 +25,7 @@ class CountryRcAdapter(private val countryList: List<ServiceResponse>, private v
 
         val  country : ServiceResponse = countryList[holder.adapterPosition]
 
-        Glide.with(context).load(country.imageCategory?.guid).into(holder.binding.imgCate)
+        Glide.with(context).load(country.imageCategory?.guid).into(holder.binding.imgMenu)
 
 //        holder.binding.tvCountryName.apply {
 //            text = country.name
@@ -48,4 +48,4 @@ class CountryRcAdapter(private val countryList: List<ServiceResponse>, private v
 
 }
 
-class CountryRcViewHolder(val binding: ItemCountryCateBinding) : RecyclerView.ViewHolder(binding.root)
+class CountryRcViewHolder(val binding: ItemCountryRcBinding) : RecyclerView.ViewHolder(binding.root)
