@@ -39,28 +39,39 @@ class CategoriesRecipesFragment : BaseFragment<FragmentCategoriesRecipesBinding>
         viewModel.getCountryCategory(requireContext().isInternetConnected())
         viewModel.allCountryCategoryData.observe(viewLifecycleOwner, Observer {
             countryRcAdapter = CountryRcAdapter(it)
-            binding.rcCountry.apply {
-                setHasFixedSize(true)
-                layoutManager =
-                    LinearLayoutManager(
-                        activity,
-                        LinearLayoutManager.HORIZONTAL,
-                        false
-                    )
-                adapter = countryRcAdapter
+//            binding.rcCountry.apply {
+//                setHasFixedSize(true)
+//                layoutManager =
+//                    LinearLayoutManager(
+//                        activity,
+//                        LinearLayoutManager.HORIZONTAL,
+//                        false
+//                    )
+//                adapter = countryRcAdapter
+//            }
+//            binding.layoutCountryCate.visibility = if(it.isNotEmpty()) View.VISIBLE else View.GONE
+//
+//            GravitySnapHelper(Gravity.CENTER).attachToRecyclerView(binding.rcCountry)
+//
+//            countryRcAdapter.setOnClickCountry(object : CountryRcAdapter.OnClickCountry {
+//                override fun onClickCountry(country: CountryCategory, position: Int) {
+//                    viewModel.getMenuCategory(
+//                        country.countryCateId,
+//                        requireContext().isInternetConnected()
+//                    )
+//                }
+//            })
+//            binding.vpCountry.apply {
+//                clipToPadding = false
+//                clipChildren = false
+//                offscreenPageLimit = 3
+//
+//                adapter = countryRcAdapter
+//            }
+
+            for (countryCategory in it) {
+                binding.tabCate.addTab(binding.tabCate.newTab().setText(countryCategory.countryCateName))
             }
-            binding.layoutCountryCate.visibility = if(it.isNotEmpty()) View.VISIBLE else View.GONE
-
-            GravitySnapHelper(Gravity.CENTER).attachToRecyclerView(binding.rcCountry)
-
-            countryRcAdapter.setOnClickCountry(object : CountryRcAdapter.OnClickCountry {
-                override fun onClickCountry(country: CountryCategory, position: Int) {
-                    viewModel.getMenuCategory(
-                        country.countryCateId,
-                        requireContext().isInternetConnected()
-                    )
-                }
-            })
         })
 
         viewModel.menuCategoryData.observe(viewLifecycleOwner, Observer {

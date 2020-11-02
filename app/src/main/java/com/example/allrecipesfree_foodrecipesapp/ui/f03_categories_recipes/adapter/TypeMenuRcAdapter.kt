@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.allrecipesfree_foodrecipesapp.databinding.ItemMenuRcBinding
 import com.example.allrecipesfree_foodrecipesapp.utility.gone
-import com.example.core.data.ServiceResponse
 import com.example.core.data.MenuCategory
 
 class TypeMenuRcAdapter(private val data: List<MenuCategory>) :
@@ -37,11 +36,11 @@ class TypeMenuRcAdapter(private val data: List<MenuCategory>) :
     }
 
     interface OnClickCountry{
-        fun onClickCountry(country: ServiceResponse, position: Int)
+        //fun onClickCountry(country: ServiceResponse, position: Int)
     }
 
     fun setOnClickCountry(onClickCountry: OnClickCountry?){
-        this.listener = onClickCountry
+        //this.listener = onClickCountry
     }
 
 }

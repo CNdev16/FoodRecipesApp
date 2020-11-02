@@ -89,7 +89,6 @@ class AllMenuFragment : BaseFragment<FragmentAllRecipesBinding>(), SearchItemsCa
             override fun onClickResult(recipePosts: RecipePosts, position: Int) {
                 val lym = binding.rcViewAllData.layoutManager as LinearLayoutManager
                 lym.scrollToPositionWithOffset(recipeFilter.indexOfFirst { r -> r.recipePostId == recipePosts.recipePostId }, 0)
-                //binding.rcViewAllData.layoutManager.(recipeFilter.indexOfFirst { r -> r.recipePostId == recipePosts.recipePostId })
 
                 binding.rcViewSearchAllData.apply {
                     visibility = View.GONE

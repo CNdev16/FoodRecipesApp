@@ -91,7 +91,7 @@
             android:layout_margin="16dp"
             android:src="@drawable/round_favorite_white_18dp"
             android:tint="@color/colorWhite"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_anchor="@id/appBar"
             app:layout_anchorGravity="bottom|right|end"
             app:rippleColor="@color/colorPrimaryDark"

@@ -6,7 +6,6 @@ import com.example.allrecipesfree_foodrecipesapp.ui.f02_all_recipes.AllMenuViewM
 import com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes.CategoriesRecipesViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.f04_favorite_recipes.FavoriteRecipesViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.f05_search.SearchAllRecipesViewModel
-import com.example.allrecipesfree_foodrecipesapp.ui.f05_search.SearchRecipesViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.f06_recipe_detail.RecipeDetailViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.main.MainActivityViewModel
 import com.example.allrecipesfree_foodrecipesapp.ui.splash_screen.SplashScreenViewModel
@@ -68,7 +67,6 @@ val viewModelModule = module {
     viewModel { CategoriesRecipesViewModel(get(), get()) }
     viewModel { MyFoodsViewModel(get()) }
     viewModel { FavoriteRecipesViewModel(get()) }
-    viewModel { SearchRecipesViewModel(get()) }
     viewModel { SearchAllRecipesViewModel(get()) }
     viewModel { SplashScreenViewModel(get(), get(), get(), get()) }
     viewModel { RecipeDetailViewModel() }

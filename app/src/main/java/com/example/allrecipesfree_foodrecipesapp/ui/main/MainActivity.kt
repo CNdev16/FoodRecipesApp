@@ -16,8 +16,6 @@ import com.example.allrecipesfree_foodrecipesapp.ui.f02_all_recipes.AllMenuFragm
 import com.example.allrecipesfree_foodrecipesapp.ui.f03_categories_recipes.CategoriesRecipesFragment
 import com.example.allrecipesfree_foodrecipesapp.ui.f04_favorite_recipes.FavoriteRecipesFragment
 import com.example.allrecipesfree_foodrecipesapp.ui.f05_search.SearchAllRecipesActivity
-import com.example.allrecipesfree_foodrecipesapp.ui.main.adapter.CountryRcAdapter
-import com.example.allrecipesfree_foodrecipesapp.ui.main.adapter.SearchRcAdapter
 import com.example.allrecipesfree_foodrecipesapp.utility.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.gson.Gson
@@ -214,6 +212,5 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomActionbar.OnClic
 
     override fun onBackPressed() {
         super.onBackPressed()
-        //toggleBottomSheetBack()
     }
 }

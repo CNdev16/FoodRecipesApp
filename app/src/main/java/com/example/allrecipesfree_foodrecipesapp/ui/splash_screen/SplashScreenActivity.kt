@@ -88,6 +88,7 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
                 object : DialogUtils.OnClickButtonDialog {
                     override fun onClickButtonDialog() {
                         DialogUtils.disMissDialog()
+                        finishAffinity()
                     }
                 }
             )

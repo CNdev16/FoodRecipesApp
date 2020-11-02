@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
@@ -166,43 +167,22 @@ class CustomActionbar @JvmOverloads constructor(
         currentFragment?.let {
             when (it) {
                 is AllMenuFragment -> {
-                    binding.edtSearch.apply {
-                        setCompoundDrawablesWithIntrinsicBounds(
-                            ContextCompat.getDrawable(
-                                context,
-                                R.drawable.round_room_service_white_18dp
-                            ),
-                            null,
-                            null,
-                            null
-                        )
-                        compoundDrawablePadding = 4
-                        hint = "Search... ${AllMenuFragment::class.java.simpleName}"
-                    }
+                    setInputBox(
+                        AllMenuFragment::class.java.simpleName,
+                        R.drawable.round_room_service_white_18dp
+                    )
                 }
                 is CategoriesRecipesFragment -> {
-                    binding.edtSearch.apply {
-                        setCompoundDrawablesWithIntrinsicBounds(
-                            ContextCompat.getDrawable(context, R.drawable.round_restaurant_white_18dp),
-                            null,
-                            null,
-                            null
-                        )
-                        compoundDrawablePadding = 4
-                        hint = "Search... ${CategoriesRecipesFragment::class.java.simpleName}"
-                    }
+                    setInputBox(
+                        CategoriesRecipesFragment::class.java.simpleName,
+                        R.drawable.round_menu_book_white_18dp
+                    )
                 }
                 is FavoriteRecipesFragment -> {
-                    binding.edtSearch.apply {
-                        setCompoundDrawablesWithIntrinsicBounds(
-                            ContextCompat.getDrawable(context, R.drawable.round_favorite_black_18dp),
-                            null,
-                            null,
-                            null
-                        )
-                        compoundDrawablePadding = 4
-                        hint = "Search... ${FavoriteRecipesFragment::class.java.simpleName}"
-                    }
+                    setInputBox(
+                        FavoriteRecipesFragment::class.java.simpleName,
+                        R.drawable.round_favorite_black_18dp
+                    )
                 }
                 else -> {
                     throw Exception("Error cast fragment.")
@@ -210,6 +190,19 @@ class CustomActionbar @JvmOverloads constructor(
             }
         }
 
+    }
+
+    fun setInputBox(s: String = "", @DrawableRes drawableId: Int = 0) {
+        binding.edtSearch.apply {
+            setCompoundDrawablesWithIntrinsicBounds(
+                ContextCompat.getDrawable(context, drawableId),
+                null,
+                null,
+                null
+            )
+            compoundDrawablePadding = 4
+            hint = "Search... $s"
+        }
     }
 
     fun closeSearchBox() {

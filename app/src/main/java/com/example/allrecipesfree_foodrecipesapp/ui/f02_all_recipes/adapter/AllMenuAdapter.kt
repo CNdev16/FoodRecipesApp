@@ -33,6 +33,9 @@ class AllMenuRcAdapter(private val context: Context, private val data: List<Reci
         holder.binding.tvTitle.apply {
             text = recipe.recipePostTitle
         }
+        holder.binding.tvDesc.apply {
+            text = "${recipe.countryCateName} , ${recipe.menuCateName}"
+        }
 
         holder.binding.tvCateName.gone()
 
